@@ -25,9 +25,14 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+
 import Component1 from './components/Component1';
+
+import Component2 from './components/Component2';
+import Component0 from './Component0';
+
 const App: () => React$Node = () => {
-  return <Component1 />;
+  return <Component0 />;
 };
 
 const styles = StyleSheet.create({});

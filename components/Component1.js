@@ -8,6 +8,10 @@ import {
   TextInput,
 } from 'react-native';
 
+const cardRegex = RegExp(/^[0-9]{16}$/);
+const cvvRegex = RegExp(/^[0-9]{3,4}$/);
+const expRegex = RegExp(/^(0[1-9]|1[0-2])\/?([0-9]{2})$/);
+
 class Component1 extends Component {
   state = {
     creditCardNumber: '',
@@ -19,28 +23,24 @@ class Component1 extends Component {
     secretAnswer: '',
     enteredWithError: '',
     cardType: '',
-    formErrors: {
-      creditCardNumber: '',
-      expirationDate: '',
-      cvv: '',
-      firstName: '',
-      lastName: '',
-      secretQuestion: '',
-      secretAnswer: '',
-    },
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
   };
 
   render() {
     return (
       <SafeAreaView style={styles.card}>
         <Text>Credit Card Home Task</Text>
-        <View>
+        <View onSubmit={e => e.preventDefault()}>
           <TextInput
             style={styles.input}
             type="text"
             //className={formErrors.creditCardNumber.length > 0 ? 'error' : null}
             placeholder="0000 0000 0000 0000"
-            noValidate
+            placeholderTextColor="rgba(255,255,255,0.7)"
+            autoCorrect={false}
             name="creditCardNumber"
             onChange={this.handleChange}
           />
@@ -50,7 +50,8 @@ class Component1 extends Component {
               type="text"
               //className={formErrors.expirationDate.length > 0 ? 'error' : null}
               placeholder="MM/YY"
-              noValidate
+              placeholderTextColor="rgba(255,255,255,0.7)"
+              autoCorrect={false}
               name="expirationDate"
               onChange={this.handleChange}
             />
@@ -59,7 +60,8 @@ class Component1 extends Component {
               type="text"
               //className={formErrors.cvv.length > 0 ? 'error' : null}
               placeholder="CVV/CVC"
-              noValidate
+              placeholderTextColor="rgba(255,255,255,0.7)"
+              autoCorrect={false}
               name="cvv"
               onChange={this.handleChange}
             />
@@ -70,7 +72,8 @@ class Component1 extends Component {
               type="text"
               //className={formErrors.firstName.length > 0 ? 'error' : null}
               placeholder="Name"
-              noValidate
+              placeholderTextColor="rgba(255,255,255,0.7)"
+              autoCorrect={false}
               name="firstName"
               onChange={this.handleChange}
             />
@@ -79,7 +82,8 @@ class Component1 extends Component {
               type="text"
               //className={formErrors.lastName.length > 0 ? 'error' : null}
               placeholder="Surname"
-              noValidate
+              placeholderTextColor="rgba(255,255,255,0.7)"
+              autoCorrect={false}
               name="lastName"
               onChange={this.handleChange}
             />
@@ -89,7 +93,8 @@ class Component1 extends Component {
             style={styles.input}
             //className={formErrors.secretQuestion.length > 0 ? 'error' : null}
             placeholder="Secret Question"
-            noValidate
+            placeholderTextColor="rgba(255,255,255,0.7)"
+            autoCorrect={false}
             name="secretQuestion"
             onChange={this.handleChange}
           />
@@ -98,11 +103,12 @@ class Component1 extends Component {
             type="text"
             //className={formErrors.secretAnswer.length > 0 ? 'error' : null}
             placeholder="Secret Answer"
-            noValidate
+            placeholderTextColor="rgba(255,255,255,0.7)"
+            autoCorrect={false}
             name="secretAnswer"
             onChange={this.handleChange}
           />
-          <Button title="Submit" />
+          <Button type="Submit" onPress={this.handleSubmit} title="Submit" />
         </View>
       </SafeAreaView>
     );
@@ -111,8 +117,9 @@ class Component1 extends Component {
 const styles = StyleSheet.create({
   card: {
     flex: 1,
-    justifyContent: 'center',
-    margin: 10,
+    alignItems: 'center',
+    backgroundColor: '#3498db',
+    padding: 10,
   },
   cardLine: {
     flexDirection: 'row',
@@ -120,8 +127,10 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    marginBottom: 20,
+    color: 'white',
+    paddingHorizontal: 10,
   },
 });
 export default Component1;
