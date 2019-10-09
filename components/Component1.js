@@ -1,3 +1,6 @@
+/* eslint-disable */
+//@flow
+
 import React, {Component} from 'react';
 import {
   Text,
@@ -6,13 +9,44 @@ import {
   View,
   Button,
   TextInput,
+  ScrollView,
 } from 'react-native';
 
 const cardRegex = RegExp(/^[0-9]{16}$/);
 const cvvRegex = RegExp(/^[0-9]{3,4}$/);
 const expRegex = RegExp(/^(0[1-9]|1[0-2])\/?([0-9]{2})$/);
+type Props = {
+  updateData: (
+    firstName: string,
+    lastName: string,
+    creditCardNumber: string,
+    cardType: string,
+    onFormValid: boolean,
+  ) => void,
+};
 
-class Component1 extends Component {
+type State = {
+  cardType: string,
+  creditCardNumber: string,
+  formErrors: {
+    firstName: boolean,
+    lastName: boolean,
+    cvv: boolean,
+    expirationDate: boolean,
+    secretQuestion: boolean,
+    secretAnswer: boolean,
+    creditCardNumber: boolean,
+  },
+  firstName: string,
+  lastName: string,
+  cvv: string,
+  expirationDate: string,
+  secretQuestion: string,
+  secretAnswer: string,
+  onFormValid: boolean,
+};
+
+class Component1 extends React.PureComponent<Props, State> {
   state = {
     creditCardNumber: '',
     cvv: '',
@@ -23,114 +57,185 @@ class Component1 extends Component {
     secretAnswer: '',
     enteredWithError: '',
     cardType: '',
+    onFormValid: true,
+    formErrors: {
+      creditCardNumber: true,
+      expirationDate: true,
+      cvv: true,
+      firstName: true,
+      lastName: true,
+      secretQuestion: true,
+      secretAnswer: true,
+    },
   };
 
-  handleSubmit = e => {
+  updateCardType = (cardType: string) => {
+    this.setState({
+      cardType: cardType,
+    });
+  };
+
+  handleSubmit = (e: SyntheticEvent<HTMLInputElement>) => {
     e.preventDefault();
-  };
+    let formErrors = {...this.state.formErrors};
+    let onFormValid = this.state.onFormValid;
 
+    for (let i in formErrors) {
+      if (formErrors[i] !== true) {
+        onFormValid = false;
+        this.setState({onFormValid: onFormValid});
+      }
+    }
+    this.setState({onFormValid}, () => {
+      this.props.updateData(
+        this.state.firstName,
+        this.state.lastName,
+        this.state.creditCardNumber,
+        this.state.cardType,
+        this.state.onFormValid,
+      );
+    });
+    return true;
+  };
+  onValidation = (name: string, value: string) => {
+    let formErrors = {...this.state.formErrors};
+
+    switch (name) {
+      case 'firstName':
+        formErrors.firstName = value.length < 3 ? false : true;
+        break;
+      case 'lastName':
+        formErrors.lastName = value.length < 3 ? false : true;
+        break;
+      case 'secretQuestion':
+        formErrors.secretQuestion = value.length < 10 ? false : true;
+        break;
+      case 'secretAnswer':
+        formErrors.secretAnswer = value.length < 10 ? false : true;
+        break;
+      case 'creditCardNumber':
+        formErrors.creditCardNumber = cardRegex.test(value) ? true : false;
+        break;
+      case 'cvv':
+        formErrors.cvv = cvvRegex.test(value) ? true : false;
+        break;
+      case 'expirationDate':
+        formErrors.expirationDate = expRegex.test(value) ? true : false;
+        break;
+      default:
+        break;
+    }
+    this.setState({formErrors, [name]: value});
+  };
+  handleChange = (e: SyntheticEvent<HTMLInputElement>) => {
+    const {name, value} = e.currentTarget;
+    this.setState({[name]: value}, () => {
+      this.onValidation(name, value);
+    });
+  };
   render() {
+    const {formErrors} = this.state;
+    console.log('(render) Component1');
     return (
-      <SafeAreaView style={styles.card}>
-        <Text>Credit Card Home Task</Text>
-        <View onSubmit={e => e.preventDefault()}>
-          <TextInput
-            style={styles.input}
-            type="text"
-            //className={formErrors.creditCardNumber.length > 0 ? 'error' : null}
-            placeholder="0000 0000 0000 0000"
-            placeholderTextColor="rgba(255,255,255,0.7)"
-            autoCorrect={false}
-            name="creditCardNumber"
-            onChange={this.handleChange}
-          />
-          <View style={styles.cardLine}>
+      <ScrollView>
+        <View style={styles.mainView}>
+          <View onSubmit={this.handleSubmit}>
             <TextInput
-              style={styles.input}
+              style={styles.inputText}
               type="text"
-              //className={formErrors.expirationDate.length > 0 ? 'error' : null}
-              placeholder="MM/YY"
-              placeholderTextColor="rgba(255,255,255,0.7)"
-              autoCorrect={false}
-              name="expirationDate"
+              //className={formErrors.creditCardNumber === true ? '' : 'error'}
+              placeholder="0000 0000 0000 0000"
+              noValidate
+              name="creditCardNumber"
               onChange={this.handleChange}
             />
+            <View style={styles.cardLine}>
+              <TextInput
+                style={styles.inputText}
+                type="text"
+                //className={formErrors.expirationDate === true ? '' : 'error'}
+                placeholder="MM/YY"
+                noValidate
+                name="expirationDate"
+                onChange={this.handleChange}
+              />
+              <TextInput
+                style={styles.inputText}
+                type="text"
+                //className={formErrors.cvv === true ? '' : 'error'}
+                placeholder="CVV/CVC"
+                noValidate
+                name="cvv"
+                onChange={this.handleChange}
+              />
+            </View>
+            <View style={styles.cardLine}>
+              <TextInput
+                style={styles.inputText}
+                type="text"
+                //className={formErrors.firstName === true ? '' : 'error'}
+                placeholder="Your Name"
+                noValidate
+                name="firstName"
+                onChange={this.handleChange}
+              />
+              <TextInput
+                style={styles.inputText}
+                type="text"
+                //className={formErrors.lastName === true ? '' : 'error'}
+                placeholder="Your Surname"
+                noValidate
+                name="lastName"
+                onChange={this.handleChange}
+              />
+            </View>
             <TextInput
-              style={styles.input}
+              style={styles.inputText}
               type="text"
-              //className={formErrors.cvv.length > 0 ? 'error' : null}
-              placeholder="CVV/CVC"
-              placeholderTextColor="rgba(255,255,255,0.7)"
-              autoCorrect={false}
-              name="cvv"
+              //className={formErrors.secretQuestion === true ? '' : 'error'}
+              placeholder="Your Secret Question"
+              noValidate
+              name="secretQuestion"
               onChange={this.handleChange}
             />
+
+            <TextInput
+              style={styles.inputText}
+              type="text"
+              //className={formErrors.secretAnswer === true ? '' : 'error'}
+              placeholder="Your Secret Answer"
+              noValidate
+              name="secretAnswer"
+              onChange={this.handleChange}
+            />
+            <Button onPress={this.handleSubmit} type="submit" title="Submit" />
           </View>
-          <View style={styles.cardLine}>
-            <TextInput
-              style={styles.input}
-              type="text"
-              //className={formErrors.firstName.length > 0 ? 'error' : null}
-              placeholder="Name"
-              placeholderTextColor="rgba(255,255,255,0.7)"
-              autoCorrect={false}
-              name="firstName"
-              onChange={this.handleChange}
-            />
-            <TextInput
-              style={styles.input}
-              type="text"
-              //className={formErrors.lastName.length > 0 ? 'error' : null}
-              placeholder="Surname"
-              placeholderTextColor="rgba(255,255,255,0.7)"
-              autoCorrect={false}
-              name="lastName"
-              onChange={this.handleChange}
-            />
-          </View>
-          <TextInput
-            type="text"
-            style={styles.input}
-            //className={formErrors.secretQuestion.length > 0 ? 'error' : null}
-            placeholder="Secret Question"
-            placeholderTextColor="rgba(255,255,255,0.7)"
-            autoCorrect={false}
-            name="secretQuestion"
-            onChange={this.handleChange}
-          />
-          <TextInput
-            style={styles.input}
-            type="text"
-            //className={formErrors.secretAnswer.length > 0 ? 'error' : null}
-            placeholder="Secret Answer"
-            placeholderTextColor="rgba(255,255,255,0.7)"
-            autoCorrect={false}
-            name="secretAnswer"
-            onChange={this.handleChange}
-          />
-          <Button type="Submit" onPress={this.handleSubmit} title="Submit" />
         </View>
-      </SafeAreaView>
+      </ScrollView>
     );
   }
 }
+
 const styles = StyleSheet.create({
-  card: {
+  mainView: {
     flex: 1,
-    alignItems: 'center',
     backgroundColor: '#3498db',
-    padding: 10,
+    paddingTop: 100,
   },
   cardLine: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
   },
-  input: {
+  inputText: {
+    alignSelf: 'stretch',
+    fontSize: 18,
     height: 40,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    marginBottom: 20,
-    color: 'white',
-    paddingHorizontal: 10,
+    marginBottom: 30,
+    color: '#fff',
+    borderBottomColor: '#f8f8f8',
+    borderBottomWidth: 1,
+    textAlign: 'center',
   },
 });
+
 export default Component1;
