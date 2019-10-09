@@ -11,6 +11,7 @@ import {
   TextInput,
   ScrollView,
 } from 'react-native';
+import Component3 from './Component3';
 
 const cardRegex = RegExp(/^[0-9]{16}$/);
 const cvvRegex = RegExp(/^[0-9]{3,4}$/);
@@ -46,7 +47,7 @@ type State = {
   onFormValid: boolean,
 };
 
-class Component1 extends React.PureComponent<Props, State> {
+class Component1 extends React.Component<Props, State> {
   state = {
     creditCardNumber: '',
     cvv: '',
@@ -135,19 +136,17 @@ class Component1 extends React.PureComponent<Props, State> {
   };
   render() {
     const {formErrors} = this.state;
-    console.log('(render) Component1');
+    console.log(this.state.creditCardNumber);
     return (
       <ScrollView>
         <View style={styles.mainView}>
-          <View onSubmit={this.handleSubmit}>
+          <View>
             <TextInput
               style={styles.inputText}
               type="text"
               //className={formErrors.creditCardNumber === true ? '' : 'error'}
               placeholder="0000 0000 0000 0000"
-              noValidate
-              name="creditCardNumber"
-              onChange={this.handleChange}
+              onChangeText={this.handleChange}
             />
             <View style={styles.cardLine}>
               <TextInput
@@ -155,18 +154,14 @@ class Component1 extends React.PureComponent<Props, State> {
                 type="text"
                 //className={formErrors.expirationDate === true ? '' : 'error'}
                 placeholder="MM/YY"
-                noValidate
-                name="expirationDate"
-                onChange={this.handleChange}
+                onChangeText={this.handleChange}
               />
               <TextInput
                 style={styles.inputText}
                 type="text"
                 //className={formErrors.cvv === true ? '' : 'error'}
                 placeholder="CVV/CVC"
-                noValidate
-                name="cvv"
-                onChange={this.handleChange}
+                onChangeText={this.handleChange}
               />
             </View>
             <View style={styles.cardLine}>
@@ -175,18 +170,14 @@ class Component1 extends React.PureComponent<Props, State> {
                 type="text"
                 //className={formErrors.firstName === true ? '' : 'error'}
                 placeholder="Your Name"
-                noValidate
-                name="firstName"
-                onChange={this.handleChange}
+                onChangeText={this.handleChange}
               />
               <TextInput
                 style={styles.inputText}
                 type="text"
                 //className={formErrors.lastName === true ? '' : 'error'}
                 placeholder="Your Surname"
-                noValidate
-                name="lastName"
-                onChange={this.handleChange}
+                onChangeText={this.handleChange}
               />
             </View>
             <TextInput
@@ -194,9 +185,7 @@ class Component1 extends React.PureComponent<Props, State> {
               type="text"
               //className={formErrors.secretQuestion === true ? '' : 'error'}
               placeholder="Your Secret Question"
-              noValidate
-              name="secretQuestion"
-              onChange={this.handleChange}
+              onChangeText={this.handleChange}
             />
 
             <TextInput
@@ -204,11 +193,13 @@ class Component1 extends React.PureComponent<Props, State> {
               type="text"
               //className={formErrors.secretAnswer === true ? '' : 'error'}
               placeholder="Your Secret Answer"
-              noValidate
-              name="secretAnswer"
-              onChange={this.handleChange}
+              onChangeText={this.handleChange}
             />
             <Button onPress={this.handleSubmit} type="submit" title="Submit" />
+            <Component3
+              creditCardNumber={this.state.creditCardNumber}
+              onCardChange={this.updateCardType}
+            />
           </View>
         </View>
       </ScrollView>
