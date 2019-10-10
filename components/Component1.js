@@ -144,24 +144,24 @@ class Component1 extends React.Component<Props, State> {
             <TextInput
               style={styles.inputText}
               type="text"
-              //className={formErrors.creditCardNumber === true ? '' : 'error'}
               placeholder="0000 0000 0000 0000"
-              onChangeText={this.handleChange}
+              onChangeText={creditCardNumber =>
+                this.setState({creditCardNumber})
+              }
             />
             <View style={styles.cardLine}>
               <TextInput
                 style={styles.inputText}
                 type="text"
-                //className={formErrors.expirationDate === true ? '' : 'error'}
                 placeholder="MM/YY"
-                onChangeText={this.handleChange}
+                onChangeText={expirationDate => this.setState({expirationDate})}
               />
               <TextInput
                 style={styles.inputText}
                 type="text"
                 //className={formErrors.cvv === true ? '' : 'error'}
                 placeholder="CVV/CVC"
-                onChangeText={this.handleChange}
+                onChangeText={cvv => this.setState({cvv})}
               />
             </View>
             <View style={styles.cardLine}>
@@ -170,14 +170,14 @@ class Component1 extends React.Component<Props, State> {
                 type="text"
                 //className={formErrors.firstName === true ? '' : 'error'}
                 placeholder="Your Name"
-                onChangeText={this.handleChange}
+                onChangeText={firstName => this.setState({firstName})}
               />
               <TextInput
                 style={styles.inputText}
                 type="text"
                 //className={formErrors.lastName === true ? '' : 'error'}
                 placeholder="Your Surname"
-                onChangeText={this.handleChange}
+                onChangeText={lastName => this.setState({lastName})}
               />
             </View>
             <TextInput
@@ -185,7 +185,7 @@ class Component1 extends React.Component<Props, State> {
               type="text"
               //className={formErrors.secretQuestion === true ? '' : 'error'}
               placeholder="Your Secret Question"
-              onChangeText={this.handleChange}
+              onChangeText={secretQuestion => this.setState({secretQuestion})}
             />
 
             <TextInput
@@ -193,7 +193,7 @@ class Component1 extends React.Component<Props, State> {
               type="text"
               //className={formErrors.secretAnswer === true ? '' : 'error'}
               placeholder="Your Secret Answer"
-              onChangeText={this.handleChange}
+              onChangeText={secretAnswer => this.setState({secretAnswer})}
             />
             <Button onPress={this.handleSubmit} type="submit" title="Submit" />
             <Component3
