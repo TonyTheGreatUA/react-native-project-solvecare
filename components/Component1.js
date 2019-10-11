@@ -159,7 +159,6 @@ class Component1 extends React.Component<Props, State> {
               <TextInput
                 style={styles.inputText}
                 type="text"
-                //className={formErrors.cvv === true ? '' : 'error'}
                 placeholder="CVV/CVC"
                 onChangeText={cvv => this.setState({cvv})}
               />
@@ -168,14 +167,12 @@ class Component1 extends React.Component<Props, State> {
               <TextInput
                 style={styles.inputText}
                 type="text"
-                //className={formErrors.firstName === true ? '' : 'error'}
                 placeholder="Your Name"
                 onChangeText={firstName => this.setState({firstName})}
               />
               <TextInput
                 style={styles.inputText}
                 type="text"
-                //className={formErrors.lastName === true ? '' : 'error'}
                 placeholder="Your Surname"
                 onChangeText={lastName => this.setState({lastName})}
               />
@@ -183,7 +180,6 @@ class Component1 extends React.Component<Props, State> {
             <TextInput
               style={styles.inputText}
               type="text"
-              //className={formErrors.secretQuestion === true ? '' : 'error'}
               placeholder="Your Secret Question"
               onChangeText={secretQuestion => this.setState({secretQuestion})}
             />
@@ -191,7 +187,6 @@ class Component1 extends React.Component<Props, State> {
             <TextInput
               style={styles.inputText}
               type="text"
-              //className={formErrors.secretAnswer === true ? '' : 'error'}
               placeholder="Your Secret Answer"
               onChangeText={secretAnswer => this.setState({secretAnswer})}
             />
