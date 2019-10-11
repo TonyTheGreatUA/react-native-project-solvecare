@@ -53,15 +53,7 @@ class Component0 extends React.Component<Props, State> {
     console.log('(render) App');
     return (
       <View style={styles.homeScreen}>
-        <Component1 updateData={this.updateData} />
-        <Component2
-          firstName={this.state.firstName}
-          lastName={this.state.lastName}
-          creditCardNumber={this.state.creditCardNumber}
-          cardType={this.state.cardType}
-          isFormInfoVisibile={this.state.isFormInfoVisibile}
-          onFormValid={this.state.onFormValid}
-        />
+        <Component4 />
       </View>
     );
   }
