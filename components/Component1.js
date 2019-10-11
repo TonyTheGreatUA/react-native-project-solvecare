@@ -45,6 +45,7 @@ type State = {
   secretQuestion: string,
   secretAnswer: string,
   onFormValid: boolean,
+  isSubmitted: boolean,
 };
 
 class Component1 extends React.Component<Props, State> {
@@ -58,15 +59,16 @@ class Component1 extends React.Component<Props, State> {
     secretAnswer: '',
     enteredWithError: '',
     cardType: '',
-    onFormValid: true,
+    onFormValid: false,
+    isSubmitted: false,
     formErrors: {
-      creditCardNumber: true,
-      expirationDate: true,
-      cvv: true,
-      firstName: true,
-      lastName: true,
-      secretQuestion: true,
-      secretAnswer: true,
+      creditCardNumber: false,
+      expirationDate: false,
+      cvv: false,
+      firstName: false,
+      lastName: false,
+      secretQuestion: false,
+      secretAnswer: false,
     },
   };
 
@@ -87,7 +89,7 @@ class Component1 extends React.Component<Props, State> {
         this.setState({onFormValid: onFormValid});
       }
     }
-    this.setState({onFormValid}, () => {
+    this.setState({onFormValid, isSubmitted: true}, () => {
       this.props.updateData(
         this.state.firstName,
         this.state.lastName,
@@ -134,15 +136,26 @@ class Component1 extends React.Component<Props, State> {
       this.onValidation(name, value);
     });
   };
+
   render() {
-    const {formErrors} = this.state;
+    const {formErrors, isSubmitted} = this.state;
     console.log(this.state.creditCardNumber);
     return (
       <ScrollView>
         <View style={styles.mainView}>
           <View>
             <TextInput
-              style={styles.inputText}
+              style={[
+                styles.inputText,
+                {
+                  borderBottomColor:
+                    !formErrors.creditCardNumber && isSubmitted
+                      ? 'red'
+                      : formErrors.creditCardNumber && !isSubmitted
+                      ? 'black'
+                      : 'black',
+                },
+              ]}
               type="text"
               placeholder="0000 0000 0000 0000"
               onChangeText={creditCardNumber =>
@@ -151,13 +164,33 @@ class Component1 extends React.Component<Props, State> {
             />
             <View style={styles.cardLine}>
               <TextInput
-                style={styles.inputText}
+                style={[
+                  styles.inputText,
+                  {
+                    borderBottomColor:
+                      !formErrors.expirationDate && isSubmitted
+                        ? 'red'
+                        : formErrors.expirationDate && !isSubmitted
+                        ? ''
+                        : '',
+                  },
+                ]}
                 type="text"
                 placeholder="MM/YY"
                 onChangeText={expirationDate => this.setState({expirationDate})}
               />
               <TextInput
-                style={styles.inputText}
+                style={[
+                  styles.inputText,
+                  {
+                    borderBottomColor:
+                      !formErrors.cvv && isSubmitted
+                        ? 'red'
+                        : formErrors.cvv && !isSubmitted
+                        ? ''
+                        : '',
+                  },
+                ]}
                 type="text"
                 placeholder="CVV/CVC"
                 onChangeText={cvv => this.setState({cvv})}
@@ -165,27 +198,67 @@ class Component1 extends React.Component<Props, State> {
             </View>
             <View style={styles.cardLine}>
               <TextInput
-                style={styles.inputText}
+                style={[
+                  styles.inputText,
+                  {
+                    borderBottomColor:
+                      !formErrors.firstName && isSubmitted
+                        ? 'red'
+                        : formErrors.firstName && !isSubmitted
+                        ? ''
+                        : '',
+                  },
+                ]}
                 type="text"
                 placeholder="Your Name"
                 onChangeText={firstName => this.setState({firstName})}
               />
               <TextInput
-                style={styles.inputText}
+                style={[
+                  styles.inputText,
+                  {
+                    borderBottomColor:
+                      !formErrors.lastName && isSubmitted
+                        ? 'red'
+                        : formErrors.lastName && !isSubmitted
+                        ? ''
+                        : '',
+                  },
+                ]}
                 type="text"
                 placeholder="Your Surname"
                 onChangeText={lastName => this.setState({lastName})}
               />
             </View>
             <TextInput
-              style={styles.inputText}
+              style={[
+                styles.inputText,
+                {
+                  borderBottomColor:
+                    !formErrors.secretQuestion && isSubmitted
+                      ? 'red'
+                      : formErrors.secretQuestion && !isSubmitted
+                      ? ''
+                      : '',
+                },
+              ]}
               type="text"
               placeholder="Your Secret Question"
               onChangeText={secretQuestion => this.setState({secretQuestion})}
             />
 
             <TextInput
-              style={styles.inputText}
+              style={[
+                styles.inputText,
+                {
+                  borderBottomColor:
+                    !formErrors.secretAnswer && isSubmitted
+                      ? 'red'
+                      : formErrors.secretAnswer && !isSubmitted
+                      ? ''
+                      : '',
+                },
+              ]}
               type="text"
               placeholder="Your Secret Answer"
               onChangeText={secretAnswer => this.setState({secretAnswer})}
