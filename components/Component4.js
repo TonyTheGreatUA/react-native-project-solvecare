@@ -15,7 +15,7 @@ export class Component4 extends React.Component {
   }
 
   makeRemoteRequest = count => {
-    fetch(`https://randomuser.me/api/?results=100`)
+    fetch(`https://randomuser.me/api/?results=50`)
       .then(response => response.json())
       .then(response => {
         let data = [];
@@ -39,6 +39,8 @@ export class Component4 extends React.Component {
         <FlatList
           data={this.state.data}
           initialNumToRender={this.state.defaultAmount}
+          keyExtractor={(item, index) => index}
+          windowSize={5}
           renderItem={({item}) => (
             <View style={styles.item}>
               <View style={styles.itemRow}>

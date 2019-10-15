@@ -10,6 +10,7 @@ export class Component5 extends Component {
       createStatus: false,
       editable: true,
       isSubmitted: false,
+      isFocused: false,
       title: '',
       weight: '',
       size: '',
@@ -20,6 +21,9 @@ export class Component5 extends Component {
       },
     };
   }
+  onFocusChange = () => {
+    this.setState({isFocused: true});
+  };
   onCreate = () => {
     this.setState({
       isSubmitted: true,
@@ -27,6 +31,10 @@ export class Component5 extends Component {
       createStatus: true,
       editable: false,
     });
+    var item = JSON.stringify(
+      `Title : ${this.state.title} Weight : ${this.state.weight} Size : ${this.state.size} Country : ${this.state.country}`,
+    );
+    return <Text>{item}</Text>;
   };
   onEdit = () => {
     this.setState({
@@ -34,13 +42,6 @@ export class Component5 extends Component {
       editable: true,
       createStatus: false,
     });
-  };
-
-  showItem = () => {
-    var item = JSON.stringify(
-      `Title : ${this.state.title} Weight : ${this.state.weight} Size : ${this.state.size} Country : ${this.state.country}`,
-    );
-    isSubmitted ? <Text>{item}</Text> : '';
   };
 
   onValidation = (name: string, value: string) => {
@@ -71,7 +72,7 @@ export class Component5 extends Component {
   };
 
   render() {
-    const {formErrors, isSubmitted} = this.state;
+    const {formErrors, isSubmitted, isFocused} = this.state;
     return (
       <View style={styles.view}>
         <View style={styles.buttons}>
@@ -87,21 +88,60 @@ export class Component5 extends Component {
         <View style={styles.inputSection}>
           <TextInput
             editable={this.state.editable}
-            style={styles.inputText}
+            onFocus={this.onFocusChange}
+            style={[
+              styles.inputText,
+              {
+                borderBottomColor:
+                  !formErrors.title && isSubmitted
+                    ? 'red'
+                    : formErrors.title && !isSubmitted
+                    ? ''
+                    : formErrors.title && isSubmitted && isFocused
+                    ? 'grey'
+                    : '',
+              },
+            ]}
             type="text"
             placeholder="Title"
             onChangeText={title => this.setState({title})}
           />
           <TextInput
             editable={this.state.editable}
-            style={styles.inputText}
+            onFocus={this.onFocusChange}
+            style={[
+              styles.inputText,
+              {
+                borderBottomColor:
+                  !formErrors.weight && isSubmitted
+                    ? 'red'
+                    : formErrors.weight && !isSubmitted
+                    ? ''
+                    : formErrors.weight && isSubmitted && isFocused
+                    ? 'grey'
+                    : '',
+              },
+            ]}
             type="text"
             placeholder="Weight"
             onChangeText={weight => this.setState({weight})}
           />
           <TextInput
             editable={this.state.editable}
-            style={styles.inputText}
+            onFocus={this.onFocusChange}
+            style={[
+              styles.inputText,
+              {
+                borderBottomColor:
+                  !formErrors.size && isSubmitted
+                    ? 'red'
+                    : formErrors.size && !isSubmitted
+                    ? ''
+                    : formErrors.size && isSubmitted && isFocused
+                    ? 'grey'
+                    : '',
+              },
+            ]}
             type="text"
             placeholder="Size"
             onChangeText={size => this.setState({size})}
@@ -110,13 +150,18 @@ export class Component5 extends Component {
           <Picker
             style={styles.picker}
             selectedValue={this.state.country}
+            enabled={this.state.editable}
             onValueChange={(itemValue, itemIndex) =>
               this.setState({country: itemValue})
             }>
             <Picker.Item label="UA" value="ua" />
             <Picker.Item label="CN" value="cn" />
           </Picker>
-          <Text>{this.showItem}</Text>
+          <Text style={{textAlign: 'center'}}>
+            {JSON.stringify(
+              `Title : ${this.state.title} Weight : ${this.state.weight} Size : ${this.state.size} Country : ${this.state.country}`,
+            )}
+          </Text>
         </View>
       </View>
     );
