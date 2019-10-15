@@ -152,8 +152,8 @@ class Component1 extends React.Component<Props, State> {
                     !formErrors.creditCardNumber && isSubmitted
                       ? 'red'
                       : formErrors.creditCardNumber && !isSubmitted
-                      ? 'black'
-                      : 'black',
+                      ? ''
+                      : '',
                 },
               ]}
               type="text"
@@ -171,8 +171,8 @@ class Component1 extends React.Component<Props, State> {
                       !formErrors.expirationDate && isSubmitted
                         ? 'red'
                         : formErrors.expirationDate && !isSubmitted
-                        ? 'black'
-                        : 'black',
+                        ? ''
+                        : '',
                   },
                 ]}
                 type="text"
@@ -187,8 +187,8 @@ class Component1 extends React.Component<Props, State> {
                       !formErrors.cvv && isSubmitted
                         ? 'red'
                         : formErrors.cvv && !isSubmitted
-                        ? 'black'
-                        : 'black',
+                        ? ''
+                        : '',
                   },
                 ]}
                 type="text"
@@ -205,8 +205,8 @@ class Component1 extends React.Component<Props, State> {
                       !formErrors.firstName && isSubmitted
                         ? 'red'
                         : formErrors.firstName && !isSubmitted
-                        ? 'black'
-                        : 'black',
+                        ? ''
+                        : '',
                   },
                 ]}
                 type="text"
@@ -221,8 +221,8 @@ class Component1 extends React.Component<Props, State> {
                       !formErrors.lastName && isSubmitted
                         ? 'red'
                         : formErrors.lastName && !isSubmitted
-                        ? 'black'
-                        : 'black',
+                        ? ''
+                        : '',
                   },
                 ]}
                 type="text"
@@ -238,8 +238,8 @@ class Component1 extends React.Component<Props, State> {
                     !formErrors.secretQuestion && isSubmitted
                       ? 'red'
                       : formErrors.secretQuestion && !isSubmitted
-                      ? 'black'
-                      : 'black',
+                      ? ''
+                      : '',
                 },
               ]}
               type="text"
@@ -255,8 +255,8 @@ class Component1 extends React.Component<Props, State> {
                     !formErrors.secretAnswer && isSubmitted
                       ? 'red'
                       : formErrors.secretAnswer && !isSubmitted
-                      ? 'black'
-                      : 'black',
+                      ? ''
+                      : '',
                 },
               ]}
               type="text"
