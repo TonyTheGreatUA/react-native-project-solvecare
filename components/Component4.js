@@ -7,7 +7,7 @@ export class Component4 extends React.Component {
 
     this.state = {
       data: [],
-      defaultLoadAmount: 5,
+      defaultLoadAmount: 10,
     };
   }
   componentDidMount() {
@@ -40,7 +40,7 @@ export class Component4 extends React.Component {
           data={this.state.data}
           initialNumToRender={this.state.defaultAmount}
           keyExtractor={(item, index) => index}
-          windowSize={5}
+          windowSize={20}
           renderItem={({item}) => (
             <View style={styles.item}>
               <View style={styles.itemRow}>

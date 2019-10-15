@@ -54,7 +54,7 @@ class Component0 extends React.Component<Props, State> {
     console.log('(render) App');
     return (
       <View style={styles.homeScreen}>
-        <Component5 />
+        <Component4 />
       </View>
     );
   }
