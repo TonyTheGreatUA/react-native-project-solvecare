@@ -1,6 +1,12 @@
 import React, {Component} from 'react';
 import {Text, View, Button, TextInput, Picker, StyleSheet} from 'react-native';
 
+const callFromServer = data => {
+  return new Promise(resolve => {
+    setTimeout(() => resolve(data), 2000);
+  });
+};
+
 export class Component5 extends Component {
   constructor() {
     super();
@@ -19,22 +25,23 @@ export class Component5 extends Component {
         weight: false,
         size: false,
       },
+      output: null,
     };
   }
   onFocusChange = () => {
     this.setState({isFocused: true});
   };
   onCreate = () => {
-    this.setState({
-      isSubmitted: true,
-      editStatus: false,
-      createStatus: true,
-      editable: false,
+    const data = this.state.data;
+    callFromServer(data).then(response => {
+      this.setState({
+        isSubmitted: true,
+        editStatus: false,
+        createStatus: true,
+        editable: false,
+        output: response,
+      });
     });
-    var item = JSON.stringify(
-      `Title : ${this.state.title} Weight : ${this.state.weight} Size : ${this.state.size} Country : ${this.state.country}`,
-    );
-    return <Text>{item}</Text>;
   };
   onEdit = () => {
     this.setState({
@@ -49,13 +56,13 @@ export class Component5 extends Component {
 
     switch (name) {
       case 'title':
-        formErrors.firstName = value.length < 1 ? false : true;
+        formErrors.title = value.length < 1 ? false : true;
         break;
       case 'weight':
-        formErrors.lastName = value.length < 1 ? false : true;
+        formErrors.weight = value.length < 1 ? false : true;
         break;
       case 'size':
-        formErrors.secretQuestion = value.length < 1 ? false : true;
+        formErrors.size = value.length < 1 ? false : true;
         break;
 
       default:
@@ -154,8 +161,8 @@ export class Component5 extends Component {
             onValueChange={(itemValue, itemIndex) =>
               this.setState({country: itemValue})
             }>
-            <Picker.Item label="UA" value="ua" />
-            <Picker.Item label="CN" value="cn" />
+            <Picker.Item enabled={this.state.editable} label="UA" value="ua" />
+            <Picker.Item enabled={this.state.editable} label="CN" value="cn" />
           </Picker>
           <Text style={{textAlign: 'center'}}>
             {JSON.stringify(
