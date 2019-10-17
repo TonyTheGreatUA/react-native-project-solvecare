@@ -25,7 +25,9 @@ type Props = {
     onFormValid: boolean,
   ) => void,
 };
-
+type Event = {
+  nativeEvent: Object,
+};
 type State = {
   cardType: string,
   creditCardNumber: string,
@@ -78,7 +80,7 @@ class Component1 extends React.Component<Props, State> {
     });
   };
 
-  handleSubmit = (e: SyntheticEvent<HTMLInputElement>) => {
+  handleSubmit = (e: SyntheticEvent<>) => {
     e.preventDefault();
     let formErrors = {...this.state.formErrors};
     let onFormValid = this.state.onFormValid;

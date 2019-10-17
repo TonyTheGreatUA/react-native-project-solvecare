@@ -1,7 +1,13 @@
+//@flow
 import React, {Component} from 'react';
 import {Text, View, FlatList, Image, StyleSheet} from 'react-native';
+type Props = {};
+type State = {
+  data: any,
+  defaultLoadAmount: number,
+};
 
-export class Component4 extends React.Component {
+export class Component4 extends React.Component<Props, State> {
   constructor() {
     super();
 
@@ -14,7 +20,7 @@ export class Component4 extends React.Component {
     this.makeRemoteRequest();
   }
 
-  makeRemoteRequest = count => {
+  makeRemoteRequest = () => {
     fetch(`https://randomuser.me/api/?results=50`)
       .then(response => response.json())
       .then(response => {
@@ -38,7 +44,7 @@ export class Component4 extends React.Component {
       <View style={styles.view}>
         <FlatList
           data={this.state.data}
-          initialNumToRender={this.state.defaultAmount}
+          initialNumToRender={this.state.defaultLoadAmount}
           keyExtractor={(item, index) => index}
           windowSize={20}
           renderItem={({item}) => (
