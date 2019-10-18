@@ -45,14 +45,14 @@ class Component2 extends React.Component<Props, State> {
     const {firstName, lastName, creditCardNumber, cardType} = this.props;
     return (
       <View style={styles.card}>
-        <Text>Card Info</Text>
+        <Text style={styles.h1}>Card Info</Text>
         <Text>First Name : {firstName}</Text>
         <Text>Last Name : {lastName}</Text>
-        <Text className="cardInfo">
+        <Text>
           Credit Card :{' '}
           {creditCardNumber.substr(this.props.creditCardNumber.length - 4)}
         </Text>
-        <Text className="cardInfo">Card Type : {cardType}</Text>
+        <Text>Card Type : {cardType}</Text>
       </View>
     );
   }
@@ -65,11 +65,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   h1: {
+    fontSize: 20,
     fontWeight: 'bold',
-    color: '#000',
-  },
-  text: {
-    color: '#000',
+    color: '#F3C678',
   },
 });
 export default Component2;
