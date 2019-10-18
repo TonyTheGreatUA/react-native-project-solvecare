@@ -41,12 +41,36 @@ type Props = {
   onSecretAnswerChange: (value: string) => void,
 };
 
-type State = {};
+type State = {
+  formErrors: {
+    firstName: boolean,
+    lastName: boolean,
+    cvv: boolean,
+    expirationDate: boolean,
+    secretQuestion: boolean,
+    secretAnswer: boolean,
+    creditCardNumber: boolean,
+  },
+  onFormValid: boolean,
+  isSubmitted: boolean,
+};
 
 class Component1 extends React.Component<Props, State> {
   constructor() {
     super();
-
+    this.state = {
+      onFormValid: false,
+      isSubmitted: false,
+      formErrors: {
+        creditCardNumber: false,
+        expirationDate: false,
+        cvv: false,
+        firstName: false,
+        lastName: false,
+        secretQuestion: false,
+        secretAnswer: false,
+      },
+    };
     this.onCreditCardNumberChange = this.onCreditCardNumberChange.bind(this);
     this.onCvvChange = this.onCvvChange.bind(this);
     this.onExpirationDateChange = this.onExpirationDateChange.bind(this);
@@ -84,6 +108,36 @@ class Component1 extends React.Component<Props, State> {
   onSecretAnswerChange(value: string) {
     this.props.setSecretAnswer(value);
   }
+
+  onValidation = (name: string, value: string) => {
+    let formErrors = {...this.state.formErrors};
+    switch (name) {
+      case 'firstName':
+        formErrors.firstName = value.length < 3 ? false : true;
+        break;
+      case 'lastName':
+        formErrors.lastName = value.length < 3 ? false : true;
+        break;
+      case 'secretQuestion':
+        formErrors.secretQuestion = value.length < 10 ? false : true;
+        break;
+      case 'secretAnswer':
+        formErrors.secretAnswer = value.length < 10 ? false : true;
+        break;
+      case 'creditCardNumber':
+        formErrors.creditCardNumber = cardRegex.test(value) ? true : false;
+        break;
+      case 'cvv':
+        formErrors.cvv = cvvRegex.test(value) ? true : false;
+        break;
+      case 'expirationDate':
+        formErrors.expirationDate = expRegex.test(value) ? true : false;
+        break;
+      default:
+        break;
+    }
+    this.setState({formErrors, [name]: value});
+  };
 
   render() {
     return (
