@@ -59,18 +59,17 @@ class Component2 extends React.Component<Props, State> {
 }
 const styles = StyleSheet.create({
   card: {
-    paddingTop: 40,
     paddingBottom: 90,
     flex: 1,
-    backgroundColor: '#3498db',
+    backgroundColor: '#fff',
     alignItems: 'center',
   },
   h1: {
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#000',
   },
   text: {
-    color: '#fff',
+    color: '#000',
   },
 });
 export default Component2;

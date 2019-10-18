@@ -7,7 +7,7 @@ import {
   StyleSheet,
   SafeAreaView,
   View,
-  Button,
+  TouchableOpacity,
   TextInput,
   ScrollView,
 } from 'react-native';
@@ -144,7 +144,9 @@ class Component1 extends React.Component<Props, State> {
               value={this.props.secretAnswer}
               onChangeText={this.onSecretAnswerChange}
             />
-            <Button type="submit" title="Submit" />
+            <TouchableOpacity style={styles.button}>
+              <Text style={styles.buttonText}>Submit</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
@@ -155,7 +157,7 @@ class Component1 extends React.Component<Props, State> {
 const styles = StyleSheet.create({
   mainView: {
     flex: 1,
-    backgroundColor: '#3498db',
+    backgroundColor: '#fff',
     paddingTop: 100,
   },
   cardLine: {
@@ -167,10 +169,22 @@ const styles = StyleSheet.create({
     fontSize: 18,
     height: 40,
     marginBottom: 30,
-    color: '#fff',
-    borderBottomColor: '#f8f8f8',
+    color: '#000000',
+    borderBottomColor: '#F3C678',
     borderBottomWidth: 1,
     textAlign: 'center',
+  },
+  button: {
+    width: '100%',
+    backgroundColor: '#F3C678',
+    paddingTop: 10,
+    paddingBottom: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 20,
   },
 });
 export default Component1;

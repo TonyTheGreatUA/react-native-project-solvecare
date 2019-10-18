@@ -29,7 +29,6 @@ class Component0 extends React.Component<Props, State> {
 const styles = StyleSheet.create({
   homeScreen: {
     flex: 1,
-    backgroundColor: '#3498db',
   },
 });
 export default Component0;
