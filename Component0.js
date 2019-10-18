@@ -1,61 +1,27 @@
 import React, {Component} from 'react';
 import {View, Text, ScrollView, StyleSheet} from 'react-native';
-import Component1 from './components/Component1';
-import Component2 from './components/Component2';
+import Component1 from './components/Component1/Component1';
+import Component2 from './components/Component2/Component2';
 import Component4 from './components/Component4';
 import Component5 from './components/Component5';
+import {applyMiddleware, createStore} from 'redux';
+import rootReducer from './store/reducers';
+import {Provider} from 'react-redux';
+import Component1Container from './components/Component1/Component1Container';
+import Component2Container from './components/Component2/Component2Container';
+const store = createStore(rootReducer);
+type Props = {};
 
-type Props = {
-  updateData: (
-    firstName: string,
-    lastName: string,
-    creditCardNumber: string,
-    cardType: string,
-    onFormValid: boolean,
-  ) => void,
-};
-
-type State = {
-  firstName: string,
-  lastName: string,
-  creditCardNumber: string,
-  cardType: string,
-  isFormInfoVisibile: boolean,
-  onFormValid: boolean,
-};
+type State = {};
 class Component0 extends React.Component<Props, State> {
-  state = {
-    firstName: '',
-    lastName: '',
-    creditCardNumber: '',
-    isFormInfoVisibile: true,
-    enteredWithError: '',
-    cardType: '',
-    onFormValid: true,
-  };
-
-  updateData = (
-    firstName: string,
-    lastName: string,
-    creditCardNumber: string,
-    cardType: string,
-    onFormValid: boolean,
-  ) => {
-    this.setState({
-      firstName: firstName,
-      lastName: lastName,
-      creditCardNumber: creditCardNumber,
-      cardType: cardType,
-      onFormValid: onFormValid,
-    });
-  };
-
   render() {
-    console.log('(render) App');
     return (
-      <View style={styles.homeScreen}>
-        <Component5 />
-      </View>
+      <Provider store={store}>
+        <View style={styles.homeScreen}>
+          <Component1Container />
+          <Component2Container />
+        </View>
+      </Provider>
     );
   }
 }

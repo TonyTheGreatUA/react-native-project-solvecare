@@ -26,9 +26,9 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import Component1 from './components/Component1';
+import Component1 from './components/Component1/Component1';
 
-import Component2 from './components/Component2';
+import Component2 from './components/Component2/Component2';
 import Component0 from './Component0';
 
 const App: () => React$Node = () => {
