@@ -12,6 +12,7 @@ import {
   ScrollView,
 } from 'react-native';
 import Component3 from '../Component3';
+import getDataFromServer from './serverService';
 
 type Props = {
   creditCardNumber: string,
@@ -60,13 +61,13 @@ class Component1 extends React.Component<Props, State> {
       onFormValid: false,
       isSubmitted: false,
       formErrors: {
-        creditCardNumber: false,
-        expirationDate: false,
-        cvv: false,
-        firstName: false,
-        lastName: false,
-        secretQuestion: false,
-        secretAnswer: false,
+        creditCardNumber: true,
+        expirationDate: true,
+        cvv: true,
+        firstName: true,
+        lastName: true,
+        secretQuestion: true,
+        secretAnswer: true,
       },
     };
     this.onCreditCardNumberChange = this.onCreditCardNumberChange.bind(this);
@@ -106,28 +107,38 @@ class Component1 extends React.Component<Props, State> {
   onSecretAnswerChange(value: string) {
     this.props.setSecretAnswer(value);
   }
-  handleSubmit = (e: SyntheticEvent<HTMLInputElement>) => {
-    const {name, value} = e.currentTarget;
-    let formErrors = {...this.state.formErrors};
+
+  getData = item => {
+    getDataFromServer(item).then(response => {
+      this.setState({formErrors: response});
+    });
+  };
+
+  handleSubmit = () => {
     let onFormValid = this.state.onFormValid;
 
-    for (let i in formErrors) {
-      if (formErrors[i] !== true) {
-        onFormValid = false;
-        this.setState({onFormValid: onFormValid});
-      }
-    }
-
-    this.setState({onFormValid, isSubmitted: true}, () => {});
+    this.setState({onFormValid, isSubmitted: true});
+    this.getData(this.state);
+    return true;
   };
 
   render() {
+    let {formErrors} = this.state;
+
     return (
       <ScrollView>
         <View style={styles.mainView}>
           <View>
             <TextInput
-              style={styles.inputText}
+              style={[
+                styles.inputText,
+                {
+                  borderBottomColor:
+                    formErrors.creditCardNumber === false
+                      ? '#FF0000'
+                      : '#F3C678',
+                },
+              ]}
               type="text"
               placeholder="0000 0000 0000 0000"
               value={this.props.creditCardNumber}
@@ -135,14 +146,28 @@ class Component1 extends React.Component<Props, State> {
             />
             <View style={styles.cardLine}>
               <TextInput
-                style={styles.inputText}
+                style={[
+                  styles.inputText,
+                  {
+                    borderBottomColor:
+                      formErrors.expirationDate === false
+                        ? '#FF0000'
+                        : '#F3C678',
+                  },
+                ]}
                 type="text"
                 placeholder="MM/YY"
                 value={this.props.expirationDate}
                 onChangeText={this.onExpirationDateChange}
               />
               <TextInput
-                style={styles.inputText}
+                style={[
+                  styles.inputText,
+                  {
+                    borderBottomColor:
+                      formErrors.cvv === false ? '#FF0000' : '#F3C678',
+                  },
+                ]}
                 type="text"
                 placeholder="CVV/CVC"
                 value={this.props.cvv}
@@ -151,14 +176,26 @@ class Component1 extends React.Component<Props, State> {
             </View>
             <View style={styles.cardLine}>
               <TextInput
-                style={styles.inputText}
+                style={[
+                  styles.inputText,
+                  {
+                    borderBottomColor:
+                      formErrors.firstName === false ? '#FF0000' : '#F3C678',
+                  },
+                ]}
                 type="text"
                 placeholder="Your Name"
                 value={this.props.firstName}
                 onChangeText={this.onFirstNameChange}
               />
               <TextInput
-                style={styles.inputText}
+                style={[
+                  styles.inputText,
+                  {
+                    borderBottomColor:
+                      formErrors.lastName === false ? '#FF0000' : '#F3C678',
+                  },
+                ]}
                 type="text"
                 placeholder="Your Surname"
                 value={this.props.lastName}
@@ -166,7 +203,13 @@ class Component1 extends React.Component<Props, State> {
               />
             </View>
             <TextInput
-              style={styles.inputText}
+              style={[
+                styles.inputText,
+                {
+                  borderBottomColor:
+                    formErrors.secretQuestion === false ? '#FF0000' : '#F3C678',
+                },
+              ]}
               type="text"
               placeholder="Your Secret Question"
               value={this.props.secretQuestion}
@@ -174,13 +217,19 @@ class Component1 extends React.Component<Props, State> {
             />
 
             <TextInput
-              style={styles.inputText}
+              style={[
+                styles.inputText,
+                {
+                  borderBottomColor:
+                    formErrors.secretAnswer === false ? '#FF0000' : '#F3C678',
+                },
+              ]}
               type="text"
               placeholder="Your Secret Answer"
               value={this.props.secretAnswer}
               onChangeText={this.onSecretAnswerChange}
             />
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={this.handleSubmit}>
               <Text style={styles.buttonText}>Submit</Text>
             </TouchableOpacity>
           </View>

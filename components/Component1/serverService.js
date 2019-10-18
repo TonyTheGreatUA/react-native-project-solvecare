@@ -7,8 +7,8 @@ const secretQuestionRegex = RegExp(/^[a-z]{10,20}$/);
 const secretAnswerRegex = RegExp(/^[a-z]{10,20}$/);
 
 const serverMock = input => {
-  return newPromise(resolve => {
-    setTimeout(() => resolve(onValidtion(input)), 5000);
+  return new Promise(resolve => {
+    setTimeout(() => resolve(onValidation(input)), 2000);
   });
 };
 
@@ -49,5 +49,6 @@ onValidation = input => {
 
   return formErrors;
 };
+const onServerValidation = input => serverMock(input);
 
-export const onServerValidation = input => serverMock(input);
+export default onServerValidation;
