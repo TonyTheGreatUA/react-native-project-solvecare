@@ -13,10 +13,6 @@ import {
 } from 'react-native';
 import Component3 from '../Component3';
 
-const cardRegex = RegExp(/^[0-9]{16}$/);
-const cvvRegex = RegExp(/^[0-9]{3,4}$/);
-const expRegex = RegExp(/^(0[1-9]|1[0-2])\/?([0-9]{2})$/);
-
 type Props = {
   creditCardNumber: string,
   expirationDate: string,
@@ -40,7 +36,9 @@ type Props = {
   onSecretQuestionChange: (value: string) => void,
   onSecretAnswerChange: (value: string) => void,
 };
-
+type Event = {
+  nativeEvent: Object,
+};
 type State = {
   formErrors: {
     firstName: boolean,
@@ -108,35 +106,19 @@ class Component1 extends React.Component<Props, State> {
   onSecretAnswerChange(value: string) {
     this.props.setSecretAnswer(value);
   }
-
-  onValidation = (name: string, value: string) => {
+  handleSubmit = (e: SyntheticEvent<HTMLInputElement>) => {
+    const {name, value} = e.currentTarget;
     let formErrors = {...this.state.formErrors};
-    switch (name) {
-      case 'firstName':
-        formErrors.firstName = value.length < 3 ? false : true;
-        break;
-      case 'lastName':
-        formErrors.lastName = value.length < 3 ? false : true;
-        break;
-      case 'secretQuestion':
-        formErrors.secretQuestion = value.length < 10 ? false : true;
-        break;
-      case 'secretAnswer':
-        formErrors.secretAnswer = value.length < 10 ? false : true;
-        break;
-      case 'creditCardNumber':
-        formErrors.creditCardNumber = cardRegex.test(value) ? true : false;
-        break;
-      case 'cvv':
-        formErrors.cvv = cvvRegex.test(value) ? true : false;
-        break;
-      case 'expirationDate':
-        formErrors.expirationDate = expRegex.test(value) ? true : false;
-        break;
-      default:
-        break;
+    let onFormValid = this.state.onFormValid;
+
+    for (let i in formErrors) {
+      if (formErrors[i] !== true) {
+        onFormValid = false;
+        this.setState({onFormValid: onFormValid});
+      }
     }
-    this.setState({formErrors, [name]: value});
+
+    this.setState({onFormValid, isSubmitted: true}, () => {});
   };
 
   render() {
