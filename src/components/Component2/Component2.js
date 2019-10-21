@@ -39,10 +39,17 @@ class Component2 extends React.Component<Props, State> {
     ) {
       return;
     }
-    this.startFormTimer();
+    if (!this.state.isFormInfoVisibile) {
+      this.startFormTimer();
+    }
   };
+
   render() {
     const {firstName, lastName, creditCardNumber, cardType} = this.props;
+    if (!this.state.isFormInfoVisibile) {
+      return null;
+    }
+
     return (
       <View style={styles.card}>
         <Text style={styles.h1}>Card Info</Text>

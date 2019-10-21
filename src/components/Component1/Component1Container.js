@@ -1,7 +1,7 @@
 /*eslint-disable*/
-import React, { Component } from "react";
-import Component1 from "./Component1";
-import { connect } from "react-redux";
+import React, {Component} from 'react';
+import Component1 from './Component1';
+import {connect} from 'react-redux';
 import {
   setCreditCardNumber,
   setCVV,
@@ -9,8 +9,8 @@ import {
   setFirstName,
   setLastName,
   setSecretQuestion,
-  setSecretAnswer
-} from "../../store/form/actions";
+  setSecretAnswer,
+} from '../../store/form/actions';
 
 class Component1Container extends Component {
   render() {
@@ -43,7 +43,7 @@ const mapStateToProps = state => {
     firstName: state.form.firstName,
     lastName: state.form.lastName,
     secretQuestion: state.form.secretQuestion,
-    secretAnswer: state.form.secretAnswer
+    secretAnswer: state.form.secretAnswer,
   };
 };
 const mapDispatchToProps = {
@@ -53,10 +53,10 @@ const mapDispatchToProps = {
   setFirstName,
   setLastName,
   setSecretQuestion,
-  setSecretAnswer
+  setSecretAnswer,
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Component1Container);
