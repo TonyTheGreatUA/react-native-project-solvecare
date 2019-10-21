@@ -18,11 +18,9 @@ onValidation = input => {
   let items = Object.keys(formItems);
 
   items.forEach(name => {
-    console.log('---validation');
     switch (name) {
       case 'firstName':
         formErrors.firstName = firstNameRegex.test(value) ? true : false;
-        console.log(formErrors.firstName);
         break;
       case 'lastName':
         formErrors.lastName = lastNameRegex.test(value) ? true : false;
@@ -37,7 +35,6 @@ onValidation = input => {
         break;
       case 'creditCardNumber':
         formErrors.creditCardNumber = cardRegex.test(value) ? true : false;
-        console.log(formErrors.creditCardNumber);
         break;
       case 'cvv':
         formErrors.cvv = cvvRegex.test(value) ? true : false;
