@@ -14,38 +14,33 @@ const callServerMock = input => {
 
 onValidation = input => {
   let formErrors = {...input.formErrors};
-  let formItems = {...input};
-  let items = Object.keys(formItems);
-
-  items.forEach(name => {
-    switch (name) {
-      case 'firstName':
-        formErrors.firstName = firstNameRegex.test(value) ? true : false;
-        break;
-      case 'lastName':
-        formErrors.lastName = lastNameRegex.test(value) ? true : false;
-        break;
-      case 'secretQuestion':
-        formErrors.secretQuestion = secretQuestionRegex.test(value)
-          ? true
-          : false;
-        break;
-      case 'secretAnswer':
-        formErrors.secretAnswer = secretAnswerRegex.test(value) ? true : false;
-        break;
-      case 'creditCardNumber':
-        formErrors.creditCardNumber = cardRegex.test(value) ? true : false;
-        break;
-      case 'cvv':
-        formErrors.cvv = cvvRegex.test(value) ? true : false;
-        break;
-      case 'expirationDate':
-        formErrors.expirationDate = expRegex.test(value) ? true : false;
-        break;
-      default:
-        break;
-    }
-  });
+  switch (input.formErrors) {
+    case 'firstName':
+      formErrors.firstName = firstNameRegex.test(value) ? true : false;
+      break;
+    case 'lastName':
+      formErrors.lastName = lastNameRegex.test(value) ? true : false;
+      break;
+    case 'secretQuestion':
+      formErrors.secretQuestion = secretQuestionRegex.test(value)
+        ? true
+        : false;
+      break;
+    case 'secretAnswer':
+      formErrors.secretAnswer = secretAnswerRegex.test(value) ? true : false;
+      break;
+    case 'creditCardNumber':
+      formErrors.creditCardNumber = cardRegex.test(value) ? true : false;
+      break;
+    case 'cvv':
+      formErrors.cvv = cvvRegex.test(value) ? true : false;
+      break;
+    case 'expirationDate':
+      formErrors.expirationDate = expRegex.test(value) ? true : false;
+      break;
+    default:
+      break;
+  }
 
   return formErrors;
 };
