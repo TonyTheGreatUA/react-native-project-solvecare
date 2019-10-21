@@ -45,7 +45,10 @@ class Component2 extends React.PureComponent<Props, State> {
 
     creditCardNumber.length === 16 && Number(creditCardNumber.slice(-4)) > 2000
       ? (cardType = 'MasterCard')
-      : (cardType = 'Visa');
+      : creditCardNumber.length === 16 &&
+        Number(creditCardNumber.slice(-4)) < 2000
+      ? (cardType = 'Visa')
+      : (cardType = '');
 
     this.setState({
       cardType,
@@ -58,7 +61,7 @@ class Component2 extends React.PureComponent<Props, State> {
     if (!this.state.isFormInfoVisibile) {
       return null;
     }
-
+    console.log(this.state.isFormInfoVisibile);
     return (
       <View style={styles.card}>
         <Text style={styles.h1}>Card Info</Text>
