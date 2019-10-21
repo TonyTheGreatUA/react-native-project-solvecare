@@ -6,7 +6,7 @@ const lastNameRegex = RegExp(/^[A-z]{2,10}$/);
 const secretQuestionRegex = RegExp(/^[a-z]{10,20}$/);
 const secretAnswerRegex = RegExp(/^[a-z]{10,20}$/);
 
-const serverMock = input => {
+const callServerMock = input => {
   return new Promise(resolve => {
     setTimeout(() => resolve(onValidation(input)), 2000);
   });
@@ -18,9 +18,11 @@ onValidation = input => {
   let items = Object.keys(formItems);
 
   items.forEach(name => {
+    console.log('---validation');
     switch (name) {
       case 'firstName':
         formErrors.firstName = firstNameRegex.test(value) ? true : false;
+        console.log(formErrors.firstName);
         break;
       case 'lastName':
         formErrors.lastName = lastNameRegex.test(value) ? true : false;
@@ -35,6 +37,7 @@ onValidation = input => {
         break;
       case 'creditCardNumber':
         formErrors.creditCardNumber = cardRegex.test(value) ? true : false;
+        console.log(formErrors.creditCardNumber);
         break;
       case 'cvv':
         formErrors.cvv = cvvRegex.test(value) ? true : false;
@@ -49,6 +52,6 @@ onValidation = input => {
 
   return formErrors;
 };
-const onServerValidation = input => serverMock(input);
+const onServerValidation = input => callServerMock(input);
 
 export default onServerValidation;
