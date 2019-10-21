@@ -108,7 +108,7 @@ class Component1 extends React.Component<Props, State> {
     this.props.setSecretAnswer(value);
   }
 
-  getData = item => {
+  getData = (item: any) => {
     getDataFromServer(item).then(response => {
       this.setState({formErrors: response});
     });
@@ -135,8 +135,8 @@ class Component1 extends React.Component<Props, State> {
                 {
                   borderBottomColor:
                     formErrors.creditCardNumber === false
-                      ? '#FF0000'
-                      : '#F3C678',
+                      ? styles.inputError
+                      : styles.inputDefault,
                 },
               ]}
               type="text"
@@ -151,8 +151,8 @@ class Component1 extends React.Component<Props, State> {
                   {
                     borderBottomColor:
                       formErrors.expirationDate === false
-                        ? '#FF0000'
-                        : '#F3C678',
+                        ? styles.inputError
+                        : styles.inputDefault,
                   },
                 ]}
                 type="text"
@@ -165,7 +165,9 @@ class Component1 extends React.Component<Props, State> {
                   styles.inputText,
                   {
                     borderBottomColor:
-                      formErrors.cvv === false ? '#FF0000' : '#F3C678',
+                      formErrors.cvv === false
+                        ? styles.inputError
+                        : styles.inputDefault,
                   },
                 ]}
                 type="text"
@@ -180,7 +182,9 @@ class Component1 extends React.Component<Props, State> {
                   styles.inputText,
                   {
                     borderBottomColor:
-                      formErrors.firstName === false ? '#FF0000' : '#F3C678',
+                      formErrors.firstName === false
+                        ? styles.inputError
+                        : styles.inputDefault,
                   },
                 ]}
                 type="text"
@@ -193,7 +197,9 @@ class Component1 extends React.Component<Props, State> {
                   styles.inputText,
                   {
                     borderBottomColor:
-                      formErrors.lastName === false ? '#FF0000' : '#F3C678',
+                      formErrors.lastName === false
+                        ? styles.inputError
+                        : styles.inputDefault,
                   },
                 ]}
                 type="text"
@@ -207,7 +213,9 @@ class Component1 extends React.Component<Props, State> {
                 styles.inputText,
                 {
                   borderBottomColor:
-                    formErrors.secretQuestion === false ? '#FF0000' : '#F3C678',
+                    formErrors.secretQuestion === false
+                      ? styles.inputError
+                      : styles.inputDefault,
                 },
               ]}
               type="text"
@@ -221,7 +229,9 @@ class Component1 extends React.Component<Props, State> {
                 styles.inputText,
                 {
                   borderBottomColor:
-                    formErrors.secretAnswer === false ? '#FF0000' : '#F3C678',
+                    formErrors.secretAnswer === false
+                      ? styles.inputError
+                      : styles.inputDefault,
                 },
               ]}
               type="text"
@@ -270,6 +280,12 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontSize: 20,
+  },
+  inputError: {
+    borderBottomColor: '#FF0000',
+  },
+  inputDefault: {
+    borderBottomColor: '#F3C678',
   },
 });
 export default Component1;
