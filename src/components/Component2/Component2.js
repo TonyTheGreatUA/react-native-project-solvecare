@@ -1,3 +1,5 @@
+//@flow
+/*eslint-disable*/
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, TextInput} from 'react-native';
 type Props = {
@@ -11,6 +13,7 @@ type Props = {
 type State = {
   isFormInfoVisibile: boolean,
   timer: boolean,
+  cardType: string,
 };
 class Component2 extends React.PureComponent<Props, State> {
   state = {
@@ -67,10 +70,7 @@ class Component2 extends React.PureComponent<Props, State> {
         <Text style={styles.h1}>Card Info</Text>
         <Text>First Name : {firstName}</Text>
         <Text>Last Name : {lastName}</Text>
-        <Text>
-          Credit Card :{' '}
-          {creditCardNumber.substr(this.props.creditCardNumber.length - 4)}
-        </Text>
+        <Text>Credit Card :{creditCardNumber.slice(-4)}</Text>
         <Text>Card Type : {cardType}</Text>
       </View>
     );
