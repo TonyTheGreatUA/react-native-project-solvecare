@@ -12,10 +12,11 @@ type State = {
   isFormInfoVisibile: boolean,
   timer: boolean,
 };
-class Component2 extends React.Component<Props, State> {
+class Component2 extends React.PureComponent<Props, State> {
   state = {
     isFormInfoVisibile: false,
     timer: false,
+    cardType: '',
   };
 
   startFormTimer = () => {
@@ -31,21 +32,29 @@ class Component2 extends React.Component<Props, State> {
     });
   };
   componentDidUpdate = (prevProps: Props) => {
-    if (
-      prevProps.firstName === this.props.firstName &&
-      prevProps.lastName === this.props.lastName &&
-      prevProps.creditCardNumber === this.props.creditCardNumber &&
-      prevProps.cardType === this.props.cardType
-    ) {
-      return;
+    if (prevProps.creditCardNumber !== this.props.creditCardNumber) {
+      this.getCardType();
     }
     if (!this.state.isFormInfoVisibile) {
       this.startFormTimer();
     }
   };
+  getCardType = () => {
+    const {creditCardNumber} = this.props;
+    let cardType;
+
+    creditCardNumber.length === 16 && Number(creditCardNumber.slice(-4)) > 2000
+      ? (cardType = 'MasterCard')
+      : (cardType = 'Visa');
+
+    this.setState({
+      cardType,
+    });
+  };
 
   render() {
-    const {firstName, lastName, creditCardNumber, cardType} = this.props;
+    const {cardType} = this.state;
+    const {firstName, lastName, creditCardNumber} = this.props;
     if (!this.state.isFormInfoVisibile) {
       return null;
     }
