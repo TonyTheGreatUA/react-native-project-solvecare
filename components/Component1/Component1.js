@@ -12,7 +12,7 @@ import {
   ScrollView,
 } from 'react-native';
 import Component3 from '../Component3';
-import getDataFromServer from './serverService';
+import getDataFromServer from '../../services/serverService';
 
 type Props = {
   creditCardNumber: string,
