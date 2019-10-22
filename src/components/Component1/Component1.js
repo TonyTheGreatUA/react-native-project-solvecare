@@ -22,6 +22,8 @@ type Props = {
   lastName: string,
   secretQuestion: string,
   secretAnswer: string,
+  showDetails: () => void,
+  onSubmit: (value: boolean) => void,
   setCreditCardNumber: (value: string) => void,
   setExpirationDate: (value: string) => void,
   setCVV: (value: string) => void,
@@ -73,6 +75,7 @@ class Component1 extends React.Component<Props, State> {
     this.onLastNameChange = this.onLastNameChange.bind(this);
     this.onSecretQuestionChange = this.onSecretQuestionChange.bind(this);
     this.onSecretAnswerChange = this.onSecretAnswerChange.bind(this);
+    this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
   onCreditCardNumberChange: () => void;
@@ -103,8 +106,16 @@ class Component1 extends React.Component<Props, State> {
   onSecretAnswerChange(value: string) {
     this.props.setSecretAnswer(value);
   }
-
+  onFormSubmit: (value: boolean) => void;
+  onFormSubmit(value: boolean) {
+    this.props.onSubmit(value);
+  }
+  onValidate() {
+    this.props.showDetails();
+  }
   handleSubmit = () => {
+    this.onValidate();
+    this.onFormSubmit(true);
     return true;
   };
 

@@ -5,11 +5,12 @@ import Component2 from './src/components/Component2/Component2';
 import Component4 from './src/components/Component4';
 import Component5 from './src/components/Component5';
 import {applyMiddleware, createStore} from 'redux';
+import ReduxThunk from 'redux-thunk';
 import rootReducer from './src/store/reducers';
 import {Provider} from 'react-redux';
 import Component1Container from './src/components/Component1/Component1Container';
 import Component2Container from './src/components/Component2/Component2Container';
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 type Props = {};
 
 type State = {};

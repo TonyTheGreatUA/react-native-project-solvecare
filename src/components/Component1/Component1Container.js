@@ -11,12 +11,14 @@ import {
   setSecretQuestion,
   setSecretAnswer,
 } from '../../store/form/actions';
+import {onSubmit, showDetails} from '../../store/details/actions';
 
 class Component1Container extends Component {
   render() {
     return (
       <Component1
         isFormSubmitted={this.props.isFormSubmitted}
+        isFormShown={this.props.isFormShown}
         creditCardNumber={this.props.creditCardNumber}
         cvv={this.props.cvv}
         expirationDate={this.props.expirationDate}
@@ -31,6 +33,8 @@ class Component1Container extends Component {
         setLastName={this.props.setLastName}
         setSecretQuestion={this.props.setSecretQuestion}
         setSecretAnswer={this.props.setSecretAnswer}
+        onSubmit={this.props.onSubmit}
+        showDetails={this.props.showDetails}
       />
     );
   }
@@ -38,6 +42,7 @@ class Component1Container extends Component {
 
 const mapStateToProps = state => {
   return {
+    isFormShown: state.details.isFormShown,
     isFormSubmitted: state.details.isFormSubmitted,
     creditCardNumber: state.form.creditCardNumber,
     cvv: state.form.cvv,
@@ -56,6 +61,8 @@ const mapDispatchToProps = {
   setLastName,
   setSecretQuestion,
   setSecretAnswer,
+  onSubmit,
+  showDetails,
 };
 
 export default connect(

@@ -1,18 +1,18 @@
 import {onValidation} from './validationService';
 
-const callServerMock = input => {
+const callServerMock = () => {
   return new Promise(resolve => {
-    setTimeout(() => resolve(onValidation(input)), 2000);
+    setTimeout(() => resolve(onValidation()), 5000);
   });
 };
 
-const onServerValidation = input => {
-  return callServerMock(input);
+const onServerValidation = () => {
+  return callServerMock();
 };
 
 class serverService {
-  callServerValidation(input) {
-    return onServerValidation(input);
+  callServerValidation() {
+    return onServerValidation();
   }
 }
 

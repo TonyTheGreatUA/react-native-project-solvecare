@@ -6,9 +6,9 @@ const lastNameRegex = RegExp(/^[A-z]{2,10}$/);
 const secretQuestionRegex = RegExp(/^[a-z]{10,20}$/);
 const secretAnswerRegex = RegExp(/^[a-z]{10,20}$/);
 
-export const onValidation = input => {
-  let formErrors = {...input.formErrors};
-  switch (input.formErrors) {
+export const onValidation = () => {
+  let formErrors = {...formErrors};
+  switch (formErrors) {
     case 'firstName':
       formErrors.firstName = firstNameRegex.test(value) ? true : false;
       break;

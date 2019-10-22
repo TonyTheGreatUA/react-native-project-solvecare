@@ -2,6 +2,7 @@ import {
   SHOW_CARD_DETAILS_REQUEST,
   SHOW_CARD_DETAILS_SUCCESS,
   SHOW_CARD_DETAILS_FAILURE,
+  SUBMIT_FORM,
 } from './actions';
 
 import {RequestStatus} from '../../utils/RequestStatus';
@@ -34,6 +35,11 @@ export const formDetails = (state = initialValue, action) => {
         requestStatus: RequestStatus.Failure,
         isFormSubmited: true,
         isFormShown: true,
+      };
+    case SUBMIT_FORM:
+      return {
+        ...state,
+        isFormShown: action.payload,
       };
   }
   return state;

@@ -1,7 +1,14 @@
 //@flow
 /*eslint-disable*/
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, TextInput} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  ActivityIndicator,
+} from 'react-native';
+
 type Props = {
   firstName: string,
   lastName: string,
@@ -53,24 +60,29 @@ class Component2 extends React.PureComponent<Props, State> {
       isLoading,
     } = this.props;
     if (isError) {
-      return null;
+      <View style={styles.card}>
+        <Text style={styles.h1}>There is an error!</Text>
+      </View>;
     }
     if (isLoading) {
       return (
-        <View>
-          <Text>Loading</Text>
+        <View style={styles.card}>
+          <ActivityIndicator size="large" />
         </View>
       );
     }
-    return (
-      <View style={styles.card}>
-        <Text style={styles.h1}>Card Info</Text>
-        <Text>First Name : {firstName}</Text>
-        <Text>Last Name : {lastName}</Text>
-        <Text>Credit Card :{creditCardNumber.slice(-4)}</Text>
-        <Text>Card Type : {cardType}</Text>
-      </View>
-    );
+    if (isFormShown && !isError) {
+      return (
+        <View style={styles.card}>
+          <Text style={styles.h1}>Card Info</Text>
+          <Text>First Name : {firstName}</Text>
+          <Text>Last Name : {lastName}</Text>
+          <Text>Credit Card : {creditCardNumber.slice(-4)}</Text>
+          <Text>Card Type : {cardType}</Text>
+        </View>
+      );
+    }
+    return <View></View>;
   }
 }
 const styles = StyleSheet.create({
