@@ -8,6 +8,7 @@ import {
   TextInput,
   ActivityIndicator,
 } from 'react-native';
+import styles from './Component2.style';
 
 type Props = {
   firstName: string,
@@ -85,17 +86,5 @@ class Component2 extends React.PureComponent<Props, State> {
     return <View></View>;
   }
 }
-const styles = StyleSheet.create({
-  card: {
-    paddingBottom: 90,
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-  },
-  h1: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#F3C678',
-  },
-});
+
 export default Component2;
