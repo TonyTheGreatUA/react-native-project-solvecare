@@ -17,6 +17,16 @@ const defaultState = {
   lastName: '',
   secretQuestion: '',
   secretAnswer: '',
+  formErrors: {
+    creditCardNumber: true,
+    expirationDate: true,
+    cvv: true,
+    firstName: true,
+    lastName: true,
+    secretQuestion: true,
+    secretAnswer: true,
+  },
+  isFormValid: true,
 };
 
 export const formReducer = (state = defaultState, action) => {
