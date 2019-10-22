@@ -50,16 +50,12 @@ type State = {
     secretAnswer: boolean,
     creditCardNumber: boolean,
   },
-  onFormValid: boolean,
-  isSubmitted: boolean,
 };
 
 class Component1 extends React.Component<Props, State> {
   constructor() {
     super();
     this.state = {
-      onFormValid: false,
-      isSubmitted: false,
       formErrors: {
         creditCardNumber: true,
         expirationDate: true,
@@ -108,17 +104,7 @@ class Component1 extends React.Component<Props, State> {
     this.props.setSecretAnswer(value);
   }
 
-  getData = (item: any) => {
-    getDataFromServer(item).then(response => {
-      this.setState({formErrors: response});
-    });
-  };
-
   handleSubmit = () => {
-    let onFormValid = this.state.onFormValid;
-
-    this.setState({onFormValid, isSubmitted: true});
-    this.getData(this.state);
     return true;
   };
 

@@ -8,38 +8,22 @@ type Props = {
   creditCardNumber: string,
   cardType: string,
   onFormValid: boolean,
+  isFormShown: boolean,
+  isLoading: boolean,
+  isError: boolean,
 };
 
 type State = {
-  isFormInfoVisibile: boolean,
-  timer: boolean,
   cardType: string,
 };
 class Component2 extends React.PureComponent<Props, State> {
   state = {
-    isFormInfoVisibile: false,
-    timer: false,
     cardType: '',
   };
 
-  startFormTimer = () => {
-    const timer = setTimeout(() => {
-      this.setState({
-        isFormInfoVisibile: false,
-        timer: false,
-      });
-    }, 5000);
-
-    this.setState({
-      isFormInfoVisibile: true,
-    });
-  };
   componentDidUpdate = (prevProps: Props) => {
     if (prevProps.creditCardNumber !== this.props.creditCardNumber) {
       this.getCardType();
-    }
-    if (!this.state.isFormInfoVisibile) {
-      this.startFormTimer();
     }
   };
   getCardType = () => {
@@ -60,11 +44,24 @@ class Component2 extends React.PureComponent<Props, State> {
 
   render() {
     const {cardType} = this.state;
-    const {firstName, lastName, creditCardNumber} = this.props;
-    if (!this.state.isFormInfoVisibile) {
+    const {
+      firstName,
+      lastName,
+      creditCardNumber,
+      isFormShown,
+      isError,
+      isLoading,
+    } = this.props;
+    if (isError) {
       return null;
     }
-    console.log(this.state.isFormInfoVisibile);
+    if (isLoading) {
+      return (
+        <View>
+          <Text>Loading</Text>
+        </View>
+      );
+    }
     return (
       <View style={styles.card}>
         <Text style={styles.h1}>Card Info</Text>

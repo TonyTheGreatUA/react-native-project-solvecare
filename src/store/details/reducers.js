@@ -19,6 +19,7 @@ export const formDetails = (state = initialValue, action) => {
         ...state,
         requestStatus: RequestStatus.Request,
         isFormSubmited: true,
+        isFormShown: true,
       };
     case SHOW_CARD_DETAILS_SUCCESS:
       return {

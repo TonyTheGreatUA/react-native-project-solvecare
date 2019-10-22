@@ -6,6 +6,14 @@ const callServerMock = input => {
   });
 };
 
-const onServerValidation = input => callServerMock(input);
+const onServerValidation = input => {
+  return callServerMock(input);
+};
 
-export default onServerValidation;
+class serverService {
+  callServerValidation(input) {
+    return onServerValidation(input);
+  }
+}
+
+export {serverService};

@@ -16,6 +16,7 @@ class Component1Container extends Component {
   render() {
     return (
       <Component1
+        isFormSubmitted={this.props.isFormSubmitted}
         creditCardNumber={this.props.creditCardNumber}
         cvv={this.props.cvv}
         expirationDate={this.props.expirationDate}
@@ -37,6 +38,7 @@ class Component1Container extends Component {
 
 const mapStateToProps = state => {
   return {
+    isFormSubmitted: state.details.isFormSubmitted,
     creditCardNumber: state.form.creditCardNumber,
     cvv: state.form.cvv,
     expirationDate: state.form.expirationDate,
