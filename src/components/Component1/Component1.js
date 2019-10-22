@@ -11,7 +11,6 @@ import {
   TextInput,
   ScrollView,
 } from 'react-native';
-import Component3 from '../Component3';
 import getDataFromServer from '../../services/serverService';
 import styles from './Component1.style';
 
