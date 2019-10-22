@@ -2,7 +2,8 @@ import {onValidation} from './validationService';
 
 const callServerMock = () => {
   return new Promise(resolve => {
-    setTimeout(() => resolve(onValidation()), 5000);
+    const val = onValidation();
+    setTimeout(() => resolve(val), 5000);
   });
 };
 
