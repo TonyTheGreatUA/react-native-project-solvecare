@@ -1,3 +1,4 @@
+//@flow
 import {
   SHOW_CARD_DETAILS_REQUEST,
   SHOW_CARD_DETAILS_SUCCESS,
@@ -5,7 +6,7 @@ import {
   SUBMIT_FORM,
 } from './actions';
 
-import {RequestStatus} from '../../utils/RequestStatus';
+import { RequestStatus } from '../../utils/RequestStatus';
 
 const initialValue = {
   requestStatus: RequestStatus.Default,
@@ -13,7 +14,10 @@ const initialValue = {
   isFormSubmited: false,
 };
 
-export const formDetails = (state = initialValue, action) => {
+export const formDetails = (
+  state: { isFormShown: boolean, isFormSubmited: boolean } = initialValue,
+  action: { type: string, payload: {} },
+) => {
   switch (action.type) {
     case SHOW_CARD_DETAILS_REQUEST:
       return {

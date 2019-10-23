@@ -1,3 +1,4 @@
+//@flow
 const cardRegex = RegExp(/^[0-9]{16}$/);
 const cvvRegex = RegExp(/^[0-9]{3,4}$/);
 const expRegex = RegExp(/^(0[1-9]|1[0-2])\/?([0-9]{2})$/);
@@ -6,13 +7,13 @@ const lastNameRegex = RegExp(/^[A-z]{2,10}$/);
 const secretQuestionRegex = RegExp(/^[A-z]{10,20}$/);
 const secretAnswerRegex = RegExp(/^[A-z]{10,20}$/);
 
-function assert(expression, message, errors) {
+function assert(expression: string, message: string, errors: Array<string>) {
   if (!expression) {
     errors.push(message);
   }
 }
 
-export const onValidation = items => {
+export const onValidation = (items: Object) => {
   const err = [];
   const {
     creditCardNumber,

@@ -1,3 +1,4 @@
+//@flow
 /*eslint-disable*/
 import { serverService } from '../../services/serverService';
 
@@ -6,7 +7,7 @@ export const SHOW_CARD_DETAILS_FAILURE = 'SHOW_CARD_DETAILS_FAILURE';
 export const SHOW_CARD_DETAILS_SUCCESS = 'SHOW_CARD_DETAILS_SUCCESS';
 export const SUBMIT_FORM = 'SUBMIT_FORM';
 
-export const showDetails = () => (dispatch, getState) => {
+export const showDetails = () => (dispatch: any, getState: any) => {
   dispatch({ type: SHOW_CARD_DETAILS_REQUEST });
   const state = getState();
   const items = state.form;
@@ -22,7 +23,7 @@ export const showDetails = () => (dispatch, getState) => {
     });
 };
 
-export const onSubmit = isFormShown => ({
+export const onSubmit = (isFormShown: boolean) => ({
   type: SUBMIT_FORM,
   payload: isFormShown,
 });

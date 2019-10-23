@@ -1,3 +1,4 @@
+//@flow
 /*eslint-disable*/
 import {
   FORM_CHANGE_CREDIT_CARD_NUMBER,
@@ -19,7 +20,21 @@ const defaultState = {
   secretAnswer: '',
 };
 
-export const formReducer = (state = defaultState, action) => {
+export const formReducer = (
+  state: {
+    creditCardNumber: string,
+    cvv: string,
+    expirationDate: string,
+    firstName: string,
+    lastName: string,
+    secretQuestion: string,
+    secretAnswer: string,
+  } = defaultState,
+  action: {
+    type: string,
+    payload: {},
+  },
+) => {
   switch (action.type) {
     case FORM_CHANGE_CREDIT_CARD_NUMBER:
       return { ...state, creditCardNumber: action.payload };
