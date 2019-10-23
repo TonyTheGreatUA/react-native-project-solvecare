@@ -32,77 +32,26 @@ type Props = {
   setLastName: (value: string) => void,
   setSecretQuestion: (value: string) => void,
   setSecretAnswer: (value: string) => void,
-  onCreditCardNumberChange: (value: string) => void,
-  onCvvChange: (value: string) => void,
-  onExpirationDateChange: (value: string) => void,
-  onFirstNameChange: (value: string) => void,
-  onLastNameChange: (value: string) => void,
-  onSecretQuestionChange: (value: string) => void,
-  onSecretAnswerChange: (value: string) => void,
 };
-type Event = {
-  nativeEvent: Object,
-};
+
 type State = {};
 
 class Component1 extends React.Component<Props, State> {
   constructor() {
     super();
-
-    this.onCreditCardNumberChange = this.onCreditCardNumberChange.bind(this);
-    this.onCvvChange = this.onCvvChange.bind(this);
-    this.onExpirationDateChange = this.onExpirationDateChange.bind(this);
-    this.onFirstNameChange = this.onFirstNameChange.bind(this);
-    this.onLastNameChange = this.onLastNameChange.bind(this);
-    this.onSecretQuestionChange = this.onSecretQuestionChange.bind(this);
-    this.onSecretAnswerChange = this.onSecretAnswerChange.bind(this);
-    this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
-  onCreditCardNumberChange: () => void;
-  onCreditCardNumberChange(value: string) {
-    this.props.setCreditCardNumber(value);
-  }
-  onExpirationDateChange: () => void;
-  onExpirationDateChange(value: string) {
-    this.props.setExpirationDate(value);
-  }
-  onCvvChange: () => void;
-  onCvvChange(value: string) {
-    this.props.setCVV(value);
-  }
-  onFirstNameChange: () => void;
-  onFirstNameChange(value: string) {
-    this.props.setFirstName(value);
-  }
-  onLastNameChange: () => void;
-  onLastNameChange(value: string) {
-    this.props.setLastName(value);
-  }
-  onSecretQuestionChange: () => void;
-  onSecretQuestionChange(value: string) {
-    this.props.setSecretQuestion(value);
-  }
-  onSecretAnswerChange: () => void;
-  onSecretAnswerChange(value: string) {
-    this.props.setSecretAnswer(value);
-  }
-  onFormSubmit: (value: boolean) => void;
-  onFormSubmit(value: boolean) {
-    this.props.onSubmit(value);
-  }
   onValidate() {
     this.props.showDetails();
   }
   handleSubmit = () => {
     this.onValidate();
-    this.onFormSubmit(true);
+    this.props.onSubmit(true);
     return true;
   };
 
   render() {
     const { isError } = this.props;
-    console.log(isError);
     return (
       <ScrollView>
         <View style={styles.mainView}>
@@ -117,7 +66,7 @@ class Component1 extends React.Component<Props, State> {
               type="text"
               placeholder="0000 0000 0000 0000"
               value={this.props.creditCardNumber}
-              onChangeText={this.onCreditCardNumberChange}
+              onChangeText={this.props.setCreditCardNumber}
             />
             <View style={styles.cardLine}>
               <TextInput
@@ -130,7 +79,7 @@ class Component1 extends React.Component<Props, State> {
                 type="text"
                 placeholder="MM/YY"
                 value={this.props.expirationDate}
-                onChangeText={this.onExpirationDateChange}
+                onChangeText={this.props.setExpirationDate}
               />
               <TextInput
                 style={[
@@ -142,7 +91,7 @@ class Component1 extends React.Component<Props, State> {
                 type="text"
                 placeholder="CVV/CVC"
                 value={this.props.cvv}
-                onChangeText={this.onCvvChange}
+                onChangeText={this.props.setCVV}
               />
             </View>
             <View style={styles.cardLine}>
@@ -156,7 +105,7 @@ class Component1 extends React.Component<Props, State> {
                 type="text"
                 placeholder="Your Name"
                 value={this.props.firstName}
-                onChangeText={this.onFirstNameChange}
+                onChangeText={this.props.setFirstName}
               />
               <TextInput
                 style={[
@@ -168,7 +117,7 @@ class Component1 extends React.Component<Props, State> {
                 type="text"
                 placeholder="Your Surname"
                 value={this.props.lastName}
-                onChangeText={this.onLastNameChange}
+                onChangeText={this.props.setLastName}
               />
             </View>
             <TextInput
@@ -181,7 +130,7 @@ class Component1 extends React.Component<Props, State> {
               type="text"
               placeholder="Your Secret Question"
               value={this.props.secretQuestion}
-              onChangeText={this.onSecretQuestionChange}
+              onChangeText={this.props.setSecretQuestion}
             />
 
             <TextInput
@@ -194,7 +143,7 @@ class Component1 extends React.Component<Props, State> {
               type="text"
               placeholder="Your Secret Answer"
               value={this.props.secretAnswer}
-              onChangeText={this.onSecretAnswerChange}
+              onChangeText={this.props.setSecretAnswer}
             />
             <TouchableOpacity style={styles.button} onPress={this.handleSubmit}>
               <Text style={styles.buttonText}>Submit</Text>

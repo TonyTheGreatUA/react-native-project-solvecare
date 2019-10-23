@@ -46,12 +46,12 @@ export class Component2Container extends Component {
 
 const mapStateToProps = state => {
   return {
-    creditCardNumber: state.form.creditCardNumber,
-    firstName: state.form.firstName,
-    lastName: state.form.lastName,
-    isFormShown: state.details.isFormShown,
-    isLoading: state.details.requestStatus === RequestStatus.Request,
-    isError: state.details.requestStatus === RequestStatus.Failure,
+    creditCardNumber: state.creditInfo.creditCardNumber,
+    firstName: state.creditInfo.firstName,
+    lastName: state.creditInfo.lastName,
+    isFormShown: state.creditInfo.isFormShown,
+    isLoading: state.creditInfo.requestStatus === RequestStatus.Request,
+    isError: state.creditInfo.requestStatus === RequestStatus.Failure,
   };
 };
 

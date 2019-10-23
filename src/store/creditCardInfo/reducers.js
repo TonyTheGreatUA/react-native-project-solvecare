@@ -1,5 +1,7 @@
 //@flow
 /*eslint-disable*/
+import { RequestStatus } from '../../utils/RequestStatus';
+
 import {
   FORM_CHANGE_CREDIT_CARD_NUMBER,
   FORM_CHANGE_CVV,
@@ -8,6 +10,10 @@ import {
   FORM_CHANGE_LAST_NAME,
   FORM_CHANGE_SECRET_QUESTION,
   FORM_CHANGE_SECRET_ANSWER,
+  SHOW_CARD_DETAILS_FAILURE,
+  SHOW_CARD_DETAILS_REQUEST,
+  SHOW_CARD_DETAILS_SUCCESS,
+  SUBMIT_FORM,
 } from './actions';
 
 const defaultState = {
@@ -18,11 +24,11 @@ const defaultState = {
   lastName: '',
   secretQuestion: '',
   secretAnswer: '',
+  requestStatus: RequestStatus.Default,
+  isFormShown: false,
 };
 
-// CreditCardInfoReducer
-
-export const formReducer = (
+export const creditCardInfoReducer = (
   state: {
     creditCardNumber: string,
     cvv: string,
@@ -31,6 +37,7 @@ export const formReducer = (
     lastName: string,
     secretQuestion: string,
     secretAnswer: string,
+    isFormShown: boolean,
   } = defaultState,
   action: {
     type: string,
@@ -52,6 +59,29 @@ export const formReducer = (
       return { ...state, secretQuestion: action.payload };
     case FORM_CHANGE_SECRET_ANSWER:
       return { ...state, secretAnswer: action.payload };
+    case SHOW_CARD_DETAILS_REQUEST:
+      return {
+        ...state,
+        requestStatus: RequestStatus.Request,
+        isFormShown: true,
+      };
+    case SHOW_CARD_DETAILS_SUCCESS:
+      return {
+        ...state,
+        requestStatus: RequestStatus.Success,
+        isFormShown: true,
+      };
+    case SHOW_CARD_DETAILS_FAILURE:
+      return {
+        ...state,
+        requestStatus: RequestStatus.Failure,
+        isFormShown: true,
+      };
+    case SUBMIT_FORM:
+      return {
+        ...state,
+        isFormShown: action.payload,
+      };
   }
   return state;
 };

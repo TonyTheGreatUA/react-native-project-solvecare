@@ -1,3 +1,4 @@
+//@flow
 /*eslint-disable*/
 import React, { Component } from 'react';
 import Component1 from './Component1';
@@ -10,22 +11,53 @@ import {
   setLastName,
   setSecretQuestion,
   setSecretAnswer,
-} from '../../store/form/actions';
-import { onSubmit, showDetails } from '../../store/details/actions';
+  submitCreditCardInfo,
+  validateCreditCard,
+} from '../../store/creditCardInfo/actions';
 import { RequestStatus } from '../../utils/RequestStatus';
 
-class Component1Container extends Component {
+type Props = {
+  onCreditCardNumberChange: (value: string) => void,
+  onCvvChange: (value: string) => void,
+  onExpirationDateChange: (value: string) => void,
+  onFirstNameChange: (value: string) => void,
+  onLastNameChange: (value: string) => void,
+  onSecretQuestionChange: (value: string) => void,
+  onSecretAnswerChange: (value: string) => void,
+};
+
+type State = {
+  isError: boolean,
+  isFormShown: boolean,
+  creditCardNumber: string,
+  cvv: string,
+  expirationDate: string,
+  firstName: string,
+  lastName: string,
+  secretQuestion: string,
+  secretAnswer: string,
+  setCreditCardNumber: () => void,
+  setCVV: () => void,
+  setExpirationDate: () => void,
+  setFirstName: () => void,
+  setLastName: () => void,
+  setSecretQuestion: () => void,
+  setSecretAnswer: () => void,
+  submitCreditCardInfo: () => void,
+  validateCreditCard: () => void,
+};
+
+class Component1Container extends Component<State, Props> {
   render() {
     return (
       <Component1
-        isFormSubmitted={this.props.isFormSubmitted}
         isFormShown={this.props.isFormShown}
         creditCardNumber={this.props.creditCardNumber}
         cvv={this.props.cvv}
         expirationDate={this.props.expirationDate}
         firstName={this.props.firstName}
         lastName={this.props.lastName}
-        secretQuestin={this.props.secretQuestion}
+        secretQuestion={this.props.secretQuestion}
         secretAnswer={this.props.secretAnswer}
         setCreditCardNumber={this.props.setCreditCardNumber}
         setCVV={this.props.setCVV}
@@ -34,8 +66,8 @@ class Component1Container extends Component {
         setLastName={this.props.setLastName}
         setSecretQuestion={this.props.setSecretQuestion}
         setSecretAnswer={this.props.setSecretAnswer}
-        onSubmit={this.props.onSubmit}
-        showDetails={this.props.showDetails}
+        onSubmit={this.props.submitCreditCardInfo}
+        showDetails={this.props.validateCreditCard}
         isError={this.props.isError}
       />
     );
@@ -44,16 +76,15 @@ class Component1Container extends Component {
 
 const mapStateToProps = state => {
   return {
-    isFormShown: state.details.isFormShown,
-    isFormSubmitted: state.details.isFormSubmitted,
-    creditCardNumber: state.form.creditCardNumber,
-    cvv: state.form.cvv,
-    expirationDate: state.form.expirationDate,
-    firstName: state.form.firstName,
-    lastName: state.form.lastName,
-    secretQuestion: state.form.secretQuestion,
-    secretAnswer: state.form.secretAnswer,
-    isError: state.details.requestStatus === RequestStatus.Failure,
+    isFormShown: state.creditInfo.isFormShown,
+    creditCardNumber: state.creditInfo.creditCardNumber,
+    cvv: state.creditInfo.cvv,
+    expirationDate: state.creditInfo.expirationDate,
+    firstName: state.creditInfo.firstName,
+    lastName: state.creditInfo.lastName,
+    secretQuestion: state.creditInfo.secretQuestion,
+    secretAnswer: state.creditInfo.secretAnswer,
+    isError: state.creditInfo.requestStatus === RequestStatus.Failure,
   };
 };
 const mapDispatchToProps = {
@@ -64,8 +95,8 @@ const mapDispatchToProps = {
   setLastName,
   setSecretQuestion,
   setSecretAnswer,
-  onSubmit,
-  showDetails,
+  submitCreditCardInfo,
+  validateCreditCard,
 };
 
 export default connect(

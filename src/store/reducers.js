@@ -1,10 +1,8 @@
 //@flow
 /*eslint-disable*/
 import { combineReducers } from 'redux';
-import { formReducer } from './form/reducers';
-import { formDetails } from './details/reducers';
+import { creditCardInfoReducer } from './creditCardInfo/reducers';
 
 export default combineReducers({
-  form: formReducer,
-  details: formDetails,
+  creditInfo: creditCardInfoReducer,
 });
