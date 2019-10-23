@@ -1,8 +1,8 @@
-import { onValidation } from './onValidation';
+import { validationService } from './validationService';
 
 const callServerMock = items => {
   return new Promise((resolve, reject) => {
-    const err = onValidation(items);
+    const err = validationService(items);
     const response = () => {
       err ? reject(err) : resolve();
     };
@@ -14,10 +14,10 @@ const onServerValidation = items => {
   return callServerMock(items);
 };
 
-class serverService {
+class callAPIService {
   callServerValidation(items) {
     return onServerValidation(items);
   }
 }
 
-export { serverService };
+export { callAPIService };

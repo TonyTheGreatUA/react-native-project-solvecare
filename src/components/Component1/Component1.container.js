@@ -66,8 +66,8 @@ class Component1Container extends Component<State, Props> {
         setLastName={this.props.setLastName}
         setSecretQuestion={this.props.setSecretQuestion}
         setSecretAnswer={this.props.setSecretAnswer}
-        onSubmit={this.props.submitCreditCardInfo}
-        showDetails={this.props.validateCreditCard}
+        submitCreditCardInfo={this.props.submitCreditCardInfo}
+        validateCreditCard={this.props.validateCreditCard}
         isError={this.props.isError}
       />
     );

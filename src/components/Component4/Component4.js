@@ -1,6 +1,6 @@
 //@flow
-import React, {Component} from 'react';
-import {Text, View, FlatList, Image, StyleSheet} from 'react-native';
+import React, { Component } from 'react';
+import { Text, View, FlatList, Image, StyleSheet } from 'react-native';
 type Props = {};
 type State = {
   data: any,
@@ -33,7 +33,7 @@ export class Component4 extends React.Component<Props, State> {
             avatar: item.picture.thumbnail,
           });
         });
-        this.setState({data: data.slice()});
+        this.setState({ data: data.slice() });
       })
       .catch(err => console.log(err));
   };
@@ -47,10 +47,10 @@ export class Component4 extends React.Component<Props, State> {
           initialNumToRender={this.state.defaultLoadAmount}
           keyExtractor={(item, index) => index}
           windowSize={20}
-          renderItem={({item}) => (
+          renderItem={({ item }) => (
             <View style={styles.item}>
               <View style={styles.itemRow}>
-                <Image style={styles.avatar} source={{uri: item.avatar}} />
+                <Image style={styles.avatar} source={{ uri: item.avatar }} />
                 <Text style={styles.index}>{item.index}</Text>
                 <Text style={styles.firstName}>{item.firstName}</Text>
                 <Text style={styles.lastName}>{item.lastName}</Text>

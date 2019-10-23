@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-  Text,
-  StyleSheet,
-  SafeAreaView,
-  View,
-  Button,
-  TextInput,
-  ScrollView,
-} from 'react-native';
+import { Text, StyleSheet, SafeAreaView, View, Button, TextInput, ScrollView } from 'react-native';
 type Props = {
   creditCardNumber?: string,
   onCardChange: (cardType: string) => void,
@@ -21,32 +13,27 @@ class Component3 extends React.PureComponent<Props, State> {
   };
 
   componentDidMount = () => {
-    const {creditCardNumber} = this.props;
+    const { creditCardNumber } = this.props;
     this.setState({
-      cardType:
-        creditCardNumber && +creditCardNumber.slice(12, 16) < 2000
-          ? 'Visa'
-          : 'Master Card',
+      cardType: creditCardNumber && +creditCardNumber.slice(12, 16) < 2000 ? 'Visa' : 'Master Card',
     });
   };
 
   componentDidUpdate = (prevProps: Props) => {
-    const {creditCardNumber} = this.props;
+    const { creditCardNumber } = this.props;
     if (prevProps === this.props && !creditCardNumber) {
       return;
     }
     const cardType: string =
-      creditCardNumber && +creditCardNumber.slice(12, 16) < 2000
-        ? 'Visa'
-        : 'MasterCard';
+      creditCardNumber && +creditCardNumber.slice(12, 16) < 2000 ? 'Visa' : 'MasterCard';
 
-    this.setState({cardType});
+    this.setState({ cardType });
     this.props.onCardChange(this.state.cardType);
   };
 
   render() {
     console.log('(render) Component3');
-    return <Text></Text>;
+    return <Text />;
   }
 }
 

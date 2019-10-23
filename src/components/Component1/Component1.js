@@ -2,16 +2,7 @@
 //@flow
 
 import React, { Component } from 'react';
-import {
-  Text,
-  StyleSheet,
-  SafeAreaView,
-  View,
-  TouchableOpacity,
-  TextInput,
-  ScrollView,
-} from 'react-native';
-import getDataFromServer from '../../services/serverService';
+import { Text, View, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import styles from './Component1.style';
 
 type Props = {
@@ -23,8 +14,8 @@ type Props = {
   lastName: string,
   secretQuestion: string,
   secretAnswer: string,
-  showDetails: () => void,
-  onSubmit: (value: boolean) => void,
+  validateCreditCard: () => void,
+  submitCreditCardInfo: (value: boolean) => void,
   setCreditCardNumber: (value: string) => void,
   setExpirationDate: (value: string) => void,
   setCVV: (value: string) => void,
@@ -37,17 +28,9 @@ type Props = {
 type State = {};
 
 class Component1 extends React.Component<Props, State> {
-  constructor() {
-    super();
-  }
-
-  onValidate() {
-    this.props.showDetails();
-  }
   handleSubmit = () => {
-    this.onValidate();
-    this.props.onSubmit(true);
-    return true;
+    this.props.validateCreditCard();
+    this.props.submitCreditCardInfo(true);
   };
 
   render() {
@@ -57,12 +40,7 @@ class Component1 extends React.Component<Props, State> {
         <View style={styles.mainView}>
           <View>
             <TextInput
-              style={[
-                styles.inputText,
-                {
-                  borderBottomColor: isError === true ? styles.inputError : styles.inputDefault,
-                },
-              ]}
+              style={[styles.inputText, isError == true ? styles.inputError : styles.inputDefault]}
               type="text"
               placeholder="0000 0000 0000 0000"
               value={this.props.creditCardNumber}
@@ -70,24 +48,14 @@ class Component1 extends React.Component<Props, State> {
             />
             <View style={styles.cardLine}>
               <TextInput
-                style={[
-                  styles.inputText,
-                  {
-                    borderBottomColor: isError ? styles.inputError : styles.inputDefault,
-                  },
-                ]}
+                style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
                 type="text"
                 placeholder="MM/YY"
                 value={this.props.expirationDate}
                 onChangeText={this.props.setExpirationDate}
               />
               <TextInput
-                style={[
-                  styles.inputText,
-                  {
-                    borderBottomColor: isError ? styles.inputError : styles.inputDefault,
-                  },
-                ]}
+                style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
                 type="text"
                 placeholder="CVV/CVC"
                 value={this.props.cvv}
@@ -96,24 +64,14 @@ class Component1 extends React.Component<Props, State> {
             </View>
             <View style={styles.cardLine}>
               <TextInput
-                style={[
-                  styles.inputText,
-                  {
-                    borderBottomColor: isError ? styles.inputError : styles.inputDefault,
-                  },
-                ]}
+                style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
                 type="text"
                 placeholder="Your Name"
                 value={this.props.firstName}
                 onChangeText={this.props.setFirstName}
               />
               <TextInput
-                style={[
-                  styles.inputText,
-                  {
-                    borderBottomColor: isError ? styles.inputError : styles.inputDefault,
-                  },
-                ]}
+                style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
                 type="text"
                 placeholder="Your Surname"
                 value={this.props.lastName}
@@ -121,12 +79,7 @@ class Component1 extends React.Component<Props, State> {
               />
             </View>
             <TextInput
-              style={[
-                styles.inputText,
-                {
-                  borderBottomColor: isError ? styles.inputError : styles.inputDefault,
-                },
-              ]}
+              style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
               type="text"
               placeholder="Your Secret Question"
               value={this.props.secretQuestion}
@@ -134,12 +87,7 @@ class Component1 extends React.Component<Props, State> {
             />
 
             <TextInput
-              style={[
-                styles.inputText,
-                {
-                  borderBottomColor: isError ? styles.inputError : styles.inputDefault,
-                },
-              ]}
+              style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
               type="text"
               placeholder="Your Secret Answer"
               value={this.props.secretAnswer}

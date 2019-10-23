@@ -14,7 +14,7 @@ import {
   SHOW_CARD_DETAILS_REQUEST,
   SHOW_CARD_DETAILS_SUCCESS,
   SUBMIT_FORM,
-} from './actions';
+} from './types';
 
 const defaultState = {
   creditCardNumber: '',

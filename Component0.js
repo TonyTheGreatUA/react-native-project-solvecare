@@ -1,11 +1,12 @@
-import React, {Component} from 'react';
-import {View, Text, ScrollView, StyleSheet} from 'react-native';
-import {applyMiddleware, createStore} from 'redux';
+import React, { Component } from 'react';
+import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import { applyMiddleware, createStore } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import rootReducer from './src/store/reducers';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import Component1Container from './src/components/Component1';
 import Component2Container from './src/components/Component2';
+
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 type Props = {};
 

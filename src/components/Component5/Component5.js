@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Text, View, Button, TextInput, Picker, StyleSheet} from 'react-native';
+import React, { Component } from 'react';
+import { Text, View, Button, TextInput, Picker, StyleSheet } from 'react-native';
 
 const callFromServer = data => {
   return new Promise(resolve => {
@@ -29,7 +29,7 @@ export class Component5 extends Component {
     };
   }
   onFocusChange = () => {
-    this.setState({isFocused: true});
+    this.setState({ isFocused: true });
   };
   onCreate = () => {
     const data = this.state.data;
@@ -52,7 +52,7 @@ export class Component5 extends Component {
   };
 
   onValidation = (name: string, value: string) => {
-    let formErrors = {...this.state.formErrors};
+    let formErrors = { ...this.state.formErrors };
 
     switch (name) {
       case 'title':
@@ -68,29 +68,23 @@ export class Component5 extends Component {
       default:
         break;
     }
-    this.setState({formErrors, [name]: value});
+    this.setState({ formErrors, [name]: value });
   };
 
   handleChange = (e: SyntheticEvent<HTMLInputElement>) => {
-    const {name, value} = e.currentTarget;
-    this.setState({[name]: value}, () => {
+    const { name, value } = e.currentTarget;
+    this.setState({ [name]: value }, () => {
       this.onValidation(name, value);
     });
   };
 
   render() {
-    const {formErrors, isSubmitted, isFocused} = this.state;
+    const { formErrors, isSubmitted, isFocused } = this.state;
     return (
       <View style={styles.view}>
         <View style={styles.buttons}>
-          <Button
-            onPress={this.onCreate}
-            disabled={this.state.createStatus}
-            title="Create Item"></Button>
-          <Button
-            onPress={this.onEdit}
-            disabled={this.state.editStatus}
-            title="Edit Item"></Button>
+          <Button onPress={this.onCreate} disabled={this.state.createStatus} title="Create Item" />
+          <Button onPress={this.onEdit} disabled={this.state.editStatus} title="Edit Item" />
         </View>
         <View style={styles.inputSection}>
           <TextInput
@@ -111,7 +105,7 @@ export class Component5 extends Component {
             ]}
             type="text"
             placeholder="Title"
-            onChangeText={title => this.setState({title})}
+            onChangeText={title => this.setState({ title })}
           />
           <TextInput
             editable={this.state.editable}
@@ -131,7 +125,7 @@ export class Component5 extends Component {
             ]}
             type="text"
             placeholder="Weight"
-            onChangeText={weight => this.setState({weight})}
+            onChangeText={weight => this.setState({ weight })}
           />
           <TextInput
             editable={this.state.editable}
@@ -151,22 +145,23 @@ export class Component5 extends Component {
             ]}
             type="text"
             placeholder="Size"
-            onChangeText={size => this.setState({size})}
+            onChangeText={size => this.setState({ size })}
           />
           <Text style={styles.text}>Country Of A Production</Text>
           <Picker
             style={styles.picker}
             selectedValue={this.state.country}
             enabled={this.state.editable}
-            onValueChange={(itemValue, itemIndex) =>
-              this.setState({country: itemValue})
-            }>
+            onValueChange={(itemValue, itemIndex) => this.setState({ country: itemValue })}
+          >
             <Picker.Item enabled={this.state.editable} label="UA" value="ua" />
             <Picker.Item enabled={this.state.editable} label="CN" value="cn" />
           </Picker>
-          <Text style={{textAlign: 'center'}}>
+          <Text style={{ textAlign: 'center' }}>
             {JSON.stringify(
-              `Title : ${this.state.title} Weight : ${this.state.weight} Size : ${this.state.size} Country : ${this.state.country}`,
+              `Title : ${this.state.title} Weight : ${this.state.weight} Size : ${
+                this.state.size
+              } Country : ${this.state.country}`,
             )}
           </Text>
         </View>

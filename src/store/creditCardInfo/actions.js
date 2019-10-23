@@ -1,19 +1,19 @@
 //@flow
 /*eslint-disable*/
-import { serverService } from '../../services/serverService';
-
-export const SHOW_CARD_DETAILS_REQUEST = 'SHOW_CARD_DETAILS_REQUEST';
-export const SHOW_CARD_DETAILS_FAILURE = 'SHOW_CARD_DETAILS_FAILURE';
-export const SHOW_CARD_DETAILS_SUCCESS = 'SHOW_CARD_DETAILS_SUCCESS';
-export const SUBMIT_FORM = 'SUBMIT_FORM';
-
-export const FORM_CHANGE_CREDIT_CARD_NUMBER = 'FORM_CHANGE_CREDIT_CARD_NUMBER';
-export const FORM_CHANGE_CVV = 'FORM_CHANGE_CVV';
-export const FORM_CHANGE_EXPIRATION_DATE = 'FORM_CHANGE_EXPIRATION_DATE';
-export const FORM_CHANGE_FIRST_NAME = 'FORM_CHANGE_FIRST_NAME';
-export const FORM_CHANGE_LAST_NAME = 'FORM_CHANGE_LAST_NAME';
-export const FORM_CHANGE_SECRET_QUESTION = 'FORM_CHANGE_SECRET_QUESTION';
-export const FORM_CHANGE_SECRET_ANSWER = 'FORM_CHANGE_SECRET_ANSWER';
+import { callAPIService } from '../../services/callAPIService';
+import {
+  FORM_CHANGE_CREDIT_CARD_NUMBER,
+  FORM_CHANGE_CVV,
+  FORM_CHANGE_EXPIRATION_DATE,
+  FORM_CHANGE_FIRST_NAME,
+  FORM_CHANGE_LAST_NAME,
+  FORM_CHANGE_SECRET_ANSWER,
+  FORM_CHANGE_SECRET_QUESTION,
+  SHOW_CARD_DETAILS_FAILURE,
+  SHOW_CARD_DETAILS_REQUEST,
+  SHOW_CARD_DETAILS_SUCCESS,
+  SUBMIT_FORM,
+} from './types';
 
 export const setCreditCardNumber = (creditCardNumber: string) => ({
   type: FORM_CHANGE_CREDIT_CARD_NUMBER,
@@ -55,7 +55,7 @@ export const validateCreditCard = () => (dispatch: any, getState: any) => {
   const state = getState();
   const items = state.creditInfo;
 
-  new serverService()
+  new callAPIService()
     .callServerValidation(items)
     .then(data => {
       dispatch({ type: SHOW_CARD_DETAILS_SUCCESS, payload: data });
