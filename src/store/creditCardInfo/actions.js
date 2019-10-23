@@ -61,7 +61,6 @@ export const validateCreditCard = () => (dispatch: any, getState: any) => {
       dispatch({ type: SHOW_CARD_DETAILS_SUCCESS, payload: data });
     })
     .catch(err => {
-      console.log('error', err);
       dispatch({ type: SHOW_CARD_DETAILS_FAILURE, err });
     });
 };

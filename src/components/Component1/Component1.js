@@ -55,8 +55,9 @@ class Component1 extends React.Component<Props, State> {
                 onChangeText={this.props.setExpirationDate}
               />
               <TextInput
+                secure
                 style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
-                type="text"
+                type="password"
                 placeholder="CVV/CVC"
                 value={this.props.cvv}
                 onChangeText={this.props.setCVV}
