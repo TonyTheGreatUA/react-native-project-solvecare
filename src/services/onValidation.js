@@ -13,7 +13,7 @@ function assert(expression: string, message: string, errors: Array<string>) {
   }
 }
 
-export const onValidation = (items: Object) => {
+export const onValidation = (items: any) => {
   const err = [];
   const {
     creditCardNumber,
