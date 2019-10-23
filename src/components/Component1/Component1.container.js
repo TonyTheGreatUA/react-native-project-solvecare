@@ -1,7 +1,7 @@
 /*eslint-disable*/
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Component1 from './Component1';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import {
   setCreditCardNumber,
   setCVV,
@@ -11,7 +11,8 @@ import {
   setSecretQuestion,
   setSecretAnswer,
 } from '../../store/form/actions';
-import {onSubmit, showDetails} from '../../store/details/actions';
+import { onSubmit, showDetails } from '../../store/details/actions';
+import { RequestStatus } from '../../utils/RequestStatus';
 
 class Component1Container extends Component {
   render() {
@@ -35,6 +36,7 @@ class Component1Container extends Component {
         setSecretAnswer={this.props.setSecretAnswer}
         onSubmit={this.props.onSubmit}
         showDetails={this.props.showDetails}
+        isError={this.props.isError}
       />
     );
   }
@@ -51,6 +53,7 @@ const mapStateToProps = state => {
     lastName: state.form.lastName,
     secretQuestion: state.form.secretQuestion,
     secretAnswer: state.form.secretAnswer,
+    isError: state.details.requestStatus === RequestStatus.Failure,
   };
 };
 const mapDispatchToProps = {

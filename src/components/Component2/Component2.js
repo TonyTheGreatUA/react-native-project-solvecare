@@ -55,9 +55,11 @@ class Component2 extends React.PureComponent<Props, State> {
       );
     }
     if (isError) {
-      <View style={styles.card}>
-        <Text style={styles.h1}>There is an error!</Text>
-      </View>;
+      return (
+        <View style={styles.card}>
+          <Text style={styles.h1}>There is an error!</Text>
+        </View>
+      );
     }
     if (isFormShown && !isError) {
       return (

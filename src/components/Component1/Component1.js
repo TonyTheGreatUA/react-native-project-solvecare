@@ -1,7 +1,7 @@
 /* eslint-disable */
 //@flow
 
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   Text,
   StyleSheet,
@@ -15,6 +15,7 @@ import getDataFromServer from '../../services/serverService';
 import styles from './Component1.style';
 
 type Props = {
+  isError: boolean,
   creditCardNumber: string,
   expirationDate: string,
   cvv: string,
@@ -42,32 +43,12 @@ type Props = {
 type Event = {
   nativeEvent: Object,
 };
-type State = {
-  formErrors: {
-    firstName: boolean,
-    lastName: boolean,
-    cvv: boolean,
-    expirationDate: boolean,
-    secretQuestion: boolean,
-    secretAnswer: boolean,
-    creditCardNumber: boolean,
-  },
-};
+type State = {};
 
 class Component1 extends React.Component<Props, State> {
   constructor() {
     super();
-    this.state = {
-      formErrors: {
-        creditCardNumber: true,
-        expirationDate: true,
-        cvv: true,
-        firstName: true,
-        lastName: true,
-        secretQuestion: true,
-        secretAnswer: true,
-      },
-    };
+
     this.onCreditCardNumberChange = this.onCreditCardNumberChange.bind(this);
     this.onCvvChange = this.onCvvChange.bind(this);
     this.onExpirationDateChange = this.onExpirationDateChange.bind(this);
@@ -120,8 +101,8 @@ class Component1 extends React.Component<Props, State> {
   };
 
   render() {
-    let {formErrors} = this.state;
-
+    const { isError } = this.props;
+    console.log(isError);
     return (
       <ScrollView>
         <View style={styles.mainView}>
@@ -130,10 +111,7 @@ class Component1 extends React.Component<Props, State> {
               style={[
                 styles.inputText,
                 {
-                  borderBottomColor:
-                    formErrors.creditCardNumber === false
-                      ? styles.inputError
-                      : styles.inputDefault,
+                  borderBottomColor: isError === true ? styles.inputError : styles.inputDefault,
                 },
               ]}
               type="text"
@@ -146,10 +124,7 @@ class Component1 extends React.Component<Props, State> {
                 style={[
                   styles.inputText,
                   {
-                    borderBottomColor:
-                      formErrors.expirationDate === false
-                        ? styles.inputError
-                        : styles.inputDefault,
+                    borderBottomColor: isError ? styles.inputError : styles.inputDefault,
                   },
                 ]}
                 type="text"
@@ -161,10 +136,7 @@ class Component1 extends React.Component<Props, State> {
                 style={[
                   styles.inputText,
                   {
-                    borderBottomColor:
-                      formErrors.cvv === false
-                        ? styles.inputError
-                        : styles.inputDefault,
+                    borderBottomColor: isError ? styles.inputError : styles.inputDefault,
                   },
                 ]}
                 type="text"
@@ -178,10 +150,7 @@ class Component1 extends React.Component<Props, State> {
                 style={[
                   styles.inputText,
                   {
-                    borderBottomColor:
-                      formErrors.firstName === false
-                        ? styles.inputError
-                        : styles.inputDefault,
+                    borderBottomColor: isError ? styles.inputError : styles.inputDefault,
                   },
                 ]}
                 type="text"
@@ -193,10 +162,7 @@ class Component1 extends React.Component<Props, State> {
                 style={[
                   styles.inputText,
                   {
-                    borderBottomColor:
-                      formErrors.lastName === false
-                        ? styles.inputError
-                        : styles.inputDefault,
+                    borderBottomColor: isError ? styles.inputError : styles.inputDefault,
                   },
                 ]}
                 type="text"
@@ -209,10 +175,7 @@ class Component1 extends React.Component<Props, State> {
               style={[
                 styles.inputText,
                 {
-                  borderBottomColor:
-                    formErrors.secretQuestion === false
-                      ? styles.inputError
-                      : styles.inputDefault,
+                  borderBottomColor: isError ? styles.inputError : styles.inputDefault,
                 },
               ]}
               type="text"
@@ -225,10 +188,7 @@ class Component1 extends React.Component<Props, State> {
               style={[
                 styles.inputText,
                 {
-                  borderBottomColor:
-                    formErrors.secretAnswer === false
-                      ? styles.inputError
-                      : styles.inputDefault,
+                  borderBottomColor: isError ? styles.inputError : styles.inputDefault,
                 },
               ]}
               type="text"
