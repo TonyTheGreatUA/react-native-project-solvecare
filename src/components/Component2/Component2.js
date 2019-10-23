@@ -15,37 +15,18 @@ type Props = {
   isError: boolean,
 };
 
-type State = {
-  cardType: string,
-};
+type State = {};
 class Component2 extends React.PureComponent<Props, State> {
-  state = {
-    cardType: '',
-  };
-
-  componentDidUpdate = (prevProps: Props) => {
-    if (prevProps.creditCardNumber !== this.props.creditCardNumber) {
-      this.getCardType();
-    }
-  };
-  getCardType = () => {
-    const { creditCardNumber } = this.props;
-    let cardType;
-
-    creditCardNumber.length === 16 && Number(creditCardNumber.slice(-4)) > 2000
-      ? (cardType = 'MasterCard')
-      : creditCardNumber.length === 16 && Number(creditCardNumber.slice(-4)) < 2000
-      ? (cardType = 'Visa')
-      : (cardType = '');
-
-    this.setState({
-      cardType,
-    });
-  };
-
   render() {
-    const { cardType } = this.state;
-    const { firstName, lastName, creditCardNumber, isFormShown, isError, isLoading } = this.props;
+    const {
+      cardType,
+      firstName,
+      lastName,
+      creditCardNumber,
+      isFormShown,
+      isError,
+      isLoading,
+    } = this.props;
 
     if (isLoading) {
       return (

@@ -42,3 +42,5 @@ export const setSecretAnswer = (secretAnswer: string) => ({
   type: FORM_CHANGE_SECRET_ANSWER,
   payload: secretAnswer,
 });
+
+// submitCreditCardInfo  + validateCreditCard + save

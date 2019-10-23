@@ -20,6 +20,8 @@ const defaultState = {
   secretAnswer: '',
 };
 
+// CreditCardInfoReducer
+
 export const formReducer = (
   state: {
     creditCardNumber: string,
