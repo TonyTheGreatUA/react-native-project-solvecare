@@ -1,20 +1,23 @@
-import {onValidation} from './validationService';
+import { onValidation } from './onValidation';
 
-const callServerMock = () => {
-  return new Promise(resolve => {
-    const val = onValidation();
-    setTimeout(() => resolve(val), 5000);
+const callServerMock = items => {
+  return new Promise((resolve, reject) => {
+    const err = onValidation(items);
+    const response = () => {
+      err ? reject(err) : resolve();
+    };
+    setTimeout(response, 5000);
   });
 };
 
-const onServerValidation = () => {
-  return callServerMock();
+const onServerValidation = items => {
+  return callServerMock(items);
 };
 
 class serverService {
-  callServerValidation() {
-    return onServerValidation();
+  callServerValidation(items) {
+    return onServerValidation(items);
   }
 }
 
-export {serverService};
+export { serverService };

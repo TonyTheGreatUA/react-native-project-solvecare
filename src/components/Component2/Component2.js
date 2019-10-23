@@ -1,13 +1,7 @@
 //@flow
 /*eslint-disable*/
-import React, {Component} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  ActivityIndicator,
-} from 'react-native';
+import React, { Component } from 'react';
+import { View, Text, StyleSheet, TextInput, ActivityIndicator } from 'react-native';
 import styles from './Component2.style';
 
 type Props = {
@@ -35,13 +29,12 @@ class Component2 extends React.PureComponent<Props, State> {
     }
   };
   getCardType = () => {
-    const {creditCardNumber} = this.props;
+    const { creditCardNumber } = this.props;
     let cardType;
 
     creditCardNumber.length === 16 && Number(creditCardNumber.slice(-4)) > 2000
       ? (cardType = 'MasterCard')
-      : creditCardNumber.length === 16 &&
-        Number(creditCardNumber.slice(-4)) < 2000
+      : creditCardNumber.length === 16 && Number(creditCardNumber.slice(-4)) < 2000
       ? (cardType = 'Visa')
       : (cardType = '');
 
@@ -51,26 +44,20 @@ class Component2 extends React.PureComponent<Props, State> {
   };
 
   render() {
-    const {cardType} = this.state;
-    const {
-      firstName,
-      lastName,
-      creditCardNumber,
-      isFormShown,
-      isError,
-      isLoading,
-    } = this.props;
-    if (isError) {
-      <View style={styles.card}>
-        <Text style={styles.h1}>There is an error!</Text>
-      </View>;
-    }
+    const { cardType } = this.state;
+    const { firstName, lastName, creditCardNumber, isFormShown, isError, isLoading } = this.props;
+
     if (isLoading) {
       return (
         <View style={styles.card}>
           <ActivityIndicator size="large" />
         </View>
       );
+    }
+    if (isError) {
+      <View style={styles.card}>
+        <Text style={styles.h1}>There is an error!</Text>
+      </View>;
     }
     if (isFormShown && !isError) {
       return (
@@ -83,7 +70,7 @@ class Component2 extends React.PureComponent<Props, State> {
         </View>
       );
     }
-    return <View></View>;
+    return <View />;
   }
 }
 

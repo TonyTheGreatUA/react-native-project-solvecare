@@ -17,34 +17,24 @@ const defaultState = {
   lastName: '',
   secretQuestion: '',
   secretAnswer: '',
-  formErrors: {
-    creditCardNumber: true,
-    expirationDate: true,
-    cvv: true,
-    firstName: true,
-    lastName: true,
-    secretQuestion: true,
-    secretAnswer: true,
-  },
-  isFormValid: true,
 };
 
 export const formReducer = (state = defaultState, action) => {
   switch (action.type) {
     case FORM_CHANGE_CREDIT_CARD_NUMBER:
-      return {...state, creditCardNumber: action.payload};
+      return { ...state, creditCardNumber: action.payload };
     case FORM_CHANGE_CVV:
-      return {...state, cvv: action.payload};
+      return { ...state, cvv: action.payload };
     case FORM_CHANGE_EXPIRATION_DATE:
-      return {...state, expirationDate: action.payload};
+      return { ...state, expirationDate: action.payload };
     case FORM_CHANGE_FIRST_NAME:
-      return {...state, firstName: action.payload};
+      return { ...state, firstName: action.payload };
     case FORM_CHANGE_LAST_NAME:
-      return {...state, lastName: action.payload};
+      return { ...state, lastName: action.payload };
     case FORM_CHANGE_SECRET_QUESTION:
-      return {...state, secretQuestion: action.payload};
+      return { ...state, secretQuestion: action.payload };
     case FORM_CHANGE_SECRET_ANSWER:
-      return {...state, secretAnswer: action.payload};
+      return { ...state, secretAnswer: action.payload };
   }
   return state;
 };
