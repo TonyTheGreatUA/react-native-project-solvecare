@@ -5,6 +5,7 @@ import { Text, View, TouchableOpacity, TextInput, ScrollView } from 'react-nativ
 import styles from './Component1.style';
 
 type Props = {
+  isSubmitted: boolean,
   isError: boolean,
   creditCardNumber: string,
   expirationDate: string,
@@ -13,6 +14,7 @@ type Props = {
   lastName: string,
   secretQuestion: string,
   secretAnswer: string,
+  onSubmitEdit: () => void,
   validateCreditCard: () => void,
   submitCreditCardInfo: (value: boolean) => void,
   setCreditCardNumber: (value: string) => void,
@@ -30,6 +32,7 @@ class Component1 extends React.Component<Props, State> {
   handleSubmit = () => {
     this.props.validateCreditCard();
     this.props.submitCreditCardInfo(true);
+    this.props.onSubmitEdit();
   };
 
   render() {
@@ -39,6 +42,7 @@ class Component1 extends React.Component<Props, State> {
         <View style={styles.mainView}>
           <View>
             <TextInput
+              editable={this.props.isSubmitted}
               style={[styles.inputText, isError == true ? styles.inputError : styles.inputDefault]}
               placeholder="0000 0000 0000 0000"
               value={this.props.creditCardNumber}
@@ -46,12 +50,14 @@ class Component1 extends React.Component<Props, State> {
             />
             <View style={styles.cardLine}>
               <TextInput
+                editable={this.props.isSubmitted}
                 style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
                 placeholder="MM/YY"
                 value={this.props.expirationDate}
                 onChangeText={this.props.setExpirationDate}
               />
               <TextInput
+                editable={this.props.isSubmitted}
                 style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
                 placeholder="CVV/CVC"
                 value={this.props.cvv}
@@ -60,12 +66,14 @@ class Component1 extends React.Component<Props, State> {
             </View>
             <View style={styles.cardLine}>
               <TextInput
+                editable={this.props.isSubmitted}
                 style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
                 placeholder="Your Name"
                 value={this.props.firstName}
                 onChangeText={this.props.setFirstName}
               />
               <TextInput
+                editable={this.props.isSubmitted}
                 style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
                 placeholder="Your Surname"
                 value={this.props.lastName}
@@ -73,6 +81,7 @@ class Component1 extends React.Component<Props, State> {
               />
             </View>
             <TextInput
+              editable={this.props.isSubmitted}
               style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
               placeholder="Your Secret Question"
               value={this.props.secretQuestion}
@@ -80,6 +89,7 @@ class Component1 extends React.Component<Props, State> {
             />
 
             <TextInput
+              editable={this.props.isSubmitted}
               style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
               placeholder="Your Secret Answer"
               value={this.props.secretAnswer}

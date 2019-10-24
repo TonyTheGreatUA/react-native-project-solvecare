@@ -17,18 +17,6 @@ import {
 import { RequestStatus } from '../../utils/RequestStatus';
 
 type Props = {
-  onCreditCardNumberChange: (value: string) => void,
-  onCvvChange: (value: string) => void,
-  onExpirationDateChange: (value: string) => void,
-  onFirstNameChange: (value: string) => void,
-  onLastNameChange: (value: string) => void,
-  onSecretQuestionChange: (value: string) => void,
-  onSecretAnswerChange: (value: string) => void,
-};
-
-type State = {
-  isError: boolean,
-  isFormShown: boolean,
   creditCardNumber: string,
   cvv: string,
   expirationDate: string,
@@ -36,6 +24,17 @@ type State = {
   lastName: string,
   secretQuestion: string,
   secretAnswer: string,
+  isError: boolean,
+  isFormShown: boolean,
+  isSubmitted: boolean,
+  onSubmitEdit: () => void,
+  onCreditCardNumberChange: (value: string) => void,
+  onCvvChange: (value: string) => void,
+  onExpirationDateChange: (value: string) => void,
+  onFirstNameChange: (value: string) => void,
+  onLastNameChange: (value: string) => void,
+  onSecretQuestionChange: (value: string) => void,
+  onSecretAnswerChange: (value: string) => void,
   setCreditCardNumber: () => void,
   setCVV: () => void,
   setExpirationDate: () => void,
@@ -47,10 +46,38 @@ type State = {
   validateCreditCard: () => void,
 };
 
-class Component1Container extends Component<State, Props> {
+type State = {
+  isSubmitted: boolean,
+};
+
+class Component1Container extends React.PureComponent<Props, State> {
+  constructor() {
+    super();
+    this.state = {
+      isSubmitted: true,
+    };
+    this.onSubmitEdit = this.onSubmitEdit.bind(this);
+  }
+  onSubmitEdit = () => {
+    const { isError } = this.props;
+    console.log(isError);
+    this.setState({
+      isSubmitted: false,
+    });
+  };
+  componentDidUpdate() {
+    const { isError } = this.props;
+    isError
+      ? this.setState({
+          isSubmitted: true,
+        })
+      : '';
+  }
   render() {
     return (
       <Component1
+        onSubmitEdit={this.onSubmitEdit}
+        isSubmitted={this.state.isSubmitted}
         isFormShown={this.props.isFormShown}
         creditCardNumber={this.props.creditCardNumber}
         cvv={this.props.cvv}
@@ -76,6 +103,7 @@ class Component1Container extends Component<State, Props> {
 
 const mapStateToProps = state => {
   return {
+    isError: state.creditInfo.isError,
     isFormShown: state.creditInfo.isFormShown,
     creditCardNumber: state.creditInfo.creditCardNumber,
     cvv: state.creditInfo.cvv,
