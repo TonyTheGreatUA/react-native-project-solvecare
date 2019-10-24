@@ -22,22 +22,9 @@ export class Component4 extends React.Component<Props, State> {
   }
 
   makeRemoteRequest = () => {
-    fetch(`https://randomuser.me/api/?results=50`)
-      .then(response => response.json())
-      .then(response => {
-        let data = [];
-        response.results.forEach((item, index) => {
-          data.push({
-            index: ++index,
-            firstName: item.name.first,
-            lastName: item.name.last,
-            avatar: item.picture.thumbnail,
-            mail: item.email,
-          });
-        });
-        this.setState({ data: data.slice() });
-      })
-      .catch(err => console.log(err));
+    const response = fetch(`https://randomuser.me/api/?results=50`);
+    const result = response.json();
+    this.setState({ data: result.results });
   };
 
   render() {
@@ -47,19 +34,18 @@ export class Component4 extends React.Component<Props, State> {
         <FlatList
           data={this.state.data}
           initialNumToRender={this.state.defaultLoadAmount}
-          keyExtractor={(item, mail) => mail}
+          keyExtractor={(item, email: any) => email}
           windowSize={20}
-          renderItem={({ item }) => (
+          renderItem={({ item, index }) => (
             <View style={styles.item}>
               <View style={styles.itemRow}>
-                <Image style={styles.avatar} source={{ uri: item.avatar }} />
-                <Text style={styles.index}>{item.index}</Text>
-                <Text style={styles.firstName}>{item.firstName}</Text>
-                <Text style={styles.lastName}>{item.lastName}</Text>
+                <Image style={styles.avatar} source={{ uri: item.picture.avatar }} />
+                <Text style={styles.index}>{index++}</Text>
+                <Text style={styles.firstName}>{item.name.first}</Text>
+                <Text style={styles.lastName}>{item.name.last}</Text>
               </View>
             </View>
           )}
-          keyExtractor={item => item.index}
         />
       </View>
     );

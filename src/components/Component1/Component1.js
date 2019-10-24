@@ -85,7 +85,7 @@ class Component1 extends React.Component<Props, State> {
               value={this.props.secretAnswer}
               onChangeText={this.props.setSecretAnswer}
             />
-            <TouchableOpacity style={styles.button} onPress={this.handleSubmit}>
+            <TouchableOpacity activeOpacity={0.2} style={styles.button} onPress={this.handleSubmit}>
               <Text style={styles.buttonText}>Submit</Text>
             </TouchableOpacity>
           </View>
