@@ -19,7 +19,7 @@ If everything is entered right, than you'll get 4 last digits of card, owner det
 #### Technologies used in project
 - React Native
 - Redux
-- Middleware: thunk
+- Thunk
 - Flow
  
 ```javascript
@@ -27,9 +27,11 @@ If everything is entered right, than you'll get 4 last digits of card, owner det
 /* In order to use */
 npm install
 
+/* for IOS */ 
+
 react-native run-ios 
 
-or
+/* or for Android*/
 
 react-native run-android
 
