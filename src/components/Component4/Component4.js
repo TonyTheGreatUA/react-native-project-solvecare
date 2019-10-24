@@ -31,6 +31,7 @@ export class Component4 extends React.Component<Props, State> {
             firstName: item.name.first,
             lastName: item.name.last,
             avatar: item.picture.thumbnail,
+            mail: item.email,
           });
         });
         this.setState({ data: data.slice() });
@@ -45,7 +46,7 @@ export class Component4 extends React.Component<Props, State> {
         <FlatList
           data={this.state.data}
           initialNumToRender={this.state.defaultLoadAmount}
-          keyExtractor={(item, index) => index}
+          keyExtractor={(item, mail) => mail}
           windowSize={20}
           renderItem={({ item }) => (
             <View style={styles.item}>

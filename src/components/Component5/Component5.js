@@ -95,11 +95,11 @@ export class Component5 extends Component {
               {
                 borderBottomColor:
                   !formErrors.title && isSubmitted
-                    ? 'red'
+                    ? inputError
                     : formErrors.title && !isSubmitted
                     ? ''
                     : formErrors.title && isSubmitted && isFocused
-                    ? 'grey'
+                    ? inputDefault
                     : '',
               },
             ]}
@@ -115,11 +115,11 @@ export class Component5 extends Component {
               {
                 borderBottomColor:
                   !formErrors.weight && isSubmitted
-                    ? 'red'
+                    ? inputError
                     : formErrors.weight && !isSubmitted
                     ? ''
                     : formErrors.weight && isSubmitted && isFocused
-                    ? 'grey'
+                    ? inputDefault
                     : '',
               },
             ]}
@@ -135,11 +135,11 @@ export class Component5 extends Component {
               {
                 borderBottomColor:
                   !formErrors.size && isSubmitted
-                    ? 'red'
+                    ? inputError
                     : formErrors.size && !isSubmitted
                     ? ''
                     : formErrors.size && isSubmitted && isFocused
-                    ? 'grey'
+                    ? inputDefault
                     : '',
               },
             ]}
@@ -200,6 +200,12 @@ const styles = StyleSheet.create({
     borderBottomColor: '#f8f8f8',
     borderBottomWidth: 1,
     textAlign: 'center',
+  },
+  inputError: {
+    borderBottomColor: '#FF0000',
+  },
+  inputDefault: {
+    borderBottomColor: '#F3C678',
   },
 });
 export default Component5;
