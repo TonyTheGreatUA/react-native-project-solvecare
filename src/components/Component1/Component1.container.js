@@ -27,6 +27,7 @@ type Props = {
   isError: boolean,
   isFormShown: boolean,
   isSubmitted: boolean,
+  isClickDisabled: boolean,
   onSubmitEdit: () => void,
   onCreditCardNumberChange: (value: string) => void,
   onCvvChange: (value: string) => void,
@@ -48,6 +49,7 @@ type Props = {
 
 type State = {
   isSubmitted: boolean,
+  isClickDisabled: boolean,
 };
 
 class Component1Container extends React.PureComponent<Props, State> {
@@ -55,6 +57,7 @@ class Component1Container extends React.PureComponent<Props, State> {
     super();
     this.state = {
       isSubmitted: true,
+      isClickDisabled: false,
     };
     this.onSubmitEdit = this.onSubmitEdit.bind(this);
   }
@@ -63,6 +66,7 @@ class Component1Container extends React.PureComponent<Props, State> {
     console.log(isError);
     this.setState({
       isSubmitted: false,
+      isClickDisabled: true,
     });
   };
   componentDidUpdate() {
@@ -70,6 +74,7 @@ class Component1Container extends React.PureComponent<Props, State> {
     isError
       ? this.setState({
           isSubmitted: true,
+          isClickDisabled: false,
         })
       : '';
   }
@@ -77,6 +82,7 @@ class Component1Container extends React.PureComponent<Props, State> {
     return (
       <Component1
         onSubmitEdit={this.onSubmitEdit}
+        isClickDisabled={this.state.isClickDisabled}
         isSubmitted={this.state.isSubmitted}
         isFormShown={this.props.isFormShown}
         creditCardNumber={this.props.creditCardNumber}

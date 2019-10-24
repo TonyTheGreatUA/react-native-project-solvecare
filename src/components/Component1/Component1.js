@@ -6,6 +6,7 @@ import styles from './Component1.style';
 
 type Props = {
   isSubmitted: boolean,
+  isClickDisabled: boolean,
   isError: boolean,
   creditCardNumber: string,
   expirationDate: string,
@@ -95,7 +96,12 @@ class Component1 extends React.Component<Props, State> {
               value={this.props.secretAnswer}
               onChangeText={this.props.setSecretAnswer}
             />
-            <TouchableOpacity activeOpacity={0.2} style={styles.button} onPress={this.handleSubmit}>
+            <TouchableOpacity
+              disabled={this.props.isClickDisabled}
+              activeOpacity={0.2}
+              style={styles.button}
+              onPress={this.handleSubmit}
+            >
               <Text style={styles.buttonText}>Submit</Text>
             </TouchableOpacity>
           </View>
