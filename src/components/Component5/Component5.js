@@ -1,4 +1,5 @@
 //@flow
+import styles from './Component5.style';
 import React, { Component } from 'react';
 import { Text, View, Button, TextInput, Picker, StyleSheet } from 'react-native';
 import { number } from 'prop-types';
@@ -191,43 +192,5 @@ export class Component5 extends Component<Props, State> {
     );
   }
 }
-const styles = StyleSheet.create({
-  view: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
-  inputSection: {
-    flex: 1,
-    paddingTop: 5,
-  },
-  buttons: {
-    paddingTop: 20,
-    paddingBottom: 5,
-    justifyContent: 'center',
-    flexDirection: 'row',
-  },
-  text: {
-    fontSize: 25,
-    textAlign: 'center',
-  },
-  picker: {
-    alignSelf: 'stretch',
-  },
-  inputText: {
-    alignSelf: 'stretch',
-    fontSize: 18,
-    height: 40,
-    marginBottom: 30,
-    color: 'black',
-    borderBottomColor: '#f8f8f8',
-    borderBottomWidth: 1,
-    textAlign: 'center',
-  },
-  inputError: {
-    borderBottomColor: '#FF0000',
-  },
-  inputDefault: {
-    borderBottomColor: '#F3C678',
-  },
-});
+
 export default Component5;
