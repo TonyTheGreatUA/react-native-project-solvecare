@@ -1,5 +1,5 @@
 //@flow
-/*eslint-disable*/
+
 import React, { Component } from 'react';
 import Component1 from './Component1';
 import { connect } from 'react-redux';

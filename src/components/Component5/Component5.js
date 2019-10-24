@@ -1,33 +1,52 @@
+//@flow
 import React, { Component } from 'react';
 import { Text, View, Button, TextInput, Picker, StyleSheet } from 'react-native';
+import { number } from 'prop-types';
 
 const callFromServer = data => {
   return new Promise(resolve => {
     setTimeout(() => resolve(data), 2000);
   });
 };
+type Props = {};
+type State = {
+  isFocused: boolean,
+  isSubmitted: boolean,
+  createStatus: boolean,
+  editable: boolean,
+  editStatus: boolean,
+  country: any,
+  title: string,
+  weight: string,
+  size: string,
+  formErrors: {
+    title: boolean,
+    weight: boolean,
+    size: boolean,
+  },
+  output: any,
+  data: any,
+};
+export class Component5 extends Component<Props, State> {
+  state = {
+    country: '',
+    editStatus: true,
+    createStatus: false,
+    editable: true,
+    isSubmitted: false,
+    isFocused: false,
+    title: '',
+    weight: '',
+    size: '',
+    formErrors: {
+      title: false,
+      weight: false,
+      size: false,
+    },
+    output: null,
+    data: '',
+  };
 
-export class Component5 extends Component {
-  constructor() {
-    super();
-    this.state = {
-      country: '',
-      editStatus: true,
-      createStatus: false,
-      editable: true,
-      isSubmitted: false,
-      isFocused: false,
-      title: '',
-      weight: '',
-      size: '',
-      formErrors: {
-        title: false,
-        weight: false,
-        size: false,
-      },
-      output: null,
-    };
-  }
   onFocusChange = () => {
     this.setState({ isFocused: true });
   };
@@ -95,15 +114,14 @@ export class Component5 extends Component {
               {
                 borderBottomColor:
                   !formErrors.title && isSubmitted
-                    ? inputError
+                    ? styles.inputError
                     : formErrors.title && !isSubmitted
                     ? ''
                     : formErrors.title && isSubmitted && isFocused
-                    ? inputDefault
+                    ? styles.inputDefault
                     : '',
               },
             ]}
-            type="text"
             placeholder="Title"
             onChangeText={title => this.setState({ title })}
           />
@@ -115,15 +133,14 @@ export class Component5 extends Component {
               {
                 borderBottomColor:
                   !formErrors.weight && isSubmitted
-                    ? inputError
+                    ? styles.inputError
                     : formErrors.weight && !isSubmitted
                     ? ''
                     : formErrors.weight && isSubmitted && isFocused
-                    ? inputDefault
+                    ? styles.inputDefault
                     : '',
               },
             ]}
-            type="text"
             placeholder="Weight"
             onChangeText={weight => this.setState({ weight })}
           />
@@ -135,15 +152,14 @@ export class Component5 extends Component {
               {
                 borderBottomColor:
                   !formErrors.size && isSubmitted
-                    ? inputError
+                    ? styles.inputError
                     : formErrors.size && !isSubmitted
                     ? ''
                     : formErrors.size && isSubmitted && isFocused
-                    ? inputDefault
+                    ? styles.inputDefault
                     : '',
               },
             ]}
-            type="text"
             placeholder="Size"
             onChangeText={size => this.setState({ size })}
           />
@@ -154,8 +170,14 @@ export class Component5 extends Component {
             enabled={this.state.editable}
             onValueChange={(itemValue, itemIndex) => this.setState({ country: itemValue })}
           >
-            <Picker.Item enabled={this.state.editable} label="UA" value="ua" />
-            <Picker.Item enabled={this.state.editable} label="CN" value="cn" />
+            <Picker.Item
+              /* Enabled works only in Android enabled={this.state.editable}*/ label="UA"
+              value="ua"
+            />
+            <Picker.Item
+              /* Enabled works only in Android enabled={this.state.editable}*/ label="CN"
+              value="cn"
+            />
           </Picker>
           <Text style={{ textAlign: 'center' }}>
             {JSON.stringify(

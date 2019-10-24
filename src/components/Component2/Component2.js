@@ -1,5 +1,5 @@
 //@flow
-/*eslint-disable*/
+
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, ActivityIndicator } from 'react-native';
 import styles from './Component2.style';
@@ -9,7 +9,6 @@ type Props = {
   lastName: string,
   creditCardNumber: string,
   cardType: string,
-  onFormValid: boolean,
   isFormShown: boolean,
   isLoading: boolean,
   isError: boolean,

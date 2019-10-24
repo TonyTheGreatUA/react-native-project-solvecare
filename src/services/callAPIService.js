@@ -1,6 +1,7 @@
+//@flow
 import { validationService } from './validationService';
 
-const callServerMock = items => {
+const callServerMock = (items: boolean): Promise<any> => {
   return new Promise((resolve, reject) => {
     const err = validationService(items);
     const response = () => {
@@ -10,12 +11,12 @@ const callServerMock = items => {
   });
 };
 
-const onServerValidation = items => {
+const onServerValidation = (items: boolean) => {
   return callServerMock(items);
 };
 
 class callAPIService {
-  callServerValidation(items) {
+  callServerValidation(items: boolean) {
     return onServerValidation(items);
   }
 }

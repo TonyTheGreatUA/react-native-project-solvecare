@@ -1,4 +1,3 @@
-/* eslint-disable */
 //@flow
 
 import React, { Component } from 'react';
@@ -41,7 +40,6 @@ class Component1 extends React.Component<Props, State> {
           <View>
             <TextInput
               style={[styles.inputText, isError == true ? styles.inputError : styles.inputDefault]}
-              type="text"
               placeholder="0000 0000 0000 0000"
               value={this.props.creditCardNumber}
               onChangeText={this.props.setCreditCardNumber}
@@ -49,15 +47,12 @@ class Component1 extends React.Component<Props, State> {
             <View style={styles.cardLine}>
               <TextInput
                 style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
-                type="text"
                 placeholder="MM/YY"
                 value={this.props.expirationDate}
                 onChangeText={this.props.setExpirationDate}
               />
               <TextInput
-                secure
                 style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
-                type="password"
                 placeholder="CVV/CVC"
                 value={this.props.cvv}
                 onChangeText={this.props.setCVV}
@@ -66,14 +61,12 @@ class Component1 extends React.Component<Props, State> {
             <View style={styles.cardLine}>
               <TextInput
                 style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
-                type="text"
                 placeholder="Your Name"
                 value={this.props.firstName}
                 onChangeText={this.props.setFirstName}
               />
               <TextInput
                 style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
-                type="text"
                 placeholder="Your Surname"
                 value={this.props.lastName}
                 onChangeText={this.props.setLastName}
@@ -81,7 +74,6 @@ class Component1 extends React.Component<Props, State> {
             </View>
             <TextInput
               style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
-              type="text"
               placeholder="Your Secret Question"
               value={this.props.secretQuestion}
               onChangeText={this.props.setSecretQuestion}
@@ -89,7 +81,6 @@ class Component1 extends React.Component<Props, State> {
 
             <TextInput
               style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
-              type="text"
               placeholder="Your Secret Answer"
               value={this.props.secretAnswer}
               onChangeText={this.props.setSecretAnswer}

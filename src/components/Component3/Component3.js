@@ -1,3 +1,4 @@
+//@flow
 import React from 'react';
 import { Text, StyleSheet, SafeAreaView, View, Button, TextInput, ScrollView } from 'react-native';
 type Props = {

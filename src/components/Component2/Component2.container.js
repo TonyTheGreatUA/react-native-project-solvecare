@@ -1,10 +1,23 @@
-/*eslint-disable*/
+//@flow
+
 import React, { Component } from 'react';
 import Component2 from './Component2';
 import { connect } from 'react-redux';
 import { RequestStatus } from '../../utils/RequestStatus';
 
-export class Component2Container extends Component {
+type State = {
+  cardType: string,
+};
+type Props = {
+  creditCardNumber: string,
+  firstName: string,
+  lastName: string,
+  isFormShown: boolean,
+  isLoading: boolean,
+  isError: boolean,
+};
+
+export class Component2Container extends Component<Props, State> {
   state = {
     cardType: '',
   };
