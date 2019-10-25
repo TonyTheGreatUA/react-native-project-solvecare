@@ -5,13 +5,13 @@ import Component1 from './Component1';
 import { connect } from 'react-redux';
 import { submitCreditCardInfo, validateCreditCard } from '../../store/creditCardInfo/actions';
 import { RequestStatus } from '../../utils/RequestStatus';
+type CustomType = {};
 
 type Props = {
   isError: boolean,
   isFormShown: boolean,
   isSubmitted: boolean,
   isClickDisabled: boolean,
-
   submitCreditCardInfo: (
     creditCardNumber: string,
     cvv: string,
@@ -53,12 +53,15 @@ class Component1Container extends React.PureComponent<Props, State> {
       isSubmitted: true,
       isClickDisabled: false,
     };
-    this.onSubmitEdit = this.onSubmitEdit.bind(this);
+    this.handleCardSubmit = this.handleCardSubmit.bind(this);
+    this.handleCardInput = this.handleCardInput.bind(this);
   }
-  onChangeText = (key: string, val: string) => {
-    this.setState({ [key]: val });
+
+  handleCardInput = (key: string, val: string) => {
+    this.setState({ [key]: val, isSubmitClicked: false });
   };
-  onSubmitEdit = () => {
+
+  handleCardSubmit = () => {
     const {
       creditCardNumber,
       cvv,
@@ -70,6 +73,7 @@ class Component1Container extends React.PureComponent<Props, State> {
       isSubmitClicked,
     } = this.state;
     const { isError } = this.props;
+
     this.props.submitCreditCardInfo(
       creditCardNumber,
       cvv,
@@ -80,10 +84,11 @@ class Component1Container extends React.PureComponent<Props, State> {
       secretAnswer,
       true,
     );
-    console.log(isError);
+
     this.setState({
       isSubmitted: false,
       isClickDisabled: true,
+      isSubmitClicked: true,
     });
   };
   componentDidUpdate() {
@@ -98,12 +103,12 @@ class Component1Container extends React.PureComponent<Props, State> {
   render() {
     return (
       <Component1
-        onSubmitEdit={this.onSubmitEdit}
+        handleCardInput={this.handleCardInput}
+        handleCardSubmit={this.handleCardSubmit}
         isClickDisabled={this.state.isClickDisabled}
         isSubmitted={this.state.isSubmitted}
         validateCreditCard={this.props.validateCreditCard}
         isError={this.props.isError}
-        onChangeText={this.onChangeText}
       />
     );
   }

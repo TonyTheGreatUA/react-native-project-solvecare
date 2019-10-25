@@ -19,13 +19,13 @@ export const validationService = (items: any) => {
   } = items;
   const err = [];
 
-  assertErr(creditCardNumber.match(RegExps.creditCardRegex), 'Credit Card Number is invalid!', err);
+  /*assertErr(creditCardNumber.match(RegExps.creditCardRegex), 'Credit Card Number is invalid!', err);
   assertErr(cvv.match(RegExps.cvvRegex), 'CVV is invalid!', err);
   assertErr(expirationDate.match(RegExps.expRegex), 'Expiration Date is invalid!', err);
   assertErr(firstName.match(RegExps.firstNameRegex), 'First Name is invalid!', err);
   assertErr(lastName.match(RegExps.lastNameRegex), 'Last Name is invalid!', err);
   assertErr(secretQuestion.match(RegExps.secretQuestionRegex), 'Secret Question is invalid!', err);
-  assertErr(secretAnswer.match(RegExps.secretAnswerRegex), 'Secret Answer is invalid!', err);
+  assertErr(secretAnswer.match(RegExps.secretAnswerRegex), 'Secret Answer is invalid!', err);*/
 
   return err[0];
 };
