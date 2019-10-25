@@ -18,7 +18,7 @@ const defaultState = {
   secretQuestion: '',
   secretAnswer: '',
   requestStatus: RequestStatus.Default,
-  isEditable: false,
+  isSubmitClicked: false,
 };
 
 export const creditCardInfoReducer = (
@@ -30,7 +30,7 @@ export const creditCardInfoReducer = (
     lastName: string,
     secretQuestion: string,
     secretAnswer: string,
-    isEditable: boolean,
+    isSubmitClicked: boolean,
   } = defaultState,
   action: {
     type: string,
@@ -42,7 +42,7 @@ export const creditCardInfoReducer = (
       lastName: string,
       secretQuestion: string,
       secretAnswer: string,
-      isEditable: boolean,
+      isSubmitClicked: boolean,
     },
   },
 ) => {
