@@ -6,7 +6,7 @@ import styles from './Component1.style';
 
 type Props = {
   handleCardInput: (name: string, val: string) => void,
-  isSubmitted: boolean,
+  isEditable: boolean,
   isClickDisabled: boolean,
   isError: boolean,
   handleCardSubmit: () => void,
@@ -22,26 +22,27 @@ class Component1 extends React.Component<Props, State> {
   };
 
   render() {
-    const { isError, handleCardInput } = this.props;
+    const { isError, handleCardInput, isEditable, isClickDisabled } = this.props;
+
     return (
       <ScrollView>
         <View style={styles.mainView}>
           <View>
             <TextInput
-              editable={this.props.isSubmitted}
+              editable={isEditable}
               style={[styles.inputText, isError == true ? styles.inputError : styles.inputDefault]}
               placeholder="0000 0000 0000 0000"
               onChangeText={val => handleCardInput('creditCardNumber', val)}
             />
             <View style={styles.cardLine}>
               <TextInput
-                editable={this.props.isSubmitted}
+                editable={isEditable}
                 style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
                 placeholder="MM/YY"
                 onChangeText={val => handleCardInput('expirationDate', val)}
               />
               <TextInput
-                editable={this.props.isSubmitted}
+                editable={isEditable}
                 style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
                 placeholder="CVV/CVC"
                 onChangeText={val => handleCardInput('cvv', val)}
@@ -49,33 +50,32 @@ class Component1 extends React.Component<Props, State> {
             </View>
             <View style={styles.cardLine}>
               <TextInput
-                editable={this.props.isSubmitted}
+                editable={isEditable}
                 style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
                 placeholder="Your Name"
                 onChangeText={val => handleCardInput('firstName', val)}
               />
               <TextInput
-                editable={this.props.isSubmitted}
+                editable={isEditable}
                 style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
                 placeholder="Your Surname"
                 onChangeText={val => handleCardInput('lastName', val)}
               />
             </View>
             <TextInput
-              editable={this.props.isSubmitted}
+              editable={isEditable}
               style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
               placeholder="Your Secret Question"
               onChangeText={val => handleCardInput('secretQuestion', val)}
             />
-
             <TextInput
-              editable={this.props.isSubmitted}
+              editable={isEditable}
               style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
               placeholder="Your Secret Answer"
               onChangeText={val => handleCardInput('secretAnswer', val)}
             />
             <TouchableOpacity
-              disabled={this.props.isClickDisabled}
+              disabled={isClickDisabled}
               activeOpacity={0.2}
               style={styles.button}
               onPress={this.handleSubmit}

@@ -18,7 +18,7 @@ const defaultState = {
   secretQuestion: '',
   secretAnswer: '',
   requestStatus: RequestStatus.Default,
-  isSubmitted: false,
+  isEditable: false,
 };
 
 export const creditCardInfoReducer = (
@@ -30,7 +30,7 @@ export const creditCardInfoReducer = (
     lastName: string,
     secretQuestion: string,
     secretAnswer: string,
-    isSubmitted: boolean,
+    isEditable: boolean,
   } = defaultState,
   action: {
     type: string,
@@ -42,7 +42,7 @@ export const creditCardInfoReducer = (
       lastName: string,
       secretQuestion: string,
       secretAnswer: string,
-      isSubmitted: boolean,
+      isEditable: boolean,
     },
   },
 ) => {
@@ -51,19 +51,16 @@ export const creditCardInfoReducer = (
       return {
         ...state,
         requestStatus: RequestStatus.Request,
-        isFormShown: true,
       };
     case SHOW_CARD_DETAILS_SUCCESS:
       return {
         ...state,
         requestStatus: RequestStatus.Success,
-        isFormShown: true,
       };
     case SHOW_CARD_DETAILS_FAILURE:
       return {
         ...state,
         requestStatus: RequestStatus.Failure,
-        isFormShown: true,
       };
     case SUBMIT_CARD_DATA:
       return {

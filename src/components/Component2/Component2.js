@@ -9,7 +9,7 @@ type Props = {
   lastName: string,
   creditCardNumber: string,
   cardType: string,
-  isFormShown: boolean,
+  isSubmitClicked: boolean,
   isLoading: boolean,
   isError: boolean,
 };
@@ -21,9 +21,9 @@ class Component2 extends React.PureComponent<Props> {
       firstName,
       lastName,
       creditCardNumber,
-      isFormShown,
       isError,
       isLoading,
+      isSubmitClicked,
     } = this.props;
 
     if (isLoading) {
@@ -40,7 +40,7 @@ class Component2 extends React.PureComponent<Props> {
         </View>
       );
     }
-    if (isFormShown && !isError) {
+    if (isSubmitClicked && !isError) {
       return (
         <View style={styles.card}>
           <Text style={styles.h1}>Card Info</Text>

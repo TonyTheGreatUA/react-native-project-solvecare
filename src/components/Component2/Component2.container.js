@@ -12,7 +12,7 @@ type Props = {
   creditCardNumber: string,
   firstName: string,
   lastName: string,
-  isFormShown: boolean,
+  isSubmitClicked: boolean,
   isLoading: boolean,
   isError: boolean,
 };
@@ -49,9 +49,9 @@ export class Component2Container extends Component<Props, State> {
         firstName={this.props.firstName}
         lastName={this.props.lastName}
         cardType={this.state.cardType}
-        isFormShown={this.props.isFormShown}
         isLoading={this.props.isLoading}
         isError={this.props.isError}
+        isSubmitClicked={this.props.isSubmitClicked}
       />
     );
   }
@@ -62,9 +62,9 @@ const mapStateToProps = state => {
     creditCardNumber: state.creditInfo.creditCardNumber,
     firstName: state.creditInfo.firstName,
     lastName: state.creditInfo.lastName,
-    isFormShown: state.creditInfo.isFormShown,
     isLoading: state.creditInfo.requestStatus === RequestStatus.Request,
     isError: state.creditInfo.requestStatus === RequestStatus.Failure,
+    isSubmitClicked: state.creditInfo.isSubmitClicked,
   };
 };
 

@@ -10,7 +10,7 @@ type CustomType = {};
 type Props = {
   isError: boolean,
   isFormShown: boolean,
-  isSubmitted: boolean,
+  isEditable: boolean,
   isClickDisabled: boolean,
   submitCreditCardInfo: (
     creditCardNumber: string,
@@ -34,7 +34,7 @@ type State = {
   secretQuestion: string,
   secretAnswer: string,
   isSubmitClicked: boolean,
-  isSubmitted: boolean,
+  isEditable: boolean,
   isClickDisabled: boolean,
 };
 
@@ -50,7 +50,7 @@ class Component1Container extends React.PureComponent<Props, State> {
       secretQuestion: '',
       secretAnswer: '',
       isSubmitClicked: false,
-      isSubmitted: true,
+      isEditable: true,
       isClickDisabled: false,
     };
     this.handleCardSubmit = this.handleCardSubmit.bind(this);
@@ -86,7 +86,7 @@ class Component1Container extends React.PureComponent<Props, State> {
     );
 
     this.setState({
-      isSubmitted: false,
+      isEditable: false,
       isClickDisabled: true,
       isSubmitClicked: true,
     });
@@ -95,7 +95,7 @@ class Component1Container extends React.PureComponent<Props, State> {
     const { isError } = this.props;
     isError
       ? this.setState({
-          isSubmitted: true,
+          isEditable: true,
           isClickDisabled: false,
         })
       : '';
@@ -106,7 +106,7 @@ class Component1Container extends React.PureComponent<Props, State> {
         handleCardInput={this.handleCardInput}
         handleCardSubmit={this.handleCardSubmit}
         isClickDisabled={this.state.isClickDisabled}
-        isSubmitted={this.state.isSubmitted}
+        isEditable={this.state.isEditable}
         validateCreditCard={this.props.validateCreditCard}
         isError={this.props.isError}
       />
