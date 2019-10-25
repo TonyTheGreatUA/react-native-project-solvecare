@@ -2,9 +2,14 @@
 import styles from './Component4.style';
 import React, { Component } from 'react';
 import { Text, View, FlatList, Image, StyleSheet } from 'react-native';
+
+type User = {
+  picture: { thumbnail: string },
+  name: { first: string, last: string },
+};
 type Props = {};
 type State = {
-  data: any,
+  data: User[],
   defaultLoadAmount: number,
 };
 
@@ -39,7 +44,7 @@ export class Component4 extends React.Component<Props, State> {
           renderItem={({ item, index }) => (
             <View style={styles.item}>
               <View style={styles.itemRow}>
-                <Image style={styles.avatar} source={{ uri: item.picture.avatar }} />
+                <Image style={styles.avatar} source={{ uri: item.picture.thumbnail }} />
                 <Text style={styles.index}>{index++}</Text>
                 <Text style={styles.firstName}>{item.name.first}</Text>
                 <Text style={styles.lastName}>{item.name.last}</Text>

@@ -14,8 +14,7 @@ type Props = {
   isError: boolean,
 };
 
-type State = {};
-class Component2 extends React.PureComponent<Props, State> {
+class Component2 extends React.PureComponent<Props> {
   render() {
     const {
       cardType,

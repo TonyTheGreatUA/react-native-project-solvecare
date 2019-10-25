@@ -3,12 +3,6 @@ import styles from './Component5.style';
 import React, { Component } from 'react';
 import { Text, View, Button, TextInput, Picker, StyleSheet } from 'react-native';
 import { number } from 'prop-types';
-
-const callFromServer = data => {
-  return new Promise(resolve => {
-    setTimeout(() => resolve(data), 2000);
-  });
-};
 type Props = {};
 type State = {
   isFocused: boolean,
@@ -16,7 +10,7 @@ type State = {
   createStatus: boolean,
   editable: boolean,
   editStatus: boolean,
-  country: any,
+  country: string | number,
   title: string,
   weight: string,
   size: string,
@@ -25,8 +19,6 @@ type State = {
     weight: boolean,
     size: boolean,
   },
-  output: any,
-  data: any,
 };
 export class Component5 extends Component<Props, State> {
   state = {
@@ -44,23 +36,17 @@ export class Component5 extends Component<Props, State> {
       weight: false,
       size: false,
     },
-    output: null,
-    data: '',
   };
 
   onFocusChange = () => {
     this.setState({ isFocused: true });
   };
   onCreate = () => {
-    const data = this.state.data;
-    callFromServer(data).then(response => {
-      this.setState({
-        isSubmitted: true,
-        editStatus: false,
-        createStatus: true,
-        editable: false,
-        output: response,
-      });
+    this.setState({
+      isSubmitted: true,
+      editStatus: false,
+      createStatus: true,
+      editable: false,
     });
   };
   onEdit = () => {

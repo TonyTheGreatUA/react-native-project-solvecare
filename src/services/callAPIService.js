@@ -15,10 +15,10 @@ const onServerValidation = (items: boolean) => {
   return callServerMock(items);
 };
 
-class callAPIService {
+class CallAPIService {
   callServerValidation(items: boolean) {
     return onServerValidation(items);
   }
 }
 
-export { callAPIService };
+export { CallAPIService };

@@ -1,6 +1,6 @@
 //@flow
 /*eslint-disable*/
-import { callAPIService } from '../../services/callAPIService';
+import { CallAPIService } from '../../services/CallAPIService';
 import {
   FORM_CHANGE_CREDIT_CARD_NUMBER,
   FORM_CHANGE_CVV,
@@ -55,7 +55,7 @@ export const validateCreditCard = () => (dispatch: any, getState: any) => {
   const state = getState();
   const items = state.creditInfo;
 
-  new callAPIService()
+  new CallAPIService()
     .callServerValidation(items)
     .then(data => {
       dispatch({ type: SHOW_CARD_DETAILS_SUCCESS, payload: data });
