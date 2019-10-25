@@ -3,20 +3,29 @@
 import React, { Component } from 'react';
 import Component1 from './Component1';
 import { connect } from 'react-redux';
-import {
-  setCreditCardNumber,
-  setCVV,
-  setExpirationDate,
-  setFirstName,
-  setLastName,
-  setSecretQuestion,
-  setSecretAnswer,
-  submitCreditCardInfo,
-  validateCreditCard,
-} from '../../store/creditCardInfo/actions';
+import { submitCreditCardInfo, validateCreditCard } from '../../store/creditCardInfo/actions';
 import { RequestStatus } from '../../utils/RequestStatus';
 
 type Props = {
+  isError: boolean,
+  isFormShown: boolean,
+  isSubmitted: boolean,
+  isClickDisabled: boolean,
+
+  submitCreditCardInfo: (
+    creditCardNumber: string,
+    cvv: string,
+    expirationDate: string,
+    firstName: string,
+    lastName: string,
+    secretQuestion: string,
+    secretAnswer: string,
+    isSubmitClicked: boolean,
+  ) => void,
+  validateCreditCard: () => void,
+};
+
+type State = {
   creditCardNumber: string,
   cvv: string,
   expirationDate: string,
@@ -24,30 +33,7 @@ type Props = {
   lastName: string,
   secretQuestion: string,
   secretAnswer: string,
-  isError: boolean,
-  isFormShown: boolean,
-  isSubmitted: boolean,
-  isClickDisabled: boolean,
-  onSubmitEdit: () => void,
-  onCreditCardNumberChange: (value: string) => void,
-  onCvvChange: (value: string) => void,
-  onExpirationDateChange: (value: string) => void,
-  onFirstNameChange: (value: string) => void,
-  onLastNameChange: (value: string) => void,
-  onSecretQuestionChange: (value: string) => void,
-  onSecretAnswerChange: (value: string) => void,
-  setCreditCardNumber: () => void,
-  setCVV: () => void,
-  setExpirationDate: () => void,
-  setFirstName: () => void,
-  setLastName: () => void,
-  setSecretQuestion: () => void,
-  setSecretAnswer: () => void,
-  submitCreditCardInfo: () => void,
-  validateCreditCard: () => void,
-};
-
-type State = {
+  isSubmitClicked: boolean,
   isSubmitted: boolean,
   isClickDisabled: boolean,
 };
@@ -56,13 +42,44 @@ class Component1Container extends React.PureComponent<Props, State> {
   constructor() {
     super();
     this.state = {
+      creditCardNumber: '',
+      cvv: '',
+      expirationDate: '',
+      firstName: '',
+      lastName: '',
+      secretQuestion: '',
+      secretAnswer: '',
+      isSubmitClicked: false,
       isSubmitted: true,
       isClickDisabled: false,
     };
     this.onSubmitEdit = this.onSubmitEdit.bind(this);
   }
+  onChangeText = (key: string, val: string) => {
+    this.setState({ [key]: val });
+  };
   onSubmitEdit = () => {
+    const {
+      creditCardNumber,
+      cvv,
+      expirationDate,
+      firstName,
+      lastName,
+      secretQuestion,
+      secretAnswer,
+      isSubmitClicked,
+    } = this.state;
     const { isError } = this.props;
+    this.props.submitCreditCardInfo(
+      creditCardNumber,
+      cvv,
+      expirationDate,
+      firstName,
+      lastName,
+      secretQuestion,
+      secretAnswer,
+      true,
+    );
     console.log(isError);
     this.setState({
       isSubmitted: false,
@@ -84,24 +101,9 @@ class Component1Container extends React.PureComponent<Props, State> {
         onSubmitEdit={this.onSubmitEdit}
         isClickDisabled={this.state.isClickDisabled}
         isSubmitted={this.state.isSubmitted}
-        isFormShown={this.props.isFormShown}
-        creditCardNumber={this.props.creditCardNumber}
-        cvv={this.props.cvv}
-        expirationDate={this.props.expirationDate}
-        firstName={this.props.firstName}
-        lastName={this.props.lastName}
-        secretQuestion={this.props.secretQuestion}
-        secretAnswer={this.props.secretAnswer}
-        setCreditCardNumber={this.props.setCreditCardNumber}
-        setCVV={this.props.setCVV}
-        setExpirationDate={this.props.setExpirationDate}
-        setFirstName={this.props.setFirstName}
-        setLastName={this.props.setLastName}
-        setSecretQuestion={this.props.setSecretQuestion}
-        setSecretAnswer={this.props.setSecretAnswer}
-        submitCreditCardInfo={this.props.submitCreditCardInfo}
         validateCreditCard={this.props.validateCreditCard}
         isError={this.props.isError}
+        onChangeText={this.onChangeText}
       />
     );
   }
@@ -109,26 +111,10 @@ class Component1Container extends React.PureComponent<Props, State> {
 
 const mapStateToProps = state => {
   return {
-    isError: state.creditInfo.isError,
-    isFormShown: state.creditInfo.isFormShown,
-    creditCardNumber: state.creditInfo.creditCardNumber,
-    cvv: state.creditInfo.cvv,
-    expirationDate: state.creditInfo.expirationDate,
-    firstName: state.creditInfo.firstName,
-    lastName: state.creditInfo.lastName,
-    secretQuestion: state.creditInfo.secretQuestion,
-    secretAnswer: state.creditInfo.secretAnswer,
     isError: state.creditInfo.requestStatus === RequestStatus.Failure,
   };
 };
 const mapDispatchToProps = {
-  setCreditCardNumber,
-  setCVV,
-  setExpirationDate,
-  setFirstName,
-  setLastName,
-  setSecretQuestion,
-  setSecretAnswer,
   submitCreditCardInfo,
   validateCreditCard,
 };

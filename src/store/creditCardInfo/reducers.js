@@ -3,17 +3,10 @@
 import { RequestStatus } from '../../utils/RequestStatus';
 
 import {
-  FORM_CHANGE_CREDIT_CARD_NUMBER,
-  FORM_CHANGE_CVV,
-  FORM_CHANGE_EXPIRATION_DATE,
-  FORM_CHANGE_FIRST_NAME,
-  FORM_CHANGE_LAST_NAME,
-  FORM_CHANGE_SECRET_QUESTION,
-  FORM_CHANGE_SECRET_ANSWER,
   SHOW_CARD_DETAILS_FAILURE,
   SHOW_CARD_DETAILS_REQUEST,
   SHOW_CARD_DETAILS_SUCCESS,
-  SUBMIT_FORM,
+  SUBMIT_CARD_DATA,
 } from './types';
 
 const defaultState = {
@@ -25,7 +18,7 @@ const defaultState = {
   secretQuestion: '',
   secretAnswer: '',
   requestStatus: RequestStatus.Default,
-  isFormShown: false,
+  isSubmitted: false,
 };
 
 export const creditCardInfoReducer = (
@@ -37,28 +30,23 @@ export const creditCardInfoReducer = (
     lastName: string,
     secretQuestion: string,
     secretAnswer: string,
-    isFormShown: boolean,
+    isSubmitted: boolean,
   } = defaultState,
   action: {
     type: string,
-    payload: {},
+    payload: {
+      creditCardNumber: string,
+      cvv: string,
+      expirationDate: string,
+      firstName: string,
+      lastName: string,
+      secretQuestion: string,
+      secretAnswer: string,
+      isSubmitted: boolean,
+    },
   },
 ) => {
   switch (action.type) {
-    case FORM_CHANGE_CREDIT_CARD_NUMBER:
-      return { ...state, creditCardNumber: action.payload };
-    case FORM_CHANGE_CVV:
-      return { ...state, cvv: action.payload };
-    case FORM_CHANGE_EXPIRATION_DATE:
-      return { ...state, expirationDate: action.payload };
-    case FORM_CHANGE_FIRST_NAME:
-      return { ...state, firstName: action.payload };
-    case FORM_CHANGE_LAST_NAME:
-      return { ...state, lastName: action.payload };
-    case FORM_CHANGE_SECRET_QUESTION:
-      return { ...state, secretQuestion: action.payload };
-    case FORM_CHANGE_SECRET_ANSWER:
-      return { ...state, secretAnswer: action.payload };
     case SHOW_CARD_DETAILS_REQUEST:
       return {
         ...state,
@@ -77,10 +65,10 @@ export const creditCardInfoReducer = (
         requestStatus: RequestStatus.Failure,
         isFormShown: true,
       };
-    case SUBMIT_FORM:
+    case SUBMIT_CARD_DATA:
       return {
         ...state,
-        isFormShown: action.payload,
+        ...action.payload,
       };
   }
   return state;
