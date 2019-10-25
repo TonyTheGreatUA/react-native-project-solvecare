@@ -6,8 +6,8 @@ import styles from './Component1.style';
 
 type Props = {
   handleCardInput: (name: string, val: string) => void,
+  isSubmitClicked: boolean,
   isEditable: boolean,
-  isClickDisabled: boolean,
   isError: boolean,
   handleCardSubmit: () => void,
   validateCreditCard: () => void,
@@ -22,7 +22,7 @@ class Component1 extends React.Component<Props, State> {
   };
 
   render() {
-    const { isError, handleCardInput, isEditable, isClickDisabled } = this.props;
+    const { isError, handleCardInput, isEditable, isSubmitClicked } = this.props;
 
     return (
       <ScrollView>
@@ -75,7 +75,7 @@ class Component1 extends React.Component<Props, State> {
               onChangeText={val => handleCardInput('secretAnswer', val)}
             />
             <TouchableOpacity
-              disabled={isClickDisabled}
+              disabled={isSubmitClicked}
               activeOpacity={0.2}
               style={styles.button}
               onPress={this.handleSubmit}
