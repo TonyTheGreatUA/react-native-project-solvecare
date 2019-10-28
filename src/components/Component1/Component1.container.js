@@ -54,8 +54,8 @@ class Component1Container extends React.PureComponent<Props, State> {
     this.handleCardInput = this.handleCardInput.bind(this);
   }
 
-  handleCardInput = (key: string, val: string) => {
-    this.setState({ [key]: val, isSubmitClicked: false });
+  handleCardInput = (name: string) => {
+    return val => this.setState({ [name]: val });
   };
 
   handleCardSubmit = () => {
