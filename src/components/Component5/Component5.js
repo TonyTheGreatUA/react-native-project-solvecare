@@ -7,6 +7,7 @@ type Props = {
   onCreate: () => void,
   onEdit: () => void,
   onFocusChange: () => void,
+  handleTextInput: (name: string) => any,
   createStatus: boolean,
   editStatus: boolean,
   editable: boolean,
@@ -23,6 +24,7 @@ type Props = {
   },
 };
 const Component5 = ({
+  handleTextInput,
   onFocusChange,
   onCreate,
   onEdit,
@@ -61,7 +63,7 @@ const Component5 = ({
             },
           ]}
           placeholder="Title"
-          /*onChangeText={title => this.setState({ title })}*/
+          onChangeText={handleTextInput('title')}
         />
         <TextInput
           editable={editable}
@@ -80,7 +82,7 @@ const Component5 = ({
             },
           ]}
           placeholder="Weight"
-          /*onChangeText={weight => this.setState({ weight })}*/
+          onChangeText={handleTextInput('weight')}
         />
         <TextInput
           editable={editable}
@@ -99,7 +101,7 @@ const Component5 = ({
             },
           ]}
           placeholder="Size"
-          /*onChangeText={size => this.setState({ size })}*/
+          onChangeText={handleTextInput('size')}
         />
         <Text style={styles.text}>Country Of A Production</Text>
         <Picker

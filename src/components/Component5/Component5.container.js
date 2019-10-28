@@ -36,7 +36,9 @@ export class Component5Container extends Component<Props, State> {
       size: false,
     },
   };
-
+  handleTextInput = (name: string) => {
+    return (val: string) => this.setState({ [name]: val });
+  };
   onFocusChange = () => {
     this.setState({ isFocused: true });
   };
@@ -86,6 +88,7 @@ export class Component5Container extends Component<Props, State> {
   render() {
     return (
       <Component5
+        handleTextInput={this.handleTextInput}
         onCreate={this.onCreate}
         onEdit={this.onEdit}
         createStatus={this.state.createStatus}
