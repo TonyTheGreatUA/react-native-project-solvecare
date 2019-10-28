@@ -14,18 +14,16 @@ type Props = {
   isError: boolean,
 };
 
-class Component2 extends React.PureComponent<Props> {
-  render() {
-    const {
-      cardType,
-      firstName,
-      lastName,
-      creditCardNumber,
-      isError,
-      isLoading,
-      isSubmitClicked,
-    } = this.props;
-
+const Component2 = ({
+  cardType,
+  firstName,
+  lastName,
+  creditCardNumber,
+  isError,
+  isLoading,
+  isSubmitClicked,
+}: Props) => {
+  {
     if (isLoading) {
       return (
         <View style={styles.card}>
@@ -53,6 +51,6 @@ class Component2 extends React.PureComponent<Props> {
     }
     return <View />;
   }
-}
+};
 
 export default Component2;
