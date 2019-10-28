@@ -107,7 +107,6 @@ class Component1Container extends React.PureComponent<Props, State> {
         handleSubmit={this.handleSubmit}
         isSubmitClicked={this.state.isSubmitClicked}
         isEditable={this.state.isEditable}
-        validateCreditCard={this.props.validateCreditCard}
         isError={this.props.isError}
       />
     );

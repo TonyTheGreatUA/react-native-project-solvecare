@@ -10,7 +10,6 @@ type Props = {
   isSubmitClicked: boolean,
   isEditable: boolean,
   isError: boolean,
-  validateCreditCard: () => void,
 };
 
 const Component1 = ({
@@ -26,7 +25,7 @@ const Component1 = ({
         <View>
           <TextInput
             editable={isEditable}
-            style={[styles.inputText, isError == true ? styles.inputError : styles.inputDefault]}
+            style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
             placeholder="0000 0000 0000 0000"
             onChangeText={handleCardInput('creditCardNumber')}
           />
