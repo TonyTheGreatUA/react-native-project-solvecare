@@ -13,8 +13,6 @@ type Props = {
   validateCreditCard: () => void,
 };
 
-type State = {};
-
 const Component1 = ({
   isError,
   handleSubmit,
