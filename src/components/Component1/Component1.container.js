@@ -96,11 +96,15 @@ class Component1Container extends React.PureComponent<Props, State> {
         })
       : '';
   }
+  handleSubmit = () => {
+    this.props.validateCreditCard();
+    this.handleCardSubmit();
+  };
   render() {
     return (
       <Component1
         handleCardInput={this.handleCardInput}
-        handleCardSubmit={this.handleCardSubmit}
+        handleSubmit={this.handleSubmit}
         isSubmitClicked={this.state.isSubmitClicked}
         isEditable={this.state.isEditable}
         validateCreditCard={this.props.validateCreditCard}

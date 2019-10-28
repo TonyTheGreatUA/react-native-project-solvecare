@@ -1,5 +1,5 @@
 //@flow
-/*eslint-disable*/
+
 import { RequestStatus } from '../../utils/RequestStatus';
 
 import {

@@ -33,7 +33,6 @@ class Component3 extends React.PureComponent<Props, State> {
   };
 
   render() {
-    console.log('(render) Component3');
     return <Text />;
   }
 }
