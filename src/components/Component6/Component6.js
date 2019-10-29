@@ -1,6 +1,14 @@
 //@flow
 import React, { Component } from 'react';
-import { Text, View, FlatList, Button, TextInput, ActivityIndicator } from 'react-native';
+import {
+  Text,
+  View,
+  FlatList,
+  Button,
+  TextInput,
+  ActivityIndicator,
+  TouchableOpacity,
+} from 'react-native';
 import styles from './Component6.style';
 
 type Props = {
@@ -41,6 +49,7 @@ const Component6 = ({
 
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>Add / Remove Cryptocurrencies</Text>
       <FlatList
         data={dataSource}
         ItemSeparatorComponent={FlatListItemSeparator}
@@ -53,13 +62,18 @@ const Component6 = ({
           onChangeText={handleTextInput('textInput')}
           clearTextOnFocus={true}
           clearButtonMode="always"
+          value={textInput}
           style={styles.inputText}
           placeholder="Input your value here"
         />
       </View>
       <View style={styles.buttons}>
-        <Button disabled={isAddedDisabled} onPress={onCreateItem} title="Add Item" />
-        <Button disabled={isRemoveDisabled} onPress={onRemoveItem} title="Remove Item" />
+        <TouchableOpacity style={styles.button} disabled={isAddedDisabled} onPress={onCreateItem}>
+          <Text>Add Item</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} disabled={isRemoveDisabled} onPress={onRemoveItem}>
+          <Text>Remove Item</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

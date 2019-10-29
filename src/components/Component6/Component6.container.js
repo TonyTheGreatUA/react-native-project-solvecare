@@ -71,6 +71,7 @@ export class Component6Container extends Component<Props, State> {
 
     this.setState({
       dataSource: [...dataSource, { title: textInput }],
+      textInput: '',
     });
   };
 
@@ -115,7 +116,6 @@ export class Component6Container extends Component<Props, State> {
         onCreateItem={this.onCreateItem}
         onRemoveItem={this.onRemoveItem}
         textInput={this.state.textInput}
-        selectItem={this.selectItem}
         FlatListItemSeparator={this.FlatListItemSeparator}
         renderItem={this.renderItem}
       />
