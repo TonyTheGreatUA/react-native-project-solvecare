@@ -1,15 +1,6 @@
 //@flow
 import React, { Component } from 'react';
-import {
-  Text,
-  View,
-  FlatList,
-  Switch,
-  Button,
-  TextInput,
-  TouchableOpacity,
-  ActivityIndicator,
-} from 'react-native';
+import { Text, View, FlatList, Button, TextInput, ActivityIndicator } from 'react-native';
 import styles from './Component6.style';
 import CheckBox from 'react-native-check-box';
 
@@ -22,13 +13,13 @@ type Props = {
   onCreateItem: () => void,
   onRemoveItem: () => void,
   textInput: string,
-  loading: boolean,
+  isLoading: boolean,
   FlatListItemSeparator: any,
   renderItem: any,
 };
 
 const Component6 = ({
-  loading,
+  isLoading,
   dataSource,
   onFocusTextInput,
   handleTextInput,
@@ -41,7 +32,7 @@ const Component6 = ({
   renderItem,
 }: Props) => {
   const itemNumber = dataSource.filter(item => item.isSelect).length;
-  if (loading) {
+  if (isLoading) {
     return (
       <View style={styles.loader}>
         <ActivityIndicator size="large" color="#000" />

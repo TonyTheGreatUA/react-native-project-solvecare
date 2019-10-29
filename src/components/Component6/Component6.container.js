@@ -2,29 +2,21 @@
 import React, { Component } from 'react';
 import Component6 from './Component6';
 import styles from './Component6.style';
-import {
-  StyleSheet,
-  View,
-  ActivityIndicator,
-  FlatList,
-  Text,
-  TouchableOpacity,
-  Image,
-  TextInput,
-  Button,
-} from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
+
 type Props = {};
 
 type State = {
-  loading: boolean,
+  isLoading: boolean,
   dataSource: any,
   textInput: string,
   isAddedDisabled: boolean,
   isRemoveDisabled: boolean,
 };
+
 export class Component6Container extends Component<Props, State> {
   state = {
-    loading: false,
+    isLoading: false,
     dataSource: [],
     textInput: '',
     isAddedDisabled: true,
@@ -36,7 +28,7 @@ export class Component6Container extends Component<Props, State> {
   }
 
   fetchData = () => {
-    this.setState({ loading: true });
+    this.setState({ isLoading: true });
 
     fetch('https://api.coinmarketcap.com/v1/ticker/?limit=10')
       .then(response => response.json())
@@ -49,12 +41,12 @@ export class Component6Container extends Component<Props, State> {
         });
 
         this.setState({
-          loading: false,
+          isLoading: false,
           dataSource: responseJson,
         });
       })
       .catch(error => {
-        this.setState({ loading: false });
+        this.setState({ isLoading: false });
       });
   };
 
@@ -85,6 +77,7 @@ export class Component6Container extends Component<Props, State> {
   onRemoveItem = () => {
     let { dataSource } = this.state;
     const newData = dataSource.filter(item => !item.isSelect);
+
     this.setState({
       dataSource: newData,
     });
@@ -114,7 +107,7 @@ export class Component6Container extends Component<Props, State> {
     return (
       <Component6
         dataSource={this.state.dataSource}
-        loading={this.state.loading}
+        isLoading={this.state.isLoading}
         onFocusTextInput={this.onFocusTextInput}
         handleTextInput={this.handleTextInput}
         isAddedDisabled={this.state.isAddedDisabled}
