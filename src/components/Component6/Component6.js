@@ -1,6 +1,6 @@
 //@flow
 import React, { Component } from 'react';
-import { Text, View, FlatList, Switch, Button, TextInput } from 'react-native';
+import { Text, View, FlatList, Switch, Button, TextInput, TouchableOpacity } from 'react-native';
 import styles from './Component6.style';
 import CheckBox from 'react-native-check-box';
 

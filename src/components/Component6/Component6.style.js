@@ -39,4 +39,5 @@ export default StyleSheet.create({
     borderBottomWidth: 1,
     textAlign: 'center',
   },
+  selected: { backgroundColor: '#FA7B5F' },
 });

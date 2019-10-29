@@ -26,19 +26,44 @@ export class Component6Container extends Component<Props, State> {
     this.makeRemoteRequest();
   }
 
-  makeRemoteRequest = async () => {
-    const response = await fetch(`https://api.coinmarketcap.com/v1/ticker/?limit=10`);
+  makeRemoteRequest = () => {
+    fetch(`https://api.coinmarketcap.com/v1/ticker/?limit=10`)
+      .then(response => response.json())
+      .then(responseJson => {
+        responseJson = responseJson.map(item => {
+          item.isSelect = false;
+
+          return item;
+        });
+        this.setState({
+          data: responseJson,
+        });
+      })
+      .catch(err => console.log(err));
+
+    /*const response = await fetch(`https://api.coinmarketcap.com/v1/ticker/?limit=10`);
     const result = await response.json();
-    this.setState({ data: result });
+    this.setState({ data: result });*/
   };
 
   handleTextInput = (key: string) => {
     return (val: string) => this.setState({ [key]: val });
   };
 
+  selectItem = (data: any) => {
+    data.item.isSelect = !data.item.isSelect;
+
+    const index = this.state.data.findIndex(item => data.item.id === item.id);
+
+    this.state.data[index] = data.item;
+
+    this.setState({ data: this.state.data });
+  };
+
   onCheckBoxClick = () => {
     this.setState({
-      isCheckedItem: !this.state.isChecked,
+      isCheckedItem: this.state.isCheckedItem,
+      isRemoveDisabled: !this.state.isRemoveDisabled,
     });
   };
 
