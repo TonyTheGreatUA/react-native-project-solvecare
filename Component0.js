@@ -18,7 +18,8 @@ class Component0 extends React.Component<Props, State> {
     return (
       <Provider store={store}>
         <View style={styles.homeScreen}>
-          <Component6Container />
+          <Component1Container />
+          <Component2Container />
         </View>
       </Provider>
     );
