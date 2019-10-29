@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { Text, View, FlatList, Button, TextInput, ActivityIndicator } from 'react-native';
 import styles from './Component6.style';
-import CheckBox from 'react-native-check-box';
 
 type Props = {
   dataSource: any,
