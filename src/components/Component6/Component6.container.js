@@ -1,90 +1,120 @@
 //@flow
 import React, { Component } from 'react';
 import Component6 from './Component6';
-
+import styles from './Component6.style';
+import {
+  StyleSheet,
+  View,
+  ActivityIndicator,
+  FlatList,
+  Text,
+  TouchableOpacity,
+  Image,
+  TextInput,
+  Button,
+} from 'react-native';
 type Props = {};
 
 type State = {
-  data: any,
+  loading: boolean,
+  dataSource: any,
   textInput: string,
-  isChecked: boolean,
   isAddedDisabled: boolean,
   isRemoveDisabled: boolean,
-  isCheckedItem: boolean,
 };
 export class Component6Container extends Component<Props, State> {
   state = {
-    data: [],
+    loading: false,
+    dataSource: [],
     textInput: '',
-    isChecked: false,
     isAddedDisabled: true,
     isRemoveDisabled: true,
-    isCheckedItem: false,
   };
 
   componentDidMount() {
-    this.makeRemoteRequest();
+    this.fetchData();
   }
 
-  makeRemoteRequest = () => {
-    fetch(`https://api.coinmarketcap.com/v1/ticker/?limit=10`)
+  fetchData = () => {
+    this.setState({ loading: true });
+
+    fetch('https://api.coinmarketcap.com/v1/ticker/?limit=10')
       .then(response => response.json())
       .then(responseJson => {
         responseJson = responseJson.map(item => {
           item.isSelect = false;
+          item.selectedClass = styles.list;
 
           return item;
         });
+
         this.setState({
-          data: responseJson,
+          loading: false,
+          dataSource: responseJson,
         });
       })
-      .catch(err => console.log(err));
-
-    /*const response = await fetch(`https://api.coinmarketcap.com/v1/ticker/?limit=10`);
-    const result = await response.json();
-    this.setState({ data: result });*/
+      .catch(error => {
+        this.setState({ loading: false });
+      });
   };
+
+  FlatListItemSeparator = () => <View style={styles.line} />;
+
+  selectItem = (data: any) => {
+    data.item.isSelect = !data.item.isSelect;
+    data.item.selectedClass = data.item.isSelect ? styles.selected : styles.list;
+
+    const index = this.state.dataSource.findIndex(item => data.item.id === item.id);
+
+    this.state.dataSource[index] = data.item;
+
+    this.setState({
+      dataSource: this.state.dataSource,
+      isRemoveDisabled: false,
+    });
+  };
+
+  onCreateItem = () => {
+    let { dataSource, textInput } = this.state;
+
+    this.setState({
+      dataSource: [...dataSource, { title: textInput }],
+    });
+  };
+
+  onRemoveItem = () => {
+    let { dataSource } = this.state;
+    const newData = dataSource.filter(item => !item.isSelect);
+    this.setState({
+      dataSource: newData,
+    });
+  };
+
+  onFocusTextInput = () => {
+    this.setState({ isAddedDisabled: false });
+  };
+
+  renderItem = (data: any) => (
+    <TouchableOpacity
+      style={[styles.list, data.item.selectedClass]}
+      onPress={() => this.selectItem(data)}
+    >
+      <Text style={styles.lightText}>
+        {data.item.name}
+        {data.item.title}
+      </Text>
+    </TouchableOpacity>
+  );
 
   handleTextInput = (key: string) => {
     return (val: string) => this.setState({ [key]: val });
   };
 
-  selectItem = (data: any) => {
-    data.item.isSelect = !data.item.isSelect;
-
-    const index = this.state.data.findIndex(item => data.item.id === item.id);
-
-    this.state.data[index] = data.item;
-
-    this.setState({ data: this.state.data });
-  };
-
-  onCheckBoxClick = () => {
-    this.setState({
-      isCheckedItem: this.state.isCheckedItem,
-      isRemoveDisabled: !this.state.isRemoveDisabled,
-    });
-  };
-
-  onCreateItem = () => {
-    let { data, textInput } = this.state;
-
-    this.setState({
-      data: [...data, { title: textInput }],
-    });
-  };
-  onRemoveItem = () => {};
-
-  onFocusTextInput = () => {
-    this.setState({ isAddedDisabled: false });
-  };
   render() {
     return (
       <Component6
-        data={this.state.data}
-        isCheckedItem={this.state.isCheckedItem}
-        onCheckBoxClick={this.onCheckBoxClick}
+        dataSource={this.state.dataSource}
+        loading={this.state.loading}
         onFocusTextInput={this.onFocusTextInput}
         handleTextInput={this.handleTextInput}
         isAddedDisabled={this.state.isAddedDisabled}
@@ -92,6 +122,9 @@ export class Component6Container extends Component<Props, State> {
         onCreateItem={this.onCreateItem}
         onRemoveItem={this.onRemoveItem}
         textInput={this.state.textInput}
+        selectItem={this.selectItem}
+        FlatListItemSeparator={this.FlatListItemSeparator}
+        renderItem={this.renderItem}
       />
     );
   }

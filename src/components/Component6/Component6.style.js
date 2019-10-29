@@ -1,27 +1,52 @@
 import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
-  view: {
+  container: {
     flex: 1,
+    backgroundColor: '#192338',
+    paddingVertical: 50,
+    position: 'relative',
+  },
+  title: {
+    fontSize: 20,
+    color: '#fff',
     textAlign: 'center',
-    paddingTop: 50,
+    marginBottom: 10,
   },
-  item: {
+  loader: {
     flex: 1,
-    width: '100%',
-    height: 30,
-    padding: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
   },
-  itemRow: {
+  list: {
+    paddingVertical: 5,
+    margin: 3,
     flexDirection: 'row',
+    backgroundColor: '#192338',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    zIndex: -1,
   },
-  firstName: {
+  lightText: {
+    color: '#f7f7f7',
+    width: 200,
+    paddingLeft: 15,
     fontSize: 12,
-    color: 'black',
   },
-  lastName: {
-    paddingLeft: 3,
-    fontSize: 12,
-    color: 'black',
+  line: {
+    height: 0.5,
+    width: '100%',
+    backgroundColor: 'rgba(255,255,255,0.5)',
+  },
+  inputText: {
+    alignSelf: 'stretch',
+    fontSize: 18,
+    height: 40,
+    marginBottom: 30,
+    color: '#FFFFFF',
+    borderBottomColor: '#f8f8f8',
+    borderBottomWidth: 1,
+    textAlign: 'center',
   },
   buttons: {
     paddingTop: 20,
@@ -29,15 +54,6 @@ export default StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row',
   },
-  inputText: {
-    alignSelf: 'stretch',
-    fontSize: 18,
-    height: 40,
-    marginBottom: 30,
-    color: 'black',
-    borderBottomColor: '#f8f8f8',
-    borderBottomWidth: 1,
-    textAlign: 'center',
-  },
-  selected: { backgroundColor: '#FA7B5F' },
+
+  selected: { backgroundColor: '#000' },
 });

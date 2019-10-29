@@ -1,13 +1,20 @@
 //@flow
 import React, { Component } from 'react';
-import { Text, View, FlatList, Switch, Button, TextInput, TouchableOpacity } from 'react-native';
+import {
+  Text,
+  View,
+  FlatList,
+  Switch,
+  Button,
+  TextInput,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
 import styles from './Component6.style';
 import CheckBox from 'react-native-check-box';
 
 type Props = {
-  data: any,
-  isCheckedItem: boolean,
-  onCheckBoxClick: () => void,
+  dataSource: any,
   onFocusTextInput: () => void,
   handleTextInput: any,
   isAddedDisabled: boolean,
@@ -15,12 +22,14 @@ type Props = {
   onCreateItem: () => void,
   onRemoveItem: () => void,
   textInput: string,
+  loading: boolean,
+  FlatListItemSeparator: any,
+  renderItem: any,
 };
 
 const Component6 = ({
-  data,
-  isCheckedItem,
-  onCheckBoxClick,
+  loading,
+  dataSource,
   onFocusTextInput,
   handleTextInput,
   isAddedDisabled,
@@ -28,30 +37,32 @@ const Component6 = ({
   onCreateItem,
   onRemoveItem,
   textInput,
+  FlatListItemSeparator,
+  renderItem,
 }: Props) => {
+  const itemNumber = dataSource.filter(item => item.isSelect).length;
+  if (loading) {
+    return (
+      <View style={styles.loader}>
+        <ActivityIndicator size="large" color="#000" />
+      </View>
+    );
+  }
+
   return (
-    <View style={styles.view}>
+    <View style={styles.container}>
       <FlatList
-        data={data}
+        data={dataSource}
+        ItemSeparatorComponent={FlatListItemSeparator}
+        renderItem={item => renderItem(item)}
         keyExtractor={(item, id) => `${id}`}
-        renderItem={({ item }) => (
-          <View style={styles.item}>
-            <View style={styles.itemRow}>
-              <Text style={styles.item}>
-                {item.name}
-                {item.title}
-              </Text>
-              <CheckBox onClick={onCheckBoxClick} isChecked={isCheckedItem} />
-            </View>
-          </View>
-        )}
       />
       <View>
         <TextInput
           onFocus={onFocusTextInput}
+          onChangeText={handleTextInput('textInput')}
           clearTextOnFocus={true}
           clearButtonMode="always"
-          onChangeText={handleTextInput('textInput')}
           style={styles.inputText}
           placeholder="Input your value here"
         />
