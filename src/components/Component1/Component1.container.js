@@ -21,7 +21,7 @@ type Props = {
     secretAnswer: string,
     isSubmitClicked: boolean,
   ) => void,
-  validateCreditCard: () => void,
+  validateCreditCard: (items: any) => void,
 };
 
 type State = {
@@ -37,22 +37,17 @@ type State = {
 };
 
 class Component1Container extends React.PureComponent<Props, State> {
-  constructor() {
-    super();
-    this.state = {
-      creditCardNumber: '',
-      cvv: '',
-      expirationDate: '',
-      firstName: '',
-      lastName: '',
-      secretQuestion: '',
-      secretAnswer: '',
-      isSubmitClicked: false,
-      isEditable: true,
-    };
-    this.handleCardSubmit = this.handleCardSubmit.bind(this);
-    this.handleCardInput = this.handleCardInput.bind(this);
-  }
+  state = {
+    creditCardNumber: '',
+    cvv: '',
+    expirationDate: '',
+    firstName: '',
+    lastName: '',
+    secretQuestion: '',
+    secretAnswer: '',
+    isSubmitClicked: false,
+    isEditable: true,
+  };
 
   handleCardInput = (name: string) => {
     return val => this.setState({ [name]: val });
@@ -97,7 +92,8 @@ class Component1Container extends React.PureComponent<Props, State> {
       : '';
   }
   handleSubmit = () => {
-    this.props.validateCreditCard();
+    const items = this.state;
+    this.props.validateCreditCard(items);
     this.handleCardSubmit();
   };
   render() {

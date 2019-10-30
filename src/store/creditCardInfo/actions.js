@@ -8,10 +8,8 @@ import {
   SUBMIT_CARD_DATA,
 } from './types';
 
-export const validateCreditCard = () => (dispatch: any, getState: any) => {
+export const validateCreditCard = (items: any) => (dispatch: any) => {
   dispatch({ type: SHOW_CARD_DETAILS_REQUEST });
-  const state = getState();
-  const items = state.creditInfo;
 
   new CallAPIService()
     .callServerValidation(items)
