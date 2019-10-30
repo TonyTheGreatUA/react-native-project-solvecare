@@ -1,36 +1,30 @@
 //@flow
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import Component4 from './Component4';
 
-type User = {
-  picture: { thumbnail: string },
-  name: { first: string, last: string },
-};
-type Props = {};
-type State = {
-  data: User[],
-  defaultLoadAmount: number,
-};
+const Component4Container = () => {
+  const [data, setData] = useState([]);
+  const [defaultLoadAmount, setDefaultLoadAmount] = useState(10);
 
-export class Component4Container extends Component<Props, State> {
-  state = {
-    data: [],
-    defaultLoadAmount: 10,
+  const makeRemoteRequest = () => {
+    fetch('https://randomuser.me/api/?results=50')
+      .then(response => response.json())
+      .then(responseJson => {
+        responseJson = responseJson.map(item => {
+          return item;
+        });
+        setData(responseJson);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
-  componentDidMount() {
-    this.makeRemoteRequest();
-  }
+  useEffect(() => {
+    makeRemoteRequest();
+  }, []);
 
-  makeRemoteRequest = () => {
-    const response = fetch(`https://randomuser.me/api/?results=50`);
-    const result = response.json();
-    this.setState({ data: result.results });
-  };
-
-  render() {
-    return <Component4 data={this.state.data} defaultLoadAmount={this.state.defaultLoadAmount} />;
-  }
-}
+  return <Component4 data={data} defaultLoadAmount={defaultLoadAmount} />;
+};
 
 export default Component4Container;
