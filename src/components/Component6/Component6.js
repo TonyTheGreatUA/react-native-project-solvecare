@@ -38,7 +38,6 @@ const Component6 = ({
   FlatListItemSeparator,
   renderItem,
 }: Props) => {
-  const itemNumber = dataSource.filter(item => item.isSelect).length;
   if (isLoading) {
     return (
       <View style={styles.loader}>

@@ -24,10 +24,10 @@ export class Component6Container extends Component<Props, State> {
   };
 
   componentDidMount() {
-    this.fetchData();
+    this.makeRemoteRequest();
   }
 
-  fetchData = () => {
+  makeRemoteRequest = () => {
     this.setState({ isLoading: true });
 
     fetch('https://api.coinmarketcap.com/v1/ticker/?limit=10')
@@ -53,15 +53,16 @@ export class Component6Container extends Component<Props, State> {
   FlatListItemSeparator = () => <View style={styles.line} />;
 
   selectItem = (data: any) => {
+    const { dataSource } = this.state;
     data.item.isSelect = !data.item.isSelect;
     data.item.selectedClass = data.item.isSelect ? styles.selected : styles.list;
 
-    const index = this.state.dataSource.findIndex(item => data.item.id === item.id);
+    const index = dataSource.findIndex(item => data.item.id === item.id);
 
-    this.state.dataSource[index] = data.item;
+    dataSource[index] = data.item;
 
     this.setState({
-      dataSource: this.state.dataSource,
+      dataSource: dataSource,
       isRemoveDisabled: false,
     });
   };
