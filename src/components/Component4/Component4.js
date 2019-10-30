@@ -1,6 +1,6 @@
 //@flow
 import styles from './Component4.style';
-import React, { Component } from 'react';
+import React from 'react';
 import { Text, View, FlatList, Image, StyleSheet } from 'react-native';
 
 type User = {

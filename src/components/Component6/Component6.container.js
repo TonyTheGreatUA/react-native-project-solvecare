@@ -1,34 +1,18 @@
 //@flow
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import Component6 from './Component6';
 import styles from './Component6.style';
 import { Text, TouchableOpacity, View } from 'react-native';
 
-type Props = {};
+export const Component6Hooks = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [dataSource, setDataSource] = useState([]);
+  const [textInput, setTextinput] = useState('');
+  const [isAddedDisabled, setIsAddedDisabled] = useState(true);
+  const [isRemoveDisabled, setIsRemoveDisabled] = useState(true);
 
-type State = {
-  isLoading: boolean,
-  dataSource: any,
-  textInput: string,
-  isAddedDisabled: boolean,
-  isRemoveDisabled: boolean,
-};
-
-export class Component6Container extends Component<Props, State> {
-  state = {
-    isLoading: false,
-    dataSource: [],
-    textInput: '',
-    isAddedDisabled: true,
-    isRemoveDisabled: true,
-  };
-
-  componentDidMount() {
-    this.makeRemoteRequest();
-  }
-
-  makeRemoteRequest = () => {
-    this.setState({ isLoading: true });
+  const makeRemoteRequest = () => {
+    setIsLoading(true);
 
     fetch('https://api.coinmarketcap.com/v1/ticker/?limit=10')
       .then(response => response.json())
@@ -40,20 +24,21 @@ export class Component6Container extends Component<Props, State> {
           return item;
         });
 
-        this.setState({
-          isLoading: false,
-          dataSource: responseJson,
-        });
+        setIsLoading(false);
+        setDataSource(responseJson);
       })
       .catch(error => {
-        this.setState({ isLoading: false });
+        setIsLoading(false);
       });
   };
 
-  FlatListItemSeparator = () => <View style={styles.line} />;
+  useEffect(() => {
+    makeRemoteRequest();
+  }, []);
 
-  selectItem = (data: any) => {
-    const { dataSource } = this.state;
+  const FlatListItemSeparator = () => <View style={styles.line} />;
+
+  const selectItem = (data: any) => {
     data.item.isSelect = !data.item.isSelect;
     data.item.selectedClass = data.item.isSelect ? styles.selected : styles.list;
 
@@ -61,38 +46,29 @@ export class Component6Container extends Component<Props, State> {
 
     dataSource[index] = data.item;
 
-    this.setState({
-      dataSource: dataSource,
-      isRemoveDisabled: false,
-    });
+    setDataSource(dataSource);
+    setIsRemoveDisabled(!isRemoveDisabled);
   };
 
-  onCreateItem = () => {
-    let { dataSource, textInput } = this.state;
-
-    this.setState({
-      dataSource: [...dataSource, { title: textInput }],
-      textInput: '',
-    });
+  const onCreateItem = () => {
+    setDataSource([...dataSource, { id: '', title: textInput, isSelect: false }]);
+    setTextinput('');
   };
 
-  onRemoveItem = () => {
-    let { dataSource } = this.state;
+  const onRemoveItem = () => {
     const newData = dataSource.filter(item => !item.isSelect);
 
-    this.setState({
-      dataSource: newData,
-    });
+    setDataSource(newData);
   };
 
-  onFocusTextInput = () => {
-    this.setState({ isAddedDisabled: false });
+  const onFocusTextInput = () => {
+    setIsAddedDisabled(false);
   };
 
-  renderItem = (data: any) => (
+  const renderItem = (data: any) => (
     <TouchableOpacity
       style={[styles.list, data.item.selectedClass]}
-      onPress={() => this.selectItem(data)}
+      onPress={() => selectItem(data)}
     >
       <Text style={styles.lightText}>
         {data.item.name}
@@ -101,27 +77,25 @@ export class Component6Container extends Component<Props, State> {
     </TouchableOpacity>
   );
 
-  handleTextInput = (key: string) => {
-    return (val: string) => this.setState({ [key]: val });
+  const handleTextInput = () => {
+    return (val: string) => setTextinput(val);
   };
 
-  render() {
-    return (
-      <Component6
-        dataSource={this.state.dataSource}
-        isLoading={this.state.isLoading}
-        onFocusTextInput={this.onFocusTextInput}
-        handleTextInput={this.handleTextInput}
-        isAddedDisabled={this.state.isAddedDisabled}
-        isRemoveDisabled={this.state.isRemoveDisabled}
-        onCreateItem={this.onCreateItem}
-        onRemoveItem={this.onRemoveItem}
-        textInput={this.state.textInput}
-        FlatListItemSeparator={this.FlatListItemSeparator}
-        renderItem={this.renderItem}
-      />
-    );
-  }
-}
+  return (
+    <Component6
+      dataSource={dataSource}
+      isLoading={isLoading}
+      onFocusTextInput={onFocusTextInput}
+      handleTextInput={handleTextInput}
+      isAddedDisabled={isAddedDisabled}
+      isRemoveDisabled={isRemoveDisabled}
+      onCreateItem={onCreateItem}
+      onRemoveItem={onRemoveItem}
+      textInput={textInput}
+      FlatListItemSeparator={FlatListItemSeparator}
+      renderItem={renderItem}
+    />
+  );
+};
 
-export default Component6Container;
+export default Component6Hooks;

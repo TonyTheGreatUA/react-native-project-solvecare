@@ -1,8 +1,6 @@
-//@flow
-
-import React, { Component, useState, useCallback } from 'react';
+import React, { Component, useState, useCallback, useEffect } from 'react';
 import Component1 from './Component1';
-import { connect } from 'react-redux';
+import { connect, useSelector, useDispatch } from 'react-redux';
 import { submitCreditCardInfo, validateCreditCard } from '../../store/creditCardInfo/actions';
 import { RequestStatus } from '../../utils/RequestStatus';
 type CustomType = {};
@@ -36,8 +34,8 @@ type State = {
   isEditable: boolean,
 };
 
-class Component1container extends React.PureComponent<Props, State> {
-  state = {
+const Component1Container = () => {
+  const { name, setValue } = useState({
     creditCardNumber: '',
     cvv: '',
     expirationDate: '',
@@ -45,12 +43,15 @@ class Component1container extends React.PureComponent<Props, State> {
     lastName: '',
     secretQuestion: '',
     secretAnswer: '',
-    isSubmitClicked: false,
-    isEditable: true,
-  };
+  });
+  const [isSubmitClicked, setIsSubmitClicked] = useState(false);
+  const [isEditable, setIsEditable] = useState(true);
+
+  const isError = useSelector(state => state.isError);
+  const dispatch = useDispatch();
 
   handleCardInput = (name: string) => {
-    return val => this.setState({ [name]: val });
+    return val => setValue({ [name]: val });
   };
 
   handleCardSubmit = () => {
@@ -64,9 +65,8 @@ class Component1container extends React.PureComponent<Props, State> {
       secretAnswer,
       isSubmitClicked,
     } = this.state;
-    const { isError } = this.props;
 
-    this.props.submitCreditCardInfo(
+    dispatch.submitCreditCardInfo(
       creditCardNumber,
       cvv,
       expirationDate,
@@ -82,32 +82,32 @@ class Component1container extends React.PureComponent<Props, State> {
       isSubmitClicked: true,
     });
   };
-  componentDidUpdate() {
-    const { isError } = this.props;
+
+  useEffect(() => {
     isError
       ? this.setState({
           isEditable: true,
           isSubmitClicked: false,
         })
       : '';
-  }
+  }, [isEditable, isSubmitClicked]);
+
   handleSubmit = () => {
     const items = this.state;
-    this.props.validateCreditCard(items);
+    dispatch.validateCreditCard(items);
     this.handleCardSubmit();
   };
-  render() {
-    return (
-      <Component1
-        handleCardInput={this.handleCardInput}
-        handleSubmit={this.handleSubmit}
-        isSubmitClicked={this.state.isSubmitClicked}
-        isEditable={this.state.isEditable}
-        isError={this.props.isError}
-      />
-    );
-  }
-}
+
+  return (
+    <Component1
+      handleCardInput={this.handleCardInput}
+      handleSubmit={this.handleSubmit}
+      isSubmitClicked={isSubmitClicked}
+      isEditable={isEditable}
+      isError={isError}
+    />
+  );
+};
 
 const mapStateToProps = state => {
   return {
@@ -122,4 +122,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Component1container);
+)(Component1Container);

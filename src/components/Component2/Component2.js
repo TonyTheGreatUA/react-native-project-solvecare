@@ -1,6 +1,6 @@
 //@flow
 
-import React, { Component } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet, TextInput, ActivityIndicator } from 'react-native';
 import styles from './Component2.style';
 

@@ -1,6 +1,6 @@
 //@flow
 import styles from './Component5.style';
-import React, { Component } from 'react';
+import React from 'react';
 import { Text, View, Button, TextInput, Picker, StyleSheet } from 'react-native';
 import { number } from 'prop-types';
 type Props = {
