@@ -1,34 +1,24 @@
-//@flow
-
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import Component2 from './Component2';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { RequestStatus } from '../../utils/RequestStatus';
 
-type State = {
-  cardType: string,
-};
-type Props = {
-  creditCardNumber: string,
-  firstName: string,
-  lastName: string,
-  isSubmitClicked: boolean,
-  isLoading: boolean,
-  isError: boolean,
-};
+const Component2Container = () => {
+  const { cardType, setCardType } = useState('');
+  const isError = useSelector(state => state.isError);
+  const isLoading = useSelector(state => state.isError);
+  const creditCardNumber = useSelector(state => state.creditCardNumber);
+  const firstName = useSelector(state => state.firstName);
+  const lastName = useSelector(state => state.lastName);
+  const isSubmitClicked = useSelector(state => state.isSubmitClicked);
 
-export class Component2Container extends Component<Props, State> {
-  state = {
-    cardType: '',
-  };
-
-  componentDidUpdate = (prevProps: Props) => {
-    if (prevProps.creditCardNumber !== this.props.creditCardNumber) {
+  useEffect(() => {
+    {
       this.getCardType();
     }
-  };
-  getCardType = () => {
-    const { creditCardNumber } = this.props;
+  }, [creditCardNumber]);
+
+  const getCardType = () => {
     let cardType;
 
     creditCardNumber.length === 16 && Number(creditCardNumber.slice(-4)) > 2000
@@ -37,25 +27,21 @@ export class Component2Container extends Component<Props, State> {
       ? (cardType = 'Visa')
       : (cardType = '');
 
-    this.setState({
-      cardType,
-    });
+    setCardType(cardType);
   };
 
-  render() {
-    return (
-      <Component2
-        creditCardNumber={this.props.creditCardNumber}
-        firstName={this.props.firstName}
-        lastName={this.props.lastName}
-        cardType={this.state.cardType}
-        isLoading={this.props.isLoading}
-        isError={this.props.isError}
-        isSubmitClicked={this.props.isSubmitClicked}
-      />
-    );
-  }
-}
+  return (
+    <Component2
+      creditCardNumber={creditCardNumber}
+      firstName={firstName}
+      lastName={lastName}
+      cardType={cardType}
+      isLoading={isLoading}
+      isError={isError}
+      isSubmitClicked={isSubmitClicked}
+    />
+  );
+};
 
 const mapStateToProps = state => {
   return {
