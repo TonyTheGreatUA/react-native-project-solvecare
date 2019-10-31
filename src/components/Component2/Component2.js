@@ -38,7 +38,7 @@ const Component2 = ({
         </View>
       );
     }
-    if (!isError) {
+    if (isSubmitClicked && !isError) {
       return (
         <View style={styles.card}>
           <Text style={styles.h1}>Card Info</Text>

@@ -24,7 +24,6 @@ const Component1 = ({
   isEditable,
   isSubmitClicked,
 }: Props) => {
-  console.log(isSubmitClicked);
   return (
     <ScrollView>
       <View style={styles.mainView}>
