@@ -5,8 +5,8 @@ import { RequestStatus } from '../../utils/RequestStatus';
 
 const Component2Container = () => {
   const [cardType, setCardType] = useState('');
-  const isError = useSelector(state => state.isError);
-  const isLoading = useSelector(state => state.isLoading);
+  const isError = useSelector(state => state.creditInfo.requestStatus === RequestStatus.Failure);
+  const isLoading = useSelector(state => state.creditInfo.requestStatus === RequestStatus.Request);
   const creditCardNumber = useSelector(state => state.creditInfo.creditCardNumber);
   const firstName = useSelector(state => state.creditInfo.firstName);
   const lastName = useSelector(state => state.creditInfo.lastName);
@@ -43,15 +43,4 @@ const Component2Container = () => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    creditCardNumber: state.creditInfo.creditCardNumber,
-    firstName: state.creditInfo.firstName,
-    lastName: state.creditInfo.lastName,
-    isLoading: state.creditInfo.requestStatus === RequestStatus.Request,
-    isError: state.creditInfo.requestStatus === RequestStatus.Failure,
-    isSubmitClicked: state.creditInfo.isSubmitClicked,
-  };
-};
-
-export default connect(mapStateToProps)(Component2Container);
+export default connect()(Component2Container);
