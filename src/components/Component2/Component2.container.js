@@ -4,17 +4,17 @@ import { connect, useSelector } from 'react-redux';
 import { RequestStatus } from '../../utils/RequestStatus';
 
 const Component2Container = () => {
-  const { cardType, setCardType } = useState('');
+  const [cardType, setCardType] = useState('');
   const isError = useSelector(state => state.isError);
-  const isLoading = useSelector(state => state.isError);
-  const creditCardNumber = useSelector(state => state.creditCardNumber);
-  const firstName = useSelector(state => state.firstName);
-  const lastName = useSelector(state => state.lastName);
-  const isSubmitClicked = useSelector(state => state.isSubmitClicked);
+  const isLoading = useSelector(state => state.isLoading);
+  const creditCardNumber = useSelector(state => state.creditInfo.creditCardNumber);
+  const firstName = useSelector(state => state.creditInfo.firstName);
+  const lastName = useSelector(state => state.creditInfo.lastName);
+  const isSubmitClicked = useSelector(state => state.creditInfo.isSubmitClicked);
 
   useEffect(() => {
     {
-      this.getCardType();
+      getCardType();
     }
   }, [creditCardNumber]);
 

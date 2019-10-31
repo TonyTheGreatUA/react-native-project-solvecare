@@ -3,39 +3,9 @@ import Component1 from './Component1';
 import { connect, useSelector, useDispatch } from 'react-redux';
 import { submitCreditCardInfo, validateCreditCard } from '../../store/creditCardInfo/actions';
 import { RequestStatus } from '../../utils/RequestStatus';
-type CustomType = {};
-
-type Props = {
-  isError: boolean,
-  isFormShown: boolean,
-  isEditable: boolean,
-  submitCreditCardInfo: (
-    creditCardNumber: string,
-    cvv: string,
-    expirationDate: string,
-    firstName: string,
-    lastName: string,
-    secretQuestion: string,
-    secretAnswer: string,
-    isSubmitClicked: boolean,
-  ) => void,
-  validateCreditCard: (items: any) => void,
-};
-
-type State = {
-  creditCardNumber: string,
-  cvv: string,
-  expirationDate: string,
-  firstName: string,
-  lastName: string,
-  secretQuestion: string,
-  secretAnswer: string,
-  isSubmitClicked: boolean,
-  isEditable: boolean,
-};
 
 const Component1Container = () => {
-  const { name, setValue } = useState({
+  const [name, setValue] = useState({
     creditCardNumber: '',
     cvv: '',
     expirationDate: '',
@@ -55,7 +25,7 @@ const Component1Container = () => {
   };
 
   handleCardSubmit = () => {
-    const {
+    /*const {
       creditCardNumber,
       cvv,
       expirationDate,
@@ -66,7 +36,7 @@ const Component1Container = () => {
       isSubmitClicked,
     } = this.state;
 
-    dispatch.submitCreditCardInfo(
+    submitCreditCardInfo(
       creditCardNumber,
       cvv,
       expirationDate,
@@ -75,26 +45,19 @@ const Component1Container = () => {
       secretQuestion,
       secretAnswer,
       true,
-    );
+    );*/
 
-    this.setState({
-      isEditable: false,
-      isSubmitClicked: true,
-    });
+    setIsEditable(false);
+    setIsSubmitClicked(true);
   };
 
   useEffect(() => {
-    isError
-      ? this.setState({
-          isEditable: true,
-          isSubmitClicked: false,
-        })
-      : '';
-  }, [isEditable, isSubmitClicked]);
+    isError ? setIsEditable(true) && setIsSubmitClicked(false) : '';
+  }, [name, isEditable, isSubmitClicked]);
 
   handleSubmit = () => {
     const items = this.state;
-    dispatch.validateCreditCard(items);
+    /*dispatch.validateCreditCard(items);*/
     this.handleCardSubmit();
   };
 
