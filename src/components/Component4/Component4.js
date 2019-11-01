@@ -2,18 +2,10 @@
 import styles from './Component4.style';
 import React from 'react';
 import { Text, View, FlatList, Image, StyleSheet } from 'react-native';
+import useComponent4 from '../../hooks/useComponent4';
 
-type User = {
-  picture: { thumbnail: string },
-  name: { first: string, last: string },
-};
-
-type Props = {
-  data: User[],
-  defaultLoadAmount: number,
-};
-
-const Component4 = ({ data, defaultLoadAmount }: Props) => {
+const Component4 = () => {
+  const { data, defaultLoadAmount } = useComponent4();
   return (
     <View style={styles.view}>
       <FlatList

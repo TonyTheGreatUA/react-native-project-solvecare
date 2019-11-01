@@ -1,10 +1,9 @@
-//@flow
-import React, { Component, useState, useEffect } from 'react';
-import Component6 from './Component6';
-import styles from './Component6.style';
+import React, { useState, useEffect } from 'react';
+import Component6 from '../components/Component6/Component6';
+import styles from '../components/Component6/Component6.style';
 import { Text, TouchableOpacity, View } from 'react-native';
 
-export const Component6Hooks = () => {
+export const useComponent6 = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [dataSource, setDataSource] = useState([]);
   const [textInput, setTextinput] = useState('');
@@ -81,21 +80,19 @@ export const Component6Hooks = () => {
     return (val: string) => setTextinput(val);
   };
 
-  return (
-    <Component6
-      dataSource={dataSource}
-      isLoading={isLoading}
-      onFocusTextInput={onFocusTextInput}
-      handleTextInput={handleTextInput}
-      isAddedDisabled={isAddedDisabled}
-      isRemoveDisabled={isRemoveDisabled}
-      onCreateItem={onCreateItem}
-      onRemoveItem={onRemoveItem}
-      textInput={textInput}
-      FlatListItemSeparator={FlatListItemSeparator}
-      renderItem={renderItem}
-    />
-  );
+  return {
+    dataSource,
+    isLoading,
+    FlatListItemSeparator,
+    renderItem,
+    handleTextInput,
+    onFocusTextInput,
+    textInput,
+    isAddedDisabled,
+    isRemoveDisabled,
+    onCreateItem,
+    onRemoveItem,
+  };
 };
 
-export default Component6Hooks;
+export default useComponent6;

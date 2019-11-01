@@ -1,8 +1,7 @@
 //@flow
 import React, { useState, useEffect } from 'react';
-import Component4 from './Component4';
 
-const Component4Container = () => {
+const useComponent4 = () => {
   const [data, setData] = useState([]);
   const [defaultLoadAmount, setDefaultLoadAmount] = useState(10);
 
@@ -24,7 +23,7 @@ const Component4Container = () => {
     makeRemoteRequest();
   }, []);
 
-  return <Component4 data={data} defaultLoadAmount={defaultLoadAmount} />;
+  return { data, defaultLoadAmount };
 };
 
-export default Component4Container;
+export default useComponent4;

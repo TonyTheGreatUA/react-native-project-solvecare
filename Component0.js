@@ -7,8 +7,6 @@ import { Provider } from 'react-redux';
 import Component1 from './src/components/Component1';
 import Component2 from './src/components/Component2';
 import Component6 from './src/components/Component6/Component6';
-import Component6Container from './src/components/Component6/Component6.container';
-import Component4Container from './src/components/Component4/Component4.container';
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 type Props = {};

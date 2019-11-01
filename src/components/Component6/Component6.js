@@ -10,34 +10,23 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import styles from './Component6.style';
+import useComponent6 from '../../hooks/useComponent6';
 
-type Props = {
-  dataSource: any,
-  onFocusTextInput: () => void,
-  handleTextInput: any,
-  isAddedDisabled: boolean,
-  isRemoveDisabled: boolean,
-  onCreateItem: () => void,
-  onRemoveItem: () => void,
-  textInput: string,
-  isLoading: boolean,
-  FlatListItemSeparator: any,
-  renderItem: any,
-};
+const Component6 = () => {
+  const {
+    dataSource,
+    isLoading,
+    FlatListItemSeparator,
+    renderItem,
+    handleTextInput,
+    onFocusTextInput,
+    textInput,
+    isAddedDisabled,
+    isRemoveDisabled,
+    onCreateItem,
+    onRemoveItem,
+  } = useComponent6();
 
-const Component6 = ({
-  isLoading,
-  dataSource,
-  onFocusTextInput,
-  handleTextInput,
-  isAddedDisabled,
-  isRemoveDisabled,
-  onCreateItem,
-  onRemoveItem,
-  textInput,
-  FlatListItemSeparator,
-  renderItem,
-}: Props) => {
   if (isLoading) {
     return (
       <View style={styles.loader}>

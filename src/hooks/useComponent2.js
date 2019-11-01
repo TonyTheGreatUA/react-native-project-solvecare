@@ -1,5 +1,4 @@
 import React, { Component, useState, useCallback, useEffect } from 'react';
-import Component1 from '../components/Component1/Component1';
 import { connect, useSelector, useDispatch } from 'react-redux';
 import { submitCreditCardInfo, validateCreditCard } from '../store/creditCardInfo/actions';
 import { RequestStatus } from '../utils/RequestStatus';
