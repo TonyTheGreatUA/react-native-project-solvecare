@@ -3,26 +3,11 @@
 import React from 'react';
 import { View, Text, StyleSheet, TextInput, ActivityIndicator } from 'react-native';
 import styles from './Component2.style';
+import useComponent2 from '../../hooks/useComponent2';
 
-type Props = {
-  firstName: string,
-  lastName: string,
-  creditCardNumber: string,
-  cardType: string,
-  isSubmitClicked: boolean,
-  isLoading: boolean,
-  isError: boolean,
-};
+const Component2 = () => {
+  const { isLoading, isError, creditCardNumber, firstName, lastName, cardType } = useComponent2();
 
-const Component2 = ({
-  cardType,
-  firstName,
-  lastName,
-  creditCardNumber,
-  isError,
-  isLoading,
-  isSubmitClicked,
-}: Props) => {
   {
     if (isLoading) {
       return (
@@ -38,7 +23,7 @@ const Component2 = ({
         </View>
       );
     }
-    if (isSubmitClicked && !isError) {
+    if (!isError) {
       return (
         <View style={styles.card}>
           <Text style={styles.h1}>Card Info</Text>

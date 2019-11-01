@@ -1,29 +1,26 @@
 import React from 'react';
+
 import { Text, View, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import styles from './Component1.style';
+import useComponent1 from '../../hooks/useComponent1';
 
-type Props = {
-  handleCardInput: (name: string) => any,
-  handleSubmit: () => void,
-  isSubmitClicked: boolean,
-  isEditable: boolean,
-  isError: boolean,
-};
+const Component1 = () => {
+  const {
+    isSubmitClicked,
+    isEditable,
+    isError,
+    handleCardInput,
+    handleSubmit,
+    setCreditCardNumber,
+    setCVV,
+    setExpirationDate,
+    setFirstName,
+    setLastName,
+    setSecretAnswer,
+    setSecretQuestion,
+    creditCardNumber,
+  } = useComponent1();
 
-const Component1 = ({
-  setCreditCardNumber,
-  setCVV,
-  setExpirationDate,
-  setFirstName,
-  setLastName,
-  setSecretQuestion,
-  setSecretAnswer,
-  isError,
-  handleSubmit,
-  handleCardInput,
-  isEditable,
-  isSubmitClicked,
-}: Props) => {
   return (
     <ScrollView>
       <View style={styles.mainView}>

@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import Component2 from './Component2';
-import { connect, useSelector } from 'react-redux';
-import { RequestStatus } from '../../utils/RequestStatus';
+import React, { Component, useState, useCallback, useEffect } from 'react';
+import Component1 from '../components/Component1/Component1';
+import { connect, useSelector, useDispatch } from 'react-redux';
+import { submitCreditCardInfo, validateCreditCard } from '../store/creditCardInfo/actions';
+import { RequestStatus } from '../utils/RequestStatus';
 
-const Component2Container = () => {
+const useComponent2 = () => {
   const [cardType, setCardType] = useState('');
   const isError = useSelector(state => state.creditInfo.requestStatus === RequestStatus.Failure);
   const isLoading = useSelector(state => state.creditInfo.requestStatus === RequestStatus.Request);
@@ -26,21 +27,18 @@ const Component2Container = () => {
       : creditCardNumber.length === 16 && Number(creditCardNumber.slice(-4)) < 2000
       ? (cardType = 'Visa')
       : (cardType = '');
-
     setCardType(cardType);
   };
 
-  return (
-    <Component2
-      creditCardNumber={creditCardNumber}
-      firstName={firstName}
-      lastName={lastName}
-      cardType={cardType}
-      isLoading={isLoading}
-      isError={isError}
-      isSubmitClicked={isSubmitClicked}
-    />
-  );
+  return {
+    creditCardNumber,
+    firstName,
+    lastName,
+    cardType,
+    isLoading,
+    isError,
+    isSubmitClicked,
+  };
 };
 
-export default connect()(Component2Container);
+export default useComponent2;

@@ -4,8 +4,8 @@ import { applyMiddleware, createStore } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import rootReducer from './src/store/reducers';
 import { Provider } from 'react-redux';
-import Component1Container from './src/components/Component1';
-import Component2Container from './src/components/Component2';
+import Component1 from './src/components/Component1';
+import Component2 from './src/components/Component2';
 import Component6 from './src/components/Component6/Component6';
 import Component6Container from './src/components/Component6/Component6.container';
 import Component4Container from './src/components/Component4/Component4.container';
@@ -19,8 +19,8 @@ class Component0 extends React.Component<Props, State> {
     return (
       <Provider store={store}>
         <View style={styles.homeScreen}>
-          <Component1Container />
-          <Component2Container />
+          <Component1 />
+          <Component2 />
         </View>
       </Provider>
     );

@@ -1,10 +1,10 @@
 import React, { Component, useState, useCallback, useEffect } from 'react';
-import Component1 from './Component1';
+import Component1 from '../components/Component1/Component1';
 import { connect, useSelector, useDispatch } from 'react-redux';
-import { submitCreditCardInfo, validateCreditCard } from '../../store/creditCardInfo/actions';
-import { RequestStatus } from '../../utils/RequestStatus';
+import { submitCreditCardInfo, validateCreditCard } from '../store/creditCardInfo/actions';
+import { RequestStatus } from '../utils/RequestStatus';
 
-const Component1Container = () => {
+const useComponent1 = () => {
   const [creditCardNumber, setCreditCardNumber] = useState('');
   const [cvv, setCVV] = useState('');
   const [expirationDate, setExpirationDate] = useState('');
@@ -18,6 +18,7 @@ const Component1Container = () => {
   const isError = useSelector(state => state.creditInfo.requestStatus === RequestStatus.Failure);
 
   const dispatch = useDispatch();
+
   const items = {
     creditCardNumber,
     cvv,
@@ -27,6 +28,7 @@ const Component1Container = () => {
     secretAnswer,
     secretQuestion,
   };
+
   const handleCardSubmit = () => {
     dispatch(
       submitCreditCardInfo(
@@ -66,21 +68,22 @@ const Component1Container = () => {
     handleCardSubmit();
   };
 
-  return (
-    <Component1
-      setCreditCardNumber={setCreditCardNumber}
-      setCVV={setCVV}
-      setExpirationDate={setExpirationDate}
-      setFirstName={setFirstName}
-      setLastName={setLastName}
-      setSecretQuestion={setSecretQuestion}
-      setSecretAnswer={setSecretAnswer}
-      handleSubmit={handleSubmit}
-      isSubmitClicked={isSubmitClicked}
-      isEditable={isEditable}
-      isError={isError}
-    />
-  );
+  return {
+    setCreditCardNumber,
+    setCVV,
+    setExpirationDate,
+    setFirstName,
+    setLastName,
+    setSecretQuestion,
+    setSecretAnswer,
+    creditCardNumber,
+    firstName,
+    lastName,
+    handleSubmit,
+    isSubmitClicked,
+    isEditable,
+    isError,
+  };
 };
 
-export default connect()(Component1Container);
+export default useComponent1;
