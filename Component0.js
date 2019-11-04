@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import Component1 from './src/components/Component1';
 import Component2 from './src/components/Component2';
 import Component6 from './src/components/Component6/Component6';
+import Component5 from './src/components/Component5';
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 type Props = {};
@@ -17,8 +18,7 @@ class Component0 extends React.Component<Props, State> {
     return (
       <Provider store={store}>
         <View style={styles.homeScreen}>
-          <Component1 />
-          <Component2 />
+          <Component5 />
         </View>
       </Provider>
     );
