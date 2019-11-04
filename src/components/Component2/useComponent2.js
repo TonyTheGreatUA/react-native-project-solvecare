@@ -1,7 +1,6 @@
-import React, { Component, useState, useCallback, useEffect } from 'react';
-import { connect, useSelector, useDispatch } from 'react-redux';
-import { submitCreditCardInfo, validateCreditCard } from '../store/creditCardInfo/actions';
-import { RequestStatus } from '../utils/RequestStatus';
+import React, { useState, useCallback, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { RequestStatus } from '../../utils/RequestStatus';
 
 const useComponent2 = () => {
   const [cardType, setCardType] = useState('');
@@ -10,7 +9,9 @@ const useComponent2 = () => {
   const creditCardNumber = useSelector(state => state.creditInfo.creditCardNumber);
   const firstName = useSelector(state => state.creditInfo.firstName);
   const lastName = useSelector(state => state.creditInfo.lastName);
-  const isSubmitClicked = useSelector(state => state.creditInfo.isSubmitClicked);
+  const isSubmitClicked = useSelector(
+    state => state.creditInfo.requestStatus === RequestStatus.Success,
+  );
 
   useEffect(() => {
     {
@@ -18,7 +19,7 @@ const useComponent2 = () => {
     }
   }, [creditCardNumber]);
 
-  const getCardType = () => {
+  const getCardType = useCallback(() => {
     let cardType;
 
     creditCardNumber.length === 16 && Number(creditCardNumber.slice(-4)) > 2000
@@ -27,7 +28,7 @@ const useComponent2 = () => {
       ? (cardType = 'Visa')
       : (cardType = '');
     setCardType(cardType);
-  };
+  }, [creditCardNumber]);
 
   return {
     creditCardNumber,

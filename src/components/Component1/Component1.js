@@ -2,24 +2,10 @@ import React from 'react';
 
 import { Text, View, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import styles from './Component1.style';
-import useComponent1 from '../../hooks/useComponent1';
+import useComponent1 from './useComponent1';
 
 const Component1 = () => {
-  const {
-    isSubmitClicked,
-    isEditable,
-    isError,
-    handleCardInput,
-    handleSubmit,
-    setCreditCardNumber,
-    setCVV,
-    setExpirationDate,
-    setFirstName,
-    setLastName,
-    setSecretAnswer,
-    setSecretQuestion,
-    creditCardNumber,
-  } = useComponent1();
+  const { isSubmitClicked, isEditable, isError, handleSubmit, handleTextInput } = useComponent1();
 
   return (
     <ScrollView>
@@ -29,20 +15,20 @@ const Component1 = () => {
             editable={isEditable}
             style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
             placeholder="0000 0000 0000 0000"
-            onChangeText={val => setCreditCardNumber(val)}
+            onChangeText={handleTextInput('creditCardNumber')}
           />
           <View style={styles.cardLine}>
             <TextInput
               editable={isEditable}
               style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
               placeholder="MM/YY"
-              onChangeText={val => setExpirationDate(val)}
+              onChangeText={handleTextInput('expirationDate')}
             />
             <TextInput
               editable={isEditable}
               style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
               placeholder="CVV/CVC"
-              onChangeText={val => setCVV(val)}
+              onChangeText={handleTextInput('cvv')}
             />
           </View>
           <View style={styles.cardLine}>
@@ -50,26 +36,26 @@ const Component1 = () => {
               editable={isEditable}
               style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
               placeholder="Your Name"
-              onChangeText={val => setFirstName(val)}
+              onChangeText={handleTextInput('firstName')}
             />
             <TextInput
               editable={isEditable}
               style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
               placeholder="Your Surname"
-              onChangeText={val => setLastName(val)}
+              onChangeText={handleTextInput('lastName')}
             />
           </View>
           <TextInput
             editable={isEditable}
             style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
             placeholder="Your Secret Question"
-            onChangeText={val => setSecretQuestion(val)}
+            onChangeText={handleTextInput('secretQuestion')}
           />
           <TextInput
             editable={isEditable}
             style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
             placeholder="Your Secret Answer"
-            onChangeText={val => setSecretAnswer(val)}
+            onChangeText={handleTextInput('secretAnswer')}
           />
           <TouchableOpacity
             disabled={isSubmitClicked}

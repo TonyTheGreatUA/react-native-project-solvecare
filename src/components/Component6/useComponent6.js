@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Component6 from '../components/Component6/Component6';
-import styles from '../components/Component6/Component6.style';
+import Component6 from './Component6';
+import styles from './Component6.style';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 export const useComponent6 = () => {
@@ -10,7 +10,7 @@ export const useComponent6 = () => {
   const [isAddedDisabled, setIsAddedDisabled] = useState(true);
   const [isRemoveDisabled, setIsRemoveDisabled] = useState(true);
 
-  const makeRemoteRequest = () => {
+  const makeRemoteRequest = useCallback(() => {
     setIsLoading(true);
 
     fetch('https://api.coinmarketcap.com/v1/ticker/?limit=10')
@@ -29,7 +29,7 @@ export const useComponent6 = () => {
       .catch(error => {
         setIsLoading(false);
       });
-  };
+  }, [dataSource]);
 
   useEffect(() => {
     makeRemoteRequest();
@@ -37,32 +37,35 @@ export const useComponent6 = () => {
 
   const FlatListItemSeparator = () => <View style={styles.line} />;
 
-  const selectItem = (data: any) => {
-    data.item.isSelect = !data.item.isSelect;
-    data.item.selectedClass = data.item.isSelect ? styles.selected : styles.list;
+  const selectItem = useCallback(
+    (data: any) => {
+      data.item.isSelect = !data.item.isSelect;
+      data.item.selectedClass = data.item.isSelect ? styles.selected : styles.list;
 
-    const index = dataSource.findIndex(item => data.item.id === item.id);
+      const index = dataSource.findIndex(item => data.item.id === item.id);
 
-    dataSource[index] = data.item;
+      dataSource[index] = data.item;
 
-    setDataSource(dataSource);
-    setIsRemoveDisabled(!isRemoveDisabled);
-  };
+      setDataSource(dataSource);
+      setIsRemoveDisabled(!isRemoveDisabled);
+    },
+    [dataSource],
+  );
 
-  const onCreateItem = () => {
+  const onCreateItem = useCallback(() => {
     setDataSource([...dataSource, { id: '', title: textInput, isSelect: false }]);
     setTextinput('');
-  };
+  }, [dataSource]);
 
-  const onRemoveItem = () => {
+  const onRemoveItem = useCallback(() => {
     const newData = dataSource.filter(item => !item.isSelect);
 
     setDataSource(newData);
-  };
+  }, [newData]);
 
-  const onFocusTextInput = () => {
+  const onFocusTextInput = useCallback(() => {
     setIsAddedDisabled(false);
-  };
+  }, [isAddedDisabled]);
 
   const renderItem = (data: any) => (
     <TouchableOpacity
@@ -76,9 +79,9 @@ export const useComponent6 = () => {
     </TouchableOpacity>
   );
 
-  const handleTextInput = () => {
+  const handleTextInput = useCallback(() => {
     return (val: string) => setTextinput(val);
-  };
+  }, [dataSource]);
 
   return {
     dataSource,

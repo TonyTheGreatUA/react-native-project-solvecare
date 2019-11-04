@@ -2,14 +2,14 @@
 import styles from './Component4.style';
 import React from 'react';
 import { Text, View, FlatList, Image, StyleSheet } from 'react-native';
-import useComponent4 from '../../hooks/useComponent4';
+import useComponent4 from './useComponent4';
 
 const Component4 = () => {
-  const { data, defaultLoadAmount } = useComponent4();
+  const { user, defaultLoadAmount } = useComponent4();
   return (
     <View style={styles.view}>
       <FlatList
-        data={data}
+        data={user}
         initialNumToRender={defaultLoadAmount}
         keyExtractor={(item, email: any) => email}
         windowSize={20}

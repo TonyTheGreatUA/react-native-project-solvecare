@@ -2,7 +2,7 @@
 import styles from './Component5.style';
 import React from 'react';
 import { Text, View, Button, TextInput, Picker, StyleSheet } from 'react-native';
-import { number } from 'prop-types';
+
 type Props = {
   onCreate: () => void,
   onEdit: () => void,
@@ -51,16 +51,13 @@ const Component5 = ({
           onFocus={onFocusChange}
           style={[
             styles.inputText,
-            {
-              borderBottomColor:
-                !formErrors.title && isSubmitted
-                  ? styles.inputError
-                  : formErrors.title && !isSubmitted
-                  ? ''
-                  : formErrors.title && isSubmitted && isFocused
-                  ? styles.inputDefault
-                  : '',
-            },
+            !formErrors.title && isSubmitted
+              ? styles.inputError
+              : formErrors.title && !isSubmitted
+              ? ''
+              : formErrors.title && isSubmitted && isFocused
+              ? styles.inputDefault
+              : '',
           ]}
           placeholder="Title"
           onChangeText={handleTextInput('title')}
@@ -70,16 +67,13 @@ const Component5 = ({
           onFocus={onFocusChange}
           style={[
             styles.inputText,
-            {
-              borderBottomColor:
-                !formErrors.weight && isSubmitted
-                  ? styles.inputError
-                  : formErrors.weight && !isSubmitted
-                  ? ''
-                  : formErrors.weight && isSubmitted && isFocused
-                  ? styles.inputDefault
-                  : '',
-            },
+            !formErrors.weight && isSubmitted
+              ? styles.inputError
+              : formErrors.weight && !isSubmitted
+              ? ''
+              : formErrors.weight && isSubmitted && isFocused
+              ? styles.inputDefault
+              : '',
           ]}
           placeholder="Weight"
           onChangeText={handleTextInput('weight')}
@@ -89,16 +83,13 @@ const Component5 = ({
           onFocus={onFocusChange}
           style={[
             styles.inputText,
-            {
-              borderBottomColor:
-                !formErrors.size && isSubmitted
-                  ? styles.inputError
-                  : formErrors.size && !isSubmitted
-                  ? ''
-                  : formErrors.size && isSubmitted && isFocused
-                  ? styles.inputDefault
-                  : '',
-            },
+            !formErrors.size && isSubmitted
+              ? styles.inputError
+              : formErrors.size && !isSubmitted
+              ? ''
+              : formErrors.size && isSubmitted && isFocused
+              ? styles.inputDefault
+              : '',
           ]}
           placeholder="Size"
           onChangeText={handleTextInput('size')}

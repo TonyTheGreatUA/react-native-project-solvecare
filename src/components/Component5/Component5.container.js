@@ -63,13 +63,13 @@ export class Component5Container extends Component<Props, State> {
 
     switch (name) {
       case 'title':
-        formErrors.title = value.length < 1 ? false : true;
+        formErrors.title = value.length < 3 ? true : false;
         break;
       case 'weight':
-        formErrors.weight = value.length < 1 ? false : true;
+        formErrors.weight = value.length < 1 ? true : false;
         break;
       case 'size':
-        formErrors.size = value.length < 1 ? false : true;
+        formErrors.size = value.length < 1 ? true : false;
         break;
 
       default:

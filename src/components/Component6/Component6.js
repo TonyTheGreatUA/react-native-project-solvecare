@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import styles from './Component6.style';
-import useComponent6 from '../../hooks/useComponent6';
+import useComponent6 from './useComponent6';
 
 const Component6 = () => {
   const {
