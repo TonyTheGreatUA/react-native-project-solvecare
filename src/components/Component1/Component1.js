@@ -1,5 +1,5 @@
+//@flow
 import React from 'react';
-
 import { Text, View, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import styles from './Component1.style';
 import useComponent1 from './useComponent1';

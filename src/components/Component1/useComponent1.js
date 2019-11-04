@@ -1,4 +1,5 @@
-import React, { useState, useCallback, useEffect, useMemo } from 'react';
+//@flow
+import React, { useState, useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { submitCreditCardInfo, validateCreditCard } from '../../store/creditCardInfo/actions';
 import { RequestStatus } from '../../utils/RequestStatus';
@@ -70,7 +71,7 @@ const useComponent1 = () => {
     isSubmitClicked,
   ]);
 
-  handleSubmit = useCallback(() => {
+  const handleSubmit = useCallback(() => {
     dispatch(validateCreditCard(cardData));
     handleCardSubmit();
   }, [cardData]);

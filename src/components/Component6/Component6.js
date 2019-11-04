@@ -1,14 +1,6 @@
 //@flow
 import React from 'react';
-import {
-  Text,
-  View,
-  FlatList,
-  Button,
-  TextInput,
-  ActivityIndicator,
-  TouchableOpacity,
-} from 'react-native';
+import { Text, View, FlatList, TextInput, ActivityIndicator, TouchableOpacity } from 'react-native';
 import styles from './Component6.style';
 import useComponent6 from './useComponent6';
 

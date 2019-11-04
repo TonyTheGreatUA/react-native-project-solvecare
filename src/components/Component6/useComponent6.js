@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Component6 from './Component6';
 import styles from './Component6.style';
 import { Text, TouchableOpacity, View } from 'react-native';
