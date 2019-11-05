@@ -1,7 +1,12 @@
 //@flow
 
 import { RequestStatus } from '../../utils/RequestStatus';
-import { ITEM_IS_EDITED_REQUEST } from './types';
+import {
+  ITEM_DETAILS_FAILURE,
+  ITEM_DETAILS_REQUEST,
+  ITEM_DETAILS_SUCCESS,
+  ITEM_IS_EDITED_REQUEST,
+} from './types';
 
 const defaultState = {
   title: '',
@@ -32,6 +37,21 @@ export const itemCardInfoReducer = (
   },
 ) => {
   switch (action.type) {
+    case ITEM_DETAILS_REQUEST:
+      return {
+        ...state,
+        requestStatus: RequestStatus.Request,
+      };
+    case ITEM_DETAILS_SUCCESS:
+      return {
+        ...state,
+        requestStatus: RequestStatus.Success,
+      };
+    case ITEM_DETAILS_FAILURE:
+      return {
+        ...state,
+        requestStatus: RequestStatus.Failure,
+      };
     case ITEM_IS_EDITED_REQUEST:
       return {
         ...state,

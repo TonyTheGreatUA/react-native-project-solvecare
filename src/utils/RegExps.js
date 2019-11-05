@@ -6,4 +6,7 @@ export const RegExps = {
   lastNameRegex: RegExp(/^[A-z]{2,10}$/),
   secretQuestionRegex: RegExp(/^[A-z]{2,10}$/),
   secretAnswerRegex: RegExp(/^[A-z]{2,10}$/),
+  titleRegex: RegExp(/^[A-z]{2,10}$/),
+  weightRegex: RegExp(/^[A-z]{2,10}$/),
+  sizeRegex: RegExp(/^[A-z]{2,10}$/),
 };

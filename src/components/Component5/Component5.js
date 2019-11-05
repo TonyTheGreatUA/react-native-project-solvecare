@@ -23,7 +23,7 @@ const Component5 = ({  }: Props) => {
       <View style={styles.buttonRow}>
         <TouchableOpacity
           style={!isItemCreated ? [styles.buttonIsDisabled, styles.buttons] : styles.buttons}
-          disabled={!isItemCreated}
+          disabled={isItemCreated}
           onPress={() => {
             setIsItemCreated(false);
           }}
@@ -32,7 +32,7 @@ const Component5 = ({  }: Props) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={isItemCreated ? [styles.buttonIsDisabled, styles.buttons] : styles.buttons}
-          disabled={isItemCreated && !isCreated}
+          disabled={!isItemCreated}
           onPress={() => {
             setIsItemCreated(true);
           }}

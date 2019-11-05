@@ -3,7 +3,7 @@ import React, { useState, useCallback } from 'react';
 import styles from './Component5.style';
 import { View, TouchableOpacity, Text, Picker, TextInput } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateItem } from '../../store/itemCardInfo/actions';
+import { updateItem, validateItem } from '../../store/itemCardInfo/actions';
 
 type Props = {
   formTitle: string,
@@ -46,10 +46,10 @@ const Component5View = ({ formTitle, buttonTitle, formStyle }: Props) => {
         itemData.isCreated,
       ),
     );
+    dispatch(validateItem(itemData));
     setItemData({ ...itemData, isCreated: true });
   }, []);
 
-  console.log(itemtest);
   return (
     <View style={{ marginTop: 20 }}>
       <Text style={[formStyle.title, styles.title]}>{formTitle}</Text>
