@@ -2,8 +2,17 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import Component5View from './Component5.view';
+type Props = {
+  itemData: {
+    title: string,
+    weight: string,
+    size: string,
+    country: string | number,
+    isCreated: boolean,
+  },
+};
 
-const withCreateItem = () => {
+const withCreateItem = ({ itemData }: Props) => {
   const crudStyles = StyleSheet.create({
     button: {
       backgroundColor: '#00FF00',
