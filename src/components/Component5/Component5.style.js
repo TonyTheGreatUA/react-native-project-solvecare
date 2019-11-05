@@ -9,8 +9,7 @@ export default StyleSheet.create({
     paddingTop: 5,
   },
   buttons: {
-    paddingTop: 20,
-    paddingBottom: 5,
+    padding: 20,
     justifyContent: 'center',
     flexDirection: 'row',
   },
@@ -36,5 +35,18 @@ export default StyleSheet.create({
   },
   inputDefault: {
     borderBottomColor: '#F3C678',
+  },
+  buttonRow: {
+    paddingTop: 60,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
+  buttonIsDisabled: {
+    backgroundColor: '#DCDCDC',
+  },
+  title: {
+    justifyContent: 'center',
   },
 });

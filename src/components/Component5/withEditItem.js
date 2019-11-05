@@ -3,21 +3,21 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import Component5View from './Component5.view';
 
-const withCreateItem = () => {
+const withEditItem = () => {
   const crudStyles = StyleSheet.create({
     button: {
-      backgroundColor: '#00FF00',
+      backgroundColor: '#0000FF',
       padding: 15,
     },
     title: {
-      color: '#00FF00',
+      color: '#0000FF',
     },
   });
 
-  const formTitle = 'Product Create';
-  const buttonTitle = 'Create Item';
+  const formTitle = 'Product Edit';
+  const buttonTitle = 'Edit Item';
 
   return <Component5View formStyle={crudStyles} formTitle={formTitle} buttonTitle={buttonTitle} />;
 };
 
-export default withCreateItem;
+export default withEditItem;

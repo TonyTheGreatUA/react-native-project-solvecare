@@ -1,20 +1,15 @@
 //@flow
 
 import { RequestStatus } from '../../utils/RequestStatus';
-import {
-  ITEM_FORM_FIELD_FAILURE,
-  ITEM_FORM_FIELD_REQUEST,
-  ITEM_FORM_FIELD_SUCCESS,
-  ITEM_IS_EDITED_REQUEST,
-} from './types';
+import { ITEM_IS_EDITED_REQUEST } from './types';
 
 const defaultState = {
   title: '',
   weight: '',
   size: '',
-  country: '',
+  country: 'UA',
   requestStatus: RequestStatus.Default,
-  isEditable: true,
+  isCreated: false,
 };
 
 export const itemCardInfoReducer = (
@@ -23,7 +18,7 @@ export const itemCardInfoReducer = (
     weight: string,
     size: string,
     country: string,
-    isEditable: boolean,
+    isCreated: boolean,
   } = defaultState,
   action: {
     type: string,
@@ -32,30 +27,15 @@ export const itemCardInfoReducer = (
       weight: string,
       size: string,
       country: string,
-      isEditable: boolean,
+      isCreated: boolean,
     },
   },
 ) => {
   switch (action.type) {
-    case ITEM_FORM_FIELD_REQUEST:
-      return {
-        ...state,
-        requestStatus: RequestStatus.Request,
-      };
-    case ITEM_FORM_FIELD_SUCCESS:
-      return {
-        ...state,
-        requestStatus: RequestStatus.Success,
-      };
-    case ITEM_FORM_FIELD_FAILURE:
-      return {
-        ...state,
-        requestStatus: RequestStatus.Failure,
-      };
     case ITEM_IS_EDITED_REQUEST:
       return {
         ...state,
-        isEditable: action.payload,
+        isCreated: action.payload,
       };
   }
   return state;

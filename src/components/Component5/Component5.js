@@ -1,21 +1,38 @@
 import styles from './Component5.style';
-import React from 'react';
-import { Text, View, Button, TextInput, Picker, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Text, View, Button, TextInput, Picker, StyleSheet, TouchableOpacity } from 'react-native';
+import { updateItem } from '../../store/creditCardInfo/actions';
+import WithEditItem from './withEditItem';
+import WithCreateItem from './withCreateItem';
 
-type Props = {
-  handleTextInput: (name: string) => any,
-  country: string | number,
-  title: string,
-  weight: string,
-  size: string,
-};
-const Component5 = ({ country, title, weight, size, handleTextInput }: Props) => {
+type Props = {};
+const Component5 = ({  }: Props) => {
+  const [isItemCreated, setIsItemCreated] = useState(false);
+  const isCreated = useSelector(state => state.itemInfo.isCreated);
+
   return (
-    <View style={styles.view}>
-      <View style={styles.inputSection}>
-        <TextInput placeholder="Title" onChangeText={handleTextInput('title')} />
-        <TextInput placeholder="Weight" onChangeText={handleTextInput('weight')} />
-        <TextInput placeholder="Size" onChangeText={handleTextInput('size')} />
+    <View>
+      <View>{isItemCreated ? <WithEditItem /> : <WithCreateItem />}</View>
+      <View style={styles.buttonRow}>
+        <TouchableOpacity
+          style={!isItemCreated ? [styles.buttonIsDisabled, styles.buttons] : styles.buttons}
+          disabled={!isItemCreated}
+          onPress={() => {
+            setIsItemCreated(false);
+          }}
+        >
+          <Text> Create Item</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={isItemCreated ? [styles.buttonIsDisabled, styles.buttons] : styles.buttons}
+          disabled={isItemCreated && !isCreated}
+          onPress={() => {
+            setIsItemCreated(true);
+          }}
+        >
+          <Text> Edit Item</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
