@@ -6,27 +6,27 @@ import useComponent1 from './useComponent1';
 
 const Component1 = () => {
   const { isSubmitClicked, isEditable, isError, handleSubmit, handleTextInput } = useComponent1();
-
+  const hasError = isError ? styles.inputError : styles.inputDefault;
   return (
     <ScrollView>
       <View style={styles.mainView}>
         <View>
           <TextInput
             editable={isEditable}
-            style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
+            style={[styles.inputText, hasError]}
             placeholder="0000 0000 0000 0000"
             onChangeText={handleTextInput('creditCardNumber')}
           />
           <View style={styles.cardLine}>
             <TextInput
               editable={isEditable}
-              style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
+              style={[styles.inputText, hasError]}
               placeholder="MM/YY"
               onChangeText={handleTextInput('expirationDate')}
             />
             <TextInput
               editable={isEditable}
-              style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
+              style={[styles.inputText, hasError]}
               placeholder="CVV/CVC"
               onChangeText={handleTextInput('cvv')}
             />
@@ -34,26 +34,26 @@ const Component1 = () => {
           <View style={styles.cardLine}>
             <TextInput
               editable={isEditable}
-              style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
+              style={[styles.inputText, hasError]}
               placeholder="Your Name"
               onChangeText={handleTextInput('firstName')}
             />
             <TextInput
               editable={isEditable}
-              style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
+              style={[styles.inputText, hasError]}
               placeholder="Your Surname"
               onChangeText={handleTextInput('lastName')}
             />
           </View>
           <TextInput
             editable={isEditable}
-            style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
+            style={[styles.inputText, hasError]}
             placeholder="Your Secret Question"
             onChangeText={handleTextInput('secretQuestion')}
           />
           <TextInput
             editable={isEditable}
-            style={[styles.inputText, isError ? styles.inputError : styles.inputDefault]}
+            style={[styles.inputText, hasError]}
             placeholder="Your Secret Answer"
             onChangeText={handleTextInput('secretAnswer')}
           />

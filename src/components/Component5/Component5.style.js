@@ -49,4 +49,7 @@ export default StyleSheet.create({
   title: {
     justifyContent: 'center',
   },
+  card: {
+    marginTop: 20,
+  },
 });

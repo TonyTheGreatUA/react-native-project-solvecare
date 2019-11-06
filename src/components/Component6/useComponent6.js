@@ -37,31 +37,31 @@ export const useComponent6 = () => {
 
   const FlatListItemSeparator = () => <View style={styles.line} />;
 
-  const selectItem = useCallback(
-    (data: any) => {
-      data.item.isSelect = !data.item.isSelect;
-      data.item.selectedClass = data.item.isSelect ? styles.selected : styles.list;
+  const selectItem = (data: any) => {
+    data.item.isSelect = !data.item.isSelect;
+    data.item.selectedClass = data.item.isSelect ? styles.selected : styles.list;
 
-      const index = dataSource.findIndex(item => data.item.id === item.id);
+    const index = dataSource.findIndex(item => data.item.id === item.id);
 
-      dataSource[index] = data.item;
+    dataSource[index] = data.item;
 
-      setDataSource(dataSource);
-      setIsRemoveDisabled(!isRemoveDisabled);
-    },
-    [dataSource],
-  );
+    setDataSource(dataSource);
+    setIsRemoveDisabled(!isRemoveDisabled);
+  };
 
-  const onCreateItem = useCallback(() => {
-    setDataSource([...dataSource, { id: '', title: textInput, isSelect: false }]);
+  const onCreateItem = () => {
+    setDataSource([
+      ...dataSource,
+      { id: Math.floor(Math.random() * 100), title: textInput, isSelect: false },
+    ]);
     setTextinput('');
-  }, [dataSource]);
+  };
 
-  const onRemoveItem = useCallback(() => {
+  const onRemoveItem = () => {
     const newData = dataSource.filter(item => !item.isSelect);
 
     setDataSource(newData);
-  }, [newData]);
+  };
 
   const onFocusTextInput = useCallback(() => {
     setIsAddedDisabled(false);

@@ -5,7 +5,7 @@ import {
   ITEM_DETAILS_FAILURE,
   ITEM_DETAILS_REQUEST,
   ITEM_DETAILS_SUCCESS,
-  ITEM_IS_EDITED_REQUEST,
+  ITEM_UPDATE_REQUEST,
 } from './types';
 
 const defaultState = {
@@ -52,7 +52,7 @@ export const itemCardInfoReducer = (
         ...state,
         requestStatus: RequestStatus.Failure,
       };
-    case ITEM_IS_EDITED_REQUEST:
+    case ITEM_UPDATE_REQUEST:
       return {
         ...state,
         isCreated: action.payload,

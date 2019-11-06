@@ -1,13 +1,22 @@
 import styles from './Component5.style';
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Text, View, Button, TextInput, Picker, StyleSheet, TouchableOpacity } from 'react-native';
 import WithEditItem from './withEditItem';
 import WithCreateItem from './withCreateItem';
+import { updateItem } from '../../store/itemCardInfo/actions';
 
 type Props = {};
+
 const Component5 = ({  }: Props) => {
+  const createStyle = !isItemCreated ? [styles.buttonIsDisabled, styles.buttons] : styles.buttons;
+  const updateStyle =
+    isItemCreated || isCreated === false
+      ? [styles.buttonIsDisabled, styles.buttons]
+      : styles.buttons;
+
   const [isItemCreated, setIsItemCreated] = useState(false);
+
   const isCreated = useSelector(state => state.itemInfo.isCreated);
   const itemData = useSelector(state => state.itemInfo);
 
@@ -15,29 +24,30 @@ const Component5 = ({  }: Props) => {
     <View>
       <View>
         {isItemCreated ? (
-          <WithEditItem itemData={itemData} />
+          <WithEditItem itemInfo={itemData} updateItem={updateItem} />
         ) : (
-          <WithCreateItem itemData={itemData} />
+          <WithCreateItem itemInfo={itemData} updateItem={updateItem} />
         )}
       </View>
       <View style={styles.buttonRow}>
         <TouchableOpacity
-          style={!isItemCreated ? [styles.buttonIsDisabled, styles.buttons] : styles.buttons}
-          disabled={isItemCreated}
+          disabled={!isItemCreated}
+          style={createStyle || isCreated === true}
           onPress={() => {
+            updateItem('', '', '', 'UA', false);
             setIsItemCreated(false);
           }}
         >
-          <Text> Create Item</Text>
+          <Text>Create Item</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={isItemCreated ? [styles.buttonIsDisabled, styles.buttons] : styles.buttons}
-          disabled={!isItemCreated}
+          disabled={isItemCreated || isCreated === false}
+          style={updateStyle}
           onPress={() => {
             setIsItemCreated(true);
           }}
         >
-          <Text> Edit Item</Text>
+          <Text>Edit Item</Text>
         </TouchableOpacity>
       </View>
     </View>

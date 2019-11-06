@@ -3,7 +3,7 @@ import {
   ITEM_DETAILS_FAILURE,
   ITEM_DETAILS_REQUEST,
   ITEM_DETAILS_SUCCESS,
-  ITEM_IS_EDITED_REQUEST,
+  ITEM_UPDATE_REQUEST,
 } from './types';
 
 export const validateItem = (items: any) => (dispatch: any) => {
@@ -27,7 +27,7 @@ export const updateItem = (
   country: string,
   isCreated: boolean,
 ) => ({
-  type: ITEM_IS_EDITED_REQUEST,
+  type: ITEM_UPDATE_REQUEST,
   payload: {
     title,
     weight,
