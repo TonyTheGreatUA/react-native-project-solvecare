@@ -17,6 +17,7 @@ type Props = {
   formStyle: any,
   itemInfo: any,
   setIsDataUpdated: any,
+  isCreated: boolean,
 };
 const Component5View = ({
   itemInfo,
@@ -25,6 +26,7 @@ const Component5View = ({
   formStyle,
   updateItem,
   setIsDataUpdated,
+  isCreated,
 }: Props) => {
   const [itemData, setItemData] = useState({
     title: '',
@@ -34,13 +36,8 @@ const Component5View = ({
     isCreated: false,
   });
 
-  const isItemCreated = useSelector(state => state.itemInfo.isCreated);
-  const dispatch = useDispatch();
-
   useEffect(() => {
-    if (isItemCreated) {
-      setItemData(...itemInfo);
-    }
+    setItemData({ ...itemInfo });
   }, []);
 
   const handleInputText = useCallback((name: string) => {
@@ -54,12 +51,12 @@ const Component5View = ({
     [itemData.country],
   );
 
-  const onButtonClick = useCallback(() => {
+  const onButtonClick = () => {
     setItemData({ ...itemData, isCreated: true });
-    dispatch(updateItem(itemData.title, itemData.weight, itemData.size, itemData.country, true));
+    updateItem(itemData.title, itemData.weight, itemData.size, itemData.country, true);
     setIsDataUpdated(true);
-  });
-
+  };
+  console.log(itemData);
   return (
     <View style={styles.cardback}>
       <View style={styles.card}>
@@ -69,19 +66,19 @@ const Component5View = ({
             onChangeText={handleInputText('title')}
             style={[styles.inputText]}
             placeholder="Title"
-            value={isItemCreated ? itemData.title : null}
+            value={isCreated ? itemData.title : null}
           />
           <TextInput
             onChangeText={handleInputText('weight')}
             style={[styles.inputText]}
             placeholder="Weight"
-            value={isItemCreated ? itemData.weight : null}
+            value={isCreated ? itemData.weight : null}
           />
           <TextInput
             onChangeText={handleInputText('size')}
             style={[styles.inputText]}
             placeholder="Size"
-            value={isItemCreated ? itemData.size : null}
+            value={isCreated ? itemData.size : null}
           />
           <Picker
             style={styles.picker}

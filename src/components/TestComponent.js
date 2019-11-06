@@ -31,7 +31,7 @@ class TestComponent extends Component {
               </View>
             </View>
             <View style={styles.itemImage}>
-              <Text>Image</Text>
+              <Image style={styles.imageSize} source={require('../../assets/tree1.png')} />
             </View>
           </View>
           <View style={styles.cardItem}>
@@ -47,7 +47,7 @@ class TestComponent extends Component {
               </View>
             </View>
             <View style={styles.itemImage}>
-              <Text>Image</Text>
+              <Image style={styles.imageSize} source={require('../../assets/tree3.png')} />
             </View>
           </View>
           <View style={styles.cardItem}>
@@ -63,7 +63,10 @@ class TestComponent extends Component {
               </View>
             </View>
             <View style={styles.itemImage}>
-              <Text>Image</Text>
+              <Image
+                style={{ height: '75%', width: '75%' }}
+                source={require('../../assets/tree2.png')}
+              />
             </View>
           </View>
         </View>
@@ -195,6 +198,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontFamily: 'arial',
     paddingRight: 180,
+  },
+  imageSize: {
+    height: '98%',
+    width: '98%',
   },
 });
 

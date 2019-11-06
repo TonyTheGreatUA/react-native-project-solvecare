@@ -12,9 +12,10 @@ type Props = {
     country: string | number,
     isCreated: boolean,
   },
+  isCreated: boolean,
 };
 
-const withEditItem = ({ updateItem, itemData }: Props) => {
+const withEditItem = ({ updateItem, itemData, isCreated }: Props) => {
   const crudStyles = StyleSheet.create({
     button: {
       backgroundColor: '#0000FF',
@@ -31,6 +32,7 @@ const withEditItem = ({ updateItem, itemData }: Props) => {
 
   return (
     <Component5View
+      isCreated={isCreated}
       updateItem={updateItem}
       isDataUpdated={isDataUpdated}
       setIsDataUpdated={setIsDataUpdated}
